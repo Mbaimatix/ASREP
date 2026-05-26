@@ -1,36 +1,35 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+﻿# ASREP Africa Website
+
+**ASAL Research & Resilience Programme — Official Website**
+
+Built for ASREP Africa, a Kenyan NGO headquartered in Isiolo County, advancing climate resilience,
+peacebuilding, indigenous knowledge, and civic governance across Kenya's arid and semi-arid lands (ASALs).
+
+---
+
+## Tech Stack
+
+- **Framework:** Next.js 16.2 (App Router) + TypeScript
+- **Styling:** Tailwind CSS v4 + Framer Motion
+- **CMS:** Sanity.io v5 (embedded Studio at `/studio`)
+- **Auth:** NextAuth.js v5 + bcrypt
+- **Database:** PostgreSQL (Neon) + Prisma v7
+- **Payments:** Pesapal (M-Pesa / Card / PayPal)
+- **Deployment:** Vercel
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Environment Variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Copy `.env.local` and fill in all credentials — see the file for full instructions.
 
-## Learn More
+## Licence
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+(c) 2026 ASREP Africa. All rights reserved.
