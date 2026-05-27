@@ -42,20 +42,16 @@ export default function MobileMenu({ isOpen, onClose, navItems, pathname }: Prop
             <Link
               href="/"
               onClick={onClose}
-              className="flex items-center gap-3"
+              className="inline-flex"
               aria-label="ASREP Africa — Home"
             >
-              <div className="relative w-9 h-9">
-                <Image
-                  src="/logos/asrep-logo-white.png"
-                  alt="ASREP Africa"
-                  fill
-                  className="object-contain"
-                />
-              </div>
-              <span className="text-white font-display font-bold text-lg">
-                ASREP <span className="text-gold">AFRICA</span>
-              </span>
+              <Image
+                src="/logos/asrep-logo.png"
+                alt="ASREP Africa — ASAL Research & Resilience Programme"
+                width={160}
+                height={56}
+                className="object-contain bg-white rounded-lg px-2 py-1 h-12 w-auto"
+              />
             </Link>
             <button
               onClick={onClose}

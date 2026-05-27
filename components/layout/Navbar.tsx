@@ -113,26 +113,18 @@ export default function Navbar() {
             {/* ─── Logo ──────────────────────────────────────────────────── */}
             <Link
               href="/"
-              className="flex items-center gap-3 shrink-0 py-3"
+              className="flex items-center shrink-0 py-2"
               aria-label="ASREP Africa — Home"
             >
-              <div className="relative w-9 h-9 md:w-10 md:h-10">
+              <div className="relative h-12 md:h-14 w-auto">
                 <Image
-                  src="/logos/asrep-logo-white.png"
-                  alt="ASREP Africa logo"
-                  fill
-                  className="object-contain"
+                  src="/logos/asrep-logo.png"
+                  alt="ASREP Africa — ASAL Research & Resilience Programme"
+                  height={56}
+                  width={160}
+                  className="object-contain h-12 md:h-14 w-auto bg-white rounded-lg px-2 py-1"
                   priority
                 />
-              </div>
-              <div className="hidden sm:block">
-                <div className="text-white font-display font-bold text-lg md:text-xl leading-none">
-                  ASREP
-                  <span className="text-gold"> AFRICA</span>
-                </div>
-                <div className="text-white/60 text-[9px] md:text-[10px] tracking-widest uppercase mt-0.5">
-                  ASAL Research & Resilience Programme
-                </div>
               </div>
             </Link>
 

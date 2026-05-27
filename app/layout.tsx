@@ -82,7 +82,9 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: "/favicon.ico",
+    icon: [
+      { url: "/logos/asrep-logo.png", type: "image/png" },
+    ],
     apple: "/apple-touch-icon.png",
   },
 };

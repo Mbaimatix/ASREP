@@ -71,25 +71,16 @@ export default function Footer() {
           <div>
             <Link
               href="/"
-              className="flex items-center gap-3 mb-5"
+              className="inline-flex mb-5"
               aria-label="ASREP Africa — Home"
             >
-              <div className="relative w-10 h-10 shrink-0">
-                <Image
-                  src="/logos/asrep-logo-white.png"
-                  alt="ASREP Africa"
-                  fill
-                  className="object-contain"
-                />
-              </div>
-              <div>
-                <div className="text-white font-display font-bold text-xl leading-none">
-                  ASREP <span className="text-gold">AFRICA</span>
-                </div>
-                <div className="text-white/50 text-[9px] tracking-widest uppercase mt-0.5">
-                  ASAL Research & Resilience Programme
-                </div>
-              </div>
+              <Image
+                src="/logos/asrep-logo.png"
+                alt="ASREP Africa — ASAL Research & Resilience Programme"
+                width={180}
+                height={72}
+                className="object-contain bg-white rounded-xl px-3 py-2 h-16 w-auto"
+              />
             </Link>
 
             <p className="text-white/65 text-sm leading-relaxed mb-6 max-w-xs">
