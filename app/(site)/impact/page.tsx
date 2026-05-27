@@ -52,7 +52,7 @@ const impactAreas = [
       { value: "3", label: "Research products published" },
       { value: "2025", label: "Series debut year" },
     ],
-    story: "The debut ASAL IK Vault publication â€” 'Cows, Women & Land' â€” documented Borana Oromo indigenous ecological knowledge and entered policy discourse at county and national level.",
+    story: "The debut ASAL IK Vault publication  -  'Cows, Women & Land'  -  documented Borana Oromo indigenous ecological knowledge and entered policy discourse at county and national level.",
   },
   {
     colour: "bg-sage/8 border-sage/20",
@@ -63,7 +63,7 @@ const impactAreas = [
       { value: "1", label: "KSG national partnership" },
       { value: "2025", label: "Partnership year" },
     ],
-    story: "The KSG 'Under the Tree' Series, piloted in Isiolo, now scales across all 47 Kenyan counties â€” a landmark testament to ASREP's community-sourced civic education model.",
+    story: "The KSG 'Under the Tree' Series, piloted in Isiolo, now scales across all 47 Kenyan counties  -  a landmark testament to ASREP's community-sourced civic education model.",
   },
   {
     colour: "bg-forest/8 border-forest/15",
@@ -80,12 +80,12 @@ const impactAreas = [
 
 // Placeholder gallery images
 const galleryImages = [
-  { src: "/images/gallery/waso-1.jpg", alt: "Waso Eco-Champions planting trees in Isiolo", caption: "Waso Eco-Champions â€” Isiolo County, 2024" },
-  { src: "/images/gallery/peace-1.jpg", alt: "Inter-community peace dialogue convened by ASREP", caption: "Peace dialogue â€” Isiolo Peace Actors Forum, 2025" },
-  { src: "/images/gallery/research-1.jpg", alt: "ASREP researcher with community elders during IK documentation", caption: "IK Vault Series research â€” Isiolo, 2025" },
-  { src: "/images/gallery/civic-1.jpg", alt: "KSG Under the Tree civic education session", caption: "KSG Under the Tree â€” civic governance, 2025" },
-  { src: "/images/gallery/community-1.jpg", alt: "ASREP community gathering in Northern Kenya", caption: "Community engagement â€” Isiolo County" },
-  { src: "/images/gallery/landscape-1.jpg", alt: "Restored ASAL landscape with new vegetation", caption: "Restored landscape â€” Waso River basin" },
+  { src: "/images/gallery/waso-1.jpg", alt: "Waso Eco-Champions planting trees in Isiolo", caption: "Waso Eco-Champions  -  Isiolo County, 2024" },
+  { src: "/images/gallery/peace-1.jpg", alt: "Inter-community peace dialogue convened by ASREP", caption: "Peace dialogue  -  Isiolo Peace Actors Forum, 2025" },
+  { src: "/images/gallery/research-1.jpg", alt: "ASREP researcher with community elders during IK documentation", caption: "IK Vault Series research  -  Isiolo, 2025" },
+  { src: "/images/gallery/civic-1.jpg", alt: "KSG Under the Tree civic education session", caption: "KSG Under the Tree  -  civic governance, 2025" },
+  { src: "/images/gallery/community-1.jpg", alt: "ASREP community gathering in Northern Kenya", caption: "Community engagement  -  Isiolo County" },
+  { src: "/images/gallery/landscape-1.jpg", alt: "Restored ASAL landscape with new vegetation", caption: "Restored landscape  -  Waso River basin" },
 ];
 
 export default async function ImpactPage() {
@@ -101,9 +101,9 @@ export default async function ImpactPage() {
         title="Our Impact"
         subtitle="Real, measurable change across climate resilience, peace, research, and governance in Kenya's ASALs."
         imageSrc="/images/impact/impact-hero.jpg"
-        imageAlt="ASREP Africa impact â€” eco-champions, peace dialogues, and community empowerment in Isiolo County"
+        imageAlt="ASREP Africa impact  -  eco-champions, peace dialogues, and community empowerment in Isiolo County"
         breadcrumbs={[{ label: "Our Impact" }]}
-        tag="2023 â€“ 2026"
+        tag="2023 - 2026"
       />
 
       {/* Numbers summary */}
@@ -167,11 +167,11 @@ export default async function ImpactPage() {
         <div className="container-asrep max-w-3xl text-center">
           <p className="text-gold text-xs font-semibold uppercase tracking-widest mb-3">Full Report</p>
           <h2 id="report-heading" className="font-display text-white text-3xl md:text-4xl font-bold mb-6">
-            ASREP Africa Impact Report 2025â€“2026
+            ASREP Africa Impact Report 2025-2026
           </h2>
           <p className="text-white/70 text-base leading-relaxed mb-8">
             Download our comprehensive impact report, covering all six programmes, financial
-            highlights, partner acknowledgements, and our vision for 2026â€“2027.
+            highlights, partner acknowledgements, and our vision for 2026-2027.
           </p>
           {annualReports.length > 0 ? (
             <a
@@ -185,7 +185,7 @@ export default async function ImpactPage() {
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
               </svg>
-              Download Impact Report 2025â€“2026 (PDF)
+              Download Impact Report 2025-2026 (PDF)
             </a>
           ) : (
             <a
@@ -206,7 +206,7 @@ export default async function ImpactPage() {
             tag="Photo Gallery"
             title="From the"
             titleHighlight="Field"
-            subtitle="Images from ASREP's programmes across Isiolo County â€” click any photo to view full size."
+            subtitle="Images from ASREP's programmes across Isiolo County  -  click any photo to view full size."
             id="gallery-heading"
           />
           <LightboxGallery images={galleryImages} columns={3} />

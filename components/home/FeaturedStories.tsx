@@ -81,7 +81,7 @@ export default async function FeaturedStories() {
       stories = fetched;
     }
   } catch {
-    // CMS unavailable â€” use fallback
+    // CMS unavailable -- use fallback
   }
 
   return (

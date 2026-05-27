@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 
 const coverage = [
@@ -67,16 +66,11 @@ export default function GlobalRecognitionStrip() {
               className="bg-white rounded-2xl p-7 shadow-sm hover:shadow-lg hover:-translate-y-1
                 transition-all duration-300 flex flex-col"
             >
-              {/* Publication logo / wordmark */}
+              {/* Publication wordmark */}
               <div className="h-8 mb-5 flex items-center">
-                <div className="relative h-8 w-36">
-                  <Image
-                    src={item.logo}
-                    alt={item.logoAlt}
-                    fill
-                    className="object-contain object-left"
-                  />
-                </div>
+                <span className="font-display font-bold text-charcoal text-sm tracking-wide border-b-2 border-earth/30 pb-0.5">
+                  {item.publication}
+                </span>
               </div>
 
               {/* Date pill */}

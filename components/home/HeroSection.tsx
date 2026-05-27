@@ -50,7 +50,7 @@ export default function HeroSection() {
 
   return (
     <section
-      className="relative h-screen min-h-[600px] max-h-[950px] w-full overflow-hidden"
+      className="relative h-screen min-h-[600px] max-h-[950px] w-full overflow-hidden bg-forest"
       aria-label="ASREP Africa hero — advancing resilience, restoring nature, sustaining peace"
     >
       {/* ── Slides ──────────────────────────────────────────────────────── */}

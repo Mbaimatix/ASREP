@@ -8,7 +8,7 @@ export default function WhoWeAreStrip() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
 
           {/* Left — photograph */}
-          <div className="relative h-80 md:h-96 lg:h-[520px] rounded-2xl overflow-hidden shadow-2xl">
+          <div className="relative h-80 md:h-96 lg:h-[520px] rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-forest to-sage">
             <Image
               src="/images/about/who-we-are.jpg"
               alt="ASREP Africa team and community members gathered in the Isiolo landscape — embodying grassroots, locally-led conservation and peacebuilding"

@@ -40,27 +40,30 @@ export default function LeadershipCard({
   linkedIn,
 }: Props) {
   const [expanded, setExpanded] = useState(false);
+  const [imgError, setImgError] = useState(false);
 
   return (
     <div className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg
       transition-shadow duration-300 flex flex-col">
       {/* Photo */}
       <div className="relative h-64 bg-sand/40">
-        {photo ? (
+        {photo && !imgError ? (
           <Image
             src={photo}
             alt={`Portrait of ${name}, ${title}`}
             fill
             className="object-cover object-top"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            onError={() => setImgError(true)}
           />
         ) : (
-          <div className="absolute inset-0 flex items-center justify-center">
+          <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
             <div className="w-24 h-24 rounded-full bg-forest/10 flex items-center justify-center">
               <svg className="w-12 h-12 text-forest/30" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
               </svg>
             </div>
+            <span className="text-xs text-forest/40 font-medium">Photo coming soon</span>
           </div>
         )}
         {/* Role pill */}

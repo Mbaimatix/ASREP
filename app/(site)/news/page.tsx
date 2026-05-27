@@ -61,14 +61,14 @@ export default async function NewsPage() {
         title="News & Media"
         subtitle="Field stories, research announcements, media features, and programme updates from ASREP Africa."
         imageSrc="/images/news/news-hero.jpg"
-        imageAlt="ASREP Africa field team conducting community engagement â€” news from the front lines"
+        imageAlt="ASREP Africa field team conducting community engagement  -  news from the front lines"
         breadcrumbs={[{ label: "News & Media" }]}
         tag="Latest Stories"
       />
 
       <section className="section-pad bg-cream" aria-labelledby="news-heading">
         <div className="container-asrep">
-          {/* Category filter â€” client-side filtering requires a client component;
+          {/* Category filter -- client-side filtering requires a client component;
               for SSR simplicity we render all posts with an accessible filter UI */}
           <div className="mb-10">
             <div
@@ -141,7 +141,7 @@ export default async function NewsPage() {
               <a key={item.href} href={item.href} target="_blank" rel="noopener noreferrer"
                 className="group flex items-start gap-5 p-6 bg-cream rounded-2xl border border-charcoal/8 hover:shadow-md transition-shadow">
                 <div className="flex-1">
-                  <p className="text-muted text-xs font-semibold uppercase tracking-widest mb-1">{item.pub} Â· {item.date}</p>
+                  <p className="text-muted text-xs font-semibold uppercase tracking-widest mb-1">{item.pub} &middot; {item.date}</p>
                   <p className="font-display font-bold text-earth group-hover:text-forest transition-colors text-lg leading-snug">
                     &ldquo;{item.title}&rdquo;
                   </p>

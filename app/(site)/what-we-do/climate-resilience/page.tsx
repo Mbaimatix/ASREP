@@ -56,7 +56,7 @@ export default function ClimateResiliencePage() {
                 </p>
               </div>
             </div>
-            <div className="relative h-80 md:h-[440px] rounded-2xl overflow-hidden shadow-xl">
+            <div className="relative h-80 md:h-[440px] rounded-2xl overflow-hidden shadow-xl bg-gradient-to-br from-forest/80 to-sage/60">
               <Image
                 src="/images/programmes/climate-context.jpg"
                 alt="Degraded ASAL landscape showing erosion and vegetation loss — the challenge ASREP addresses"
