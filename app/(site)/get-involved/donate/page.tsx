@@ -76,8 +76,9 @@ export default function DonatePage() {
                     <p className="text-xs font-semibold text-charcoal/50 uppercase tracking-wider mb-1">
                       M-Pesa Paybill
                     </p>
-                    <p className="text-charcoal font-medium text-sm">Business No: <strong>XXXXX</strong></p>
-                    <p className="text-charcoal/60 text-xs">Account: ASREP DONATION</p>
+                    {/* TODO: Replace with actual M-Pesa Paybill business number before going live */}
+                    <p className="text-charcoal font-medium text-sm">Business No: <strong className="text-earth">Contact us for details</strong></p>
+                    <p className="text-charcoal/60 text-xs">Account: ASREP DONATION — email <a href="mailto:asrepafrica@gmail.com" className="text-forest hover:underline">asrepafrica@gmail.com</a></p>
                   </div>
                   <div>
                     <p className="text-xs font-semibold text-charcoal/50 uppercase tracking-wider mb-1">

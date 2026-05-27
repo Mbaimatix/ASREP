@@ -99,8 +99,9 @@ export default function EventsPage() {
       <PageHero
         title="Events & Summits"
         subtitle="Bringing communities, researchers, and policymakers together to advance resilience across Kenya's ASALs."
-        imageSrc="/images/about/about-hero.jpg"
-        imageAlt="ASREP Africa community summit and dialogue event"
+        imageSrc="/images/gallery/dida-fayo-remarks-under-tree-series-launch-oldonyiro.jpg"
+        imageAlt="ASREP Africa Executive Director Dida Fayo giving keynote remarks at the KSG Under the Tree Series launch in Oldonyiro, Isiolo"
+        overlayOpacity={65}
         breadcrumbs={[{ label: "Events & Summits" }]}
         tag="Convening Change"
       />

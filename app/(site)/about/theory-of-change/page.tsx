@@ -15,8 +15,9 @@ export default function TheoryOfChangePage() {
       <PageHero
         title="Theory of Change"
         subtitle="How ASREP transforms inputs into lasting resilience — a five-step logic model grounded in evidence and community leadership."
-        imageSrc="/images/about/toc-hero.jpg"
-        imageAlt="Community members and ASREP researchers collaborating on knowledge documentation, Isiolo County"
+        imageSrc="/images/gallery/asrep-elders-strategic-meeting.jpg"
+        imageAlt="ASREP Africa executive and community elders collaborating on knowledge documentation and strategic planning"
+        overlayOpacity={70}
         breadcrumbs={[
           { label: "About", href: "/about" },
           { label: "Theory of Change" },

@@ -32,15 +32,31 @@ const staticRoutes: MetadataRoute.Sitemap = [
   { url: `${BASE}/gallery`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.7 },
   { url: `${BASE}/videos`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.7 },
   { url: `${BASE}/events`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.8 },
+  { url: `${BASE}/privacy-policy`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.3 },
+  { url: `${BASE}/terms-of-use`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.3 },
+];
+
+// Static fallback news slugs — always in sitemap even without CMS
+const staticNewsSlugs = [
+  { slug: "waso-eco-champions-10000-trees", publishedAt: "2026-04-01" },
+  { slug: "guardian-conservation-usaid", publishedAt: "2026-03-16" },
+  { slug: "ksg-under-tree-national", publishedAt: "2026-02-20" },
+  { slug: "biographic-future-conservation", publishedAt: "2026-01-15" },
+  { slug: "ik-vault-debut-cows-women-land", publishedAt: "2025-09-30" },
+  { slug: "isiolo-peace-forum-500", publishedAt: "2025-08-10" },
 ];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  let newsSlugs: { slug: string; publishedAt?: string }[] = [];
+  let cmsNewsSlugs: { slug: string; publishedAt?: string }[] = [];
   try {
-    newsSlugs = await readClient.fetch(ALL_NEWS_SLUGS_QUERY);
+    cmsNewsSlugs = await readClient.fetch(ALL_NEWS_SLUGS_QUERY);
   } catch { /* CMS unavailable */ }
 
-  const newsRoutes: MetadataRoute.Sitemap = newsSlugs.map((item) => ({
+  // Merge CMS slugs with static slugs, deduplicating by slug value
+  const allNewsSlugs = [...staticNewsSlugs, ...cmsNewsSlugs]
+    .filter((v, i, a) => a.findIndex((t) => t.slug === v.slug) === i);
+
+  const newsRoutes: MetadataRoute.Sitemap = allNewsSlugs.map((item) => ({
     url: `${BASE}/news/${item.slug}`,
     lastModified: item.publishedAt ? new Date(item.publishedAt) : new Date(),
     changeFrequency: "monthly" as const,

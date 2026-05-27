@@ -78,8 +78,9 @@ export default function MissionVisionPage() {
       <PageHero
         title="Mission, Vision & Core Values"
         subtitle="The beliefs and principles that guide every programme, decision, and partnership."
-        imageSrc="/images/about/mission-hero.jpg"
-        imageAlt="Community members and ASREP staff in discussion under acacia trees, Isiolo"
+        imageSrc="/images/gallery/community-roundtable-isiolo.jpg"
+        imageAlt="ASREP Africa community roundtable with elders, women and youth representatives discussing values and strategy in Isiolo"
+        overlayOpacity={72}
         breadcrumbs={[
           { label: "About", href: "/about" },
           { label: "Mission, Vision & Values" },

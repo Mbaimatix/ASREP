@@ -5,7 +5,7 @@ import PageHero from "@/components/shared/PageHero";
 import SectionHeader from "@/components/shared/SectionHeader";
 
 export const metadata: Metadata = {
-  title: "About ASREP Africa | ASAL Research & Resilience Programme",
+  title: "About ASREP Africa",
   description:
     "Founded in 2023 and headquartered in Isiolo County, ASREP Africa delivers locally-led, evidence-driven programmes for climate resilience, peacebuilding, and sustainable livelihoods across Kenya's ASALs.",
 };
@@ -27,7 +27,7 @@ const whyPillars = [
     text: "Research, monitoring, and indigenous knowledge documentation underpin every decision. Our ASAL IK Vault Series sets a new benchmark.",
   },
   {
-    icon: "♀",
+    icon: "👩",
     title: "Gender & Youth Intentional",
     text: "At least 60% of programme participants are women and youth — not by accident, but by design.",
   },
@@ -78,7 +78,7 @@ export default function AboutPage() {
                   with pre-formed solutions.
                 </p>
                 <p>
-                  In just two years of operation, ASREP has engaged over 2,000 community
+                  In just three years of operation, ASREP has engaged over 2,000 community
                   members, planted 10,000 indigenous trees, convened hundreds of peace actors,
                   developed 23 institutional policies, and had its work featured in The Guardian
                   and Biographic Magazine.

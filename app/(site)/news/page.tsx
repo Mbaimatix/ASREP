@@ -38,13 +38,13 @@ type NewsPost = {
   featuredImage?: SanityImageSource & { alt?: string };
 };
 
-const fallbackPosts: NewsPost[] = [
-  { _id: "n1", title: "Waso Eco-Champions Plant 10,000 Indigenous Trees Across Isiolo County", slug: { current: "waso-eco-champions-10000-trees" }, category: "climate-environment", excerpt: "ASREP Africa's flagship Waso Eco-Champions programme reaches a landmark milestone, with 10,000 indigenous trees planted across 10 wards of Isiolo County.", publishedAt: "2026-04-01", featuredImage: undefined },
-  { _id: "n2", title: "ASREP Featured in The Guardian: Conservation Without US Aid", slug: { current: "guardian-conservation-usaid" }, category: "media-coverage", excerpt: "The Guardian's global environment desk highlights ASREP's community-led conservation model as a template for the post-USAID funding landscape.", publishedAt: "2026-03-16", featuredImage: undefined },
-  { _id: "n3", title: "KSG 'Under the Tree' Civic Education Series Goes National", slug: { current: "ksg-under-tree-national" }, category: "partnerships", excerpt: "A landmark partnership with the Kenya School of Government scales the Isiolo-piloted civic education model to all 47 Kenyan counties.", publishedAt: "2026-02-20", featuredImage: undefined },
-  { _id: "n4", title: "Biographic Magazine: The Future of Conservation", slug: { current: "biographic-future-conservation" }, category: "media-coverage", excerpt: "International conservation magazine Biographic profiles ASREP Africa's eco-champion model as a blueprint for community-funded ecological restoration.", publishedAt: "2026-01-15", featuredImage: undefined },
-  { _id: "n5", title: "ASAL IK Vault Series Debut: Cows, Women & Land", slug: { current: "ik-vault-debut-cows-women-land" }, category: "research", excerpt: "ASREP releases its debut ASAL Indigenous Knowledge publication, documenting Borana Oromo ecological and cultural knowledge from Isiolo County.", publishedAt: "2025-09-30", featuredImage: undefined },
-  { _id: "n6", title: "Isiolo Peace Actors Forum Engages 500+ Community Members", slug: { current: "isiolo-peace-forum-500" }, category: "peacebuilding", excerpt: "The Isiolo Peace Actors Forum convenes its largest session, bringing together pastoral communities, women leaders, and youth from across 10 wards.", publishedAt: "2025-08-10", featuredImage: undefined },
+const fallbackPosts: (NewsPost & { _staticImage?: string })[] = [
+  { _id: "n1", title: "Waso Eco-Champions Plant 10,000 Indigenous Trees Across Isiolo County", slug: { current: "waso-eco-champions-10000-trees" }, category: "climate-environment", excerpt: "ASREP Africa's flagship Waso Eco-Champions programme reaches a landmark milestone, with 10,000 indigenous trees planted across 10 wards of Isiolo County.", publishedAt: "2026-04-01", featuredImage: undefined, _staticImage: "/images/gallery/waso-eco-champs-line.jpg" },
+  { _id: "n2", title: "ASREP Featured in The Guardian: Conservation Without US Aid", slug: { current: "guardian-conservation-usaid" }, category: "media-coverage", excerpt: "The Guardian's global environment desk highlights ASREP's community-led conservation model as a template for the post-USAID funding landscape.", publishedAt: "2026-03-16", featuredImage: undefined, _staticImage: "/images/gallery/asrep-forest-partnership.jpg" },
+  { _id: "n3", title: "KSG 'Under the Tree' Civic Education Series Goes National", slug: { current: "ksg-under-tree-national" }, category: "partnerships", excerpt: "A landmark partnership with the Kenya School of Government scales the Isiolo-piloted civic education model to all 47 Kenyan counties.", publishedAt: "2026-02-20", featuredImage: undefined, _staticImage: "/images/gallery/dida-fayo-remarks-under-tree-series-launch-oldonyiro.jpg" },
+  { _id: "n4", title: "Biographic Magazine: The Future of Conservation Without US Aid", slug: { current: "biographic-future-conservation" }, category: "media-coverage", excerpt: "International conservation magazine Biographic profiles ASREP Africa's eco-champion model as a blueprint for community-funded ecological restoration.", publishedAt: "2026-01-15", featuredImage: undefined, _staticImage: "/images/gallery/kenya-forest-service-tree-planting.jpg" },
+  { _id: "n5", title: "ASAL IK Vault Series Debut: 'Cows, Women & Land' Documents Borana Oromo Knowledge", slug: { current: "ik-vault-debut-cows-women-land" }, category: "research", excerpt: "ASREP releases its debut ASAL Indigenous Knowledge publication, documenting Borana Oromo ecological and cultural knowledge from Isiolo County.", publishedAt: "2025-09-30", featuredImage: undefined, _staticImage: "/images/gallery/asrep-elders-strategic-meeting.jpg" },
+  { _id: "n6", title: "Isiolo Peace Actors Forum Engages 500+ Community Members", slug: { current: "isiolo-peace-forum-500" }, category: "peacebuilding", excerpt: "The Isiolo Peace Actors Forum convenes its largest session, bringing together pastoral communities, women leaders, and youth from across 10 wards.", publishedAt: "2025-08-10", featuredImage: undefined, _staticImage: "/images/gallery/community-women-peace-prayer.jpg" },
 ];
 
 export default async function NewsPage() {
@@ -106,8 +106,8 @@ export default async function NewsPage() {
                 publishedAt={post.publishedAt}
                 imageUrl={post.featuredImage
                   ? urlFor(post.featuredImage).width(640).height(400).url()
-                  : undefined}
-                imageAlt={(post.featuredImage as { alt?: string } | undefined)?.alt}
+                  : (post as { _staticImage?: string })._staticImage}
+                imageAlt={(post.featuredImage as { alt?: string } | undefined)?.alt ?? post.title}
               />
             ))}
           </div>

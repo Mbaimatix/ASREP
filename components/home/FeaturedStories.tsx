@@ -37,16 +37,18 @@ function formatDate(dateString: string) {
 }
 
 // Fallback stories shown when CMS is empty / during build
+// Slugs are kept consistent with the news listing page and news/[slug] route
 const fallbackStories = [
   {
     _id: "f1",
-    title: "Waso Eco-Champs: Restoring 10,000 Trees in Northern Kenya's Fragile ASALs",
-    slug: { current: "waso-eco-champs-restoration" },
+    title: "Waso Eco-Champions Plant 10,000 Indigenous Trees Across Isiolo County",
+    slug: { current: "waso-eco-champions-10000-trees" },
     category: "climate-environment",
     excerpt:
       "Over 2,000 community eco-champions have mobilised across 10 wards of Isiolo County, planting indigenous trees to reverse decades of landscape degradation.",
-    publishedAt: "2026-03-01",
+    publishedAt: "2026-04-01",
     featuredImage: null,
+    _imageUrl: "/images/gallery/waso-eco-champs-line.jpg",
   },
   {
     _id: "f2",
@@ -57,26 +59,29 @@ const fallbackStories = [
       "The Guardian highlights ASREP's approach to building locally-funded, community-led conservation in an era of declining international aid.",
     publishedAt: "2026-03-16",
     featuredImage: null,
+    _imageUrl: "/images/gallery/asrep-forest-partnership.jpg",
   },
   {
     _id: "f3",
-    title: "KSG 'Under the Tree' Civic Education Scales to 47 Counties",
-    slug: { current: "ksg-under-the-tree-47-counties" },
+    title: "KSG 'Under the Tree' Civic Education Series Goes National",
+    slug: { current: "ksg-under-tree-national" },
     category: "partnerships",
     excerpt:
-      "A landmark partnership with the Kenya School of Government takes participatory civic education from its Isiolo pilot to a national rollout programme.",
-    publishedAt: "2025-11-15",
+      "A landmark partnership with the Kenya School of Government takes participatory civic education from its Isiolo pilot to a national rollout across all 47 Kenyan counties.",
+    publishedAt: "2026-02-20",
     featuredImage: null,
+    _imageUrl: "/images/gallery/dida-fayo-remarks-under-tree-series-launch-oldonyiro.jpg",
   },
   {
     _id: "f4",
-    title: "ASAL IK Vault Debut: 'Cows, Women & Land' Documents Borana Oromo Knowledge",
-    slug: { current: "ik-vault-cows-women-land" },
+    title: "ASAL IK Vault Series Debut: 'Cows, Women & Land' Documents Borana Oromo Knowledge",
+    slug: { current: "ik-vault-debut-cows-women-land" },
     category: "research",
     excerpt:
       "ASREP releases its debut ASAL Indigenous Knowledge publication, documenting Borana Oromo ecological and cultural knowledge from Isiolo County.",
     publishedAt: "2025-09-30",
     featuredImage: null,
+    _imageUrl: "/images/gallery/asrep-elders-strategic-meeting.jpg",
   },
 ];
 
@@ -141,8 +146,16 @@ export default async function FeaturedStories() {
                     className="object-cover group-hover:scale-105 transition-transform duration-700"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
+                ) : (story as { _imageUrl?: string })._imageUrl ? (
+                  <Image
+                    src={(story as { _imageUrl?: string })._imageUrl!}
+                    alt={story.title}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-700"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  />
                 ) : (
-                  <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="absolute inset-0 flex items-center justify-center bg-sage/10">
                     <svg className="w-12 h-12 text-sage/30" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                     </svg>

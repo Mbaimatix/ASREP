@@ -79,8 +79,9 @@ export default function WhatWeDoPage() {
       <PageHero
         title="What We Do"
         subtitle="Six integrated programmes. One vision: resilient, peaceful, and self-reliant ASAL communities."
-        imageSrc="/images/what-we-do/overview-hero.jpg"
-        imageAlt="Panoramic view of ASREP programmes in action across Isiolo County landscape"
+        imageSrc="/images/gallery/asrep-community-team-group.jpg"
+        imageAlt="ASREP Africa community team and programme staff working across Isiolo County"
+        overlayOpacity={65}
         breadcrumbs={[{ label: "What We Do" }]}
         tag="Our Programmes"
       />
