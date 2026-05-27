@@ -1,5 +1,6 @@
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import BackToTop from "@/components/shared/BackToTop";
 
 /**
  * Public-facing site layout — wraps every page under (site)/ with
@@ -17,6 +18,7 @@ export default function SiteLayout({
         {children}
       </main>
       <Footer />
+      <BackToTop />
     </>
   );
 }

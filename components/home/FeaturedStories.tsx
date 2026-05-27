@@ -68,6 +68,16 @@ const fallbackStories = [
     publishedAt: "2025-11-15",
     featuredImage: null,
   },
+  {
+    _id: "f4",
+    title: "ASAL IK Vault Debut: 'Cows, Women & Land' Documents Borana Oromo Knowledge",
+    slug: { current: "ik-vault-cows-women-land" },
+    category: "research",
+    excerpt:
+      "ASREP releases its debut ASAL Indigenous Knowledge publication, documenting Borana Oromo ecological and cultural knowledge from Isiolo County.",
+    publishedAt: "2025-09-30",
+    featuredImage: null,
+  },
 ];
 
 export default async function FeaturedStories() {
@@ -114,7 +124,7 @@ export default async function FeaturedStories() {
         </div>
 
         {/* Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-7">
           {stories.map((story) => (
             <article
               key={story._id}

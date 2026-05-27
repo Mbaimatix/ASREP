@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 const coverage = [
   {
@@ -67,10 +68,22 @@ export default function GlobalRecognitionStrip() {
                 transition-all duration-300 flex flex-col"
             >
               {/* Publication wordmark */}
-              <div className="h-8 mb-5 flex items-center">
-                <span className="font-display font-bold text-charcoal text-sm tracking-wide border-b-2 border-earth/30 pb-0.5">
-                  {item.publication}
-                </span>
+              <div className="h-10 mb-5 flex items-center">
+                {item.publication === "The Guardian" ? (
+                  <div className="relative h-8 w-32">
+                    <Image
+                      src="/logos/guardian-logo.jpg"
+                      alt="The Guardian newspaper logo"
+                      fill
+                      className="object-contain object-left"
+                      sizes="128px"
+                    />
+                  </div>
+                ) : (
+                  <span className="font-display font-bold text-charcoal text-sm tracking-wide border-b-2 border-earth/30 pb-0.5">
+                    {item.publication}
+                  </span>
+                )}
               </div>
 
               {/* Date pill */}

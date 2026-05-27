@@ -78,14 +78,14 @@ const impactAreas = [
   },
 ];
 
-// Placeholder gallery images
+// Impact gallery images using real field photos
 const galleryImages = [
-  { src: "/images/gallery/waso-1.jpg", alt: "Waso Eco-Champions planting trees in Isiolo", caption: "Waso Eco-Champions  -  Isiolo County, 2024" },
-  { src: "/images/gallery/peace-1.jpg", alt: "Inter-community peace dialogue convened by ASREP", caption: "Peace dialogue  -  Isiolo Peace Actors Forum, 2025" },
-  { src: "/images/gallery/research-1.jpg", alt: "ASREP researcher with community elders during IK documentation", caption: "IK Vault Series research  -  Isiolo, 2025" },
-  { src: "/images/gallery/civic-1.jpg", alt: "KSG Under the Tree civic education session", caption: "KSG Under the Tree  -  civic governance, 2025" },
-  { src: "/images/gallery/community-1.jpg", alt: "ASREP community gathering in Northern Kenya", caption: "Community engagement  -  Isiolo County" },
-  { src: "/images/gallery/landscape-1.jpg", alt: "Restored ASAL landscape with new vegetation", caption: "Restored landscape  -  Waso River basin" },
+  { src: "/images/gallery/waso-eco-champs-line.jpg", alt: "Waso Eco-Champions lined up at a community tree planting event in Isiolo County", caption: "Waso Eco-Champions - Isiolo County, 2024" },
+  { src: "/images/gallery/community-women-peace-prayer.jpg", alt: "Women community leaders in a peace prayer circle convened by ASREP Africa's peacebuilding programme", caption: "Women peace prayer - Isiolo Peace Actors Forum, 2025" },
+  { src: "/images/gallery/asrep-elders-strategic-meeting.jpg", alt: "ASREP Africa executive and community elders at a strategic planning meeting", caption: "IK documentation with elders - Isiolo, 2025" },
+  { src: "/images/gallery/dida-fayo-remarks-under-tree-series-launch-oldonyiro.jpg", alt: "Dida Fayo giving remarks at the KSG Under the Tree Series launch in Oldonyiro, Isiolo", caption: "KSG Under the Tree launch - Oldonyiro, 2025" },
+  { src: "/images/gallery/asrep-community-team-group.jpg", alt: "ASREP Africa community team group photo with programme staff and partners", caption: "Community engagement - Isiolo County" },
+  { src: "/images/gallery/sdzwa-k-biodiversity-strategy-validation-meeting-laikipia.jpg", alt: "ASREP and SDZWA-K officials at the national biodiversity strategy validation meeting in Laikipia", caption: "Biodiversity strategy validation - Laikipia, 2026" },
 ];
 
 export default async function ImpactPage() {

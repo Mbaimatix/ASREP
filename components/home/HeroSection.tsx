@@ -28,25 +28,19 @@ const slides = [
   },
 ];
 
-const SLIDE_INTERVAL = 6000; // 6 seconds per slide
+const SLIDE_INTERVAL = 6000;
 
 export default function HeroSection() {
   const [current, setCurrent] = useState(0);
-  const [prevSlide, setPrevSlide] = useState<number | null>(null);
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setPrevSlide(current);
       setCurrent((c) => (c + 1) % slides.length);
     }, SLIDE_INTERVAL);
     return () => clearInterval(timer);
-  }, [current]);
+  }, []);
 
-  const goTo = (index: number) => {
-    if (index === current) return;
-    setPrevSlide(current);
-    setCurrent(index);
-  };
+  const goTo = (index: number) => setCurrent(index);
 
   return (
     <section
@@ -88,26 +82,26 @@ export default function HeroSection() {
         className="absolute inset-0 z-10"
         style={{
           background:
-            "linear-gradient(to top, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.35) 50%, rgba(0,0,0,0.12) 100%)",
+            "linear-gradient(to top, rgba(0,0,0,0.80) 0%, rgba(0,0,0,0.45) 50%, rgba(0,0,0,0.20) 100%)",
         }}
         aria-hidden="true"
       />
 
-      {/* ── Text block — lower left ──────────────────────────────────────── */}
-      <div className="absolute inset-0 z-20 flex items-end">
-        <div className="container-asrep pb-20 md:pb-24 lg:pb-28 max-w-3xl">
+      {/* ── Text block — centred ────────────────────────────────────────── */}
+      <div className="absolute inset-0 z-20 flex items-center justify-center">
+        <div className="text-center px-6 max-w-4xl">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.3, ease: "easeOut" }}
           >
             {/* Eyebrow */}
-            <p className="text-gold text-xs font-semibold uppercase tracking-[0.2em] mb-4">
-              ASAL Research &amp; Resilience Programme · Kenya
+            <p className="text-gold text-xs font-semibold uppercase tracking-[0.2em] mb-5">
+              ASAL Research &amp; Resilience Programme &middot; Kenya
             </p>
 
             {/* H1 */}
-            <h1 className="font-display text-white text-4xl sm:text-5xl md:text-6xl font-bold leading-tight mb-5">
+            <h1 className="font-display text-white text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6">
               Advancing Resilience.{" "}
               <br className="hidden sm:block" />
               Restoring Nature.{" "}
@@ -116,43 +110,40 @@ export default function HeroSection() {
             </h1>
 
             {/* Subline */}
-            <p className="text-white/80 text-lg md:text-xl leading-relaxed mb-8 max-w-xl">
-              Building resilient communities across Kenya&apos;s arid and semi-arid lands —
+            <p className="text-white/80 text-lg md:text-xl leading-relaxed mb-10 max-w-2xl mx-auto">
+              Building resilient communities across Kenya&apos;s arid and semi-arid lands
               through evidence, culture, and community-led action.
             </p>
 
-            {/* CTAs */}
-            <div className="flex flex-wrap gap-4">
+            {/* Single CTA */}
+            <div className="flex flex-wrap gap-4 justify-center">
               <Link
                 href="/what-we-do"
-                className="inline-flex items-center gap-2 px-7 py-3.5 bg-white text-forest font-semibold
-                  text-sm rounded-lg hover:bg-cream transition-all duration-200 hover:shadow-lg
-                  hover:-translate-y-0.5 focus-visible:ring-2 focus-visible:ring-white focus-visible:outline-none"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-cta hover:bg-cta-hover text-white
+                  font-semibold text-base rounded-xl transition-all duration-200 hover:shadow-xl
+                  hover:-translate-y-0.5 focus-visible:ring-2 focus-visible:ring-cta focus-visible:outline-none"
               >
                 Explore Our Work
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5} aria-hidden="true">
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5} aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
                 </svg>
               </Link>
               <Link
-                href="/get-involved/donate"
-                className="inline-flex items-center gap-2 px-7 py-3.5 bg-cta hover:bg-cta-hover text-white
-                  font-semibold text-sm rounded-lg transition-all duration-200 hover:shadow-lg
-                  hover:-translate-y-0.5 focus-visible:ring-2 focus-visible:ring-cta focus-visible:outline-none"
+                href="/about"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-white/15 hover:bg-white/25 text-white
+                  font-semibold text-base rounded-xl border border-white/30 hover:border-white/60
+                  transition-all duration-200 backdrop-blur-sm"
               >
-                Donate Now
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5} aria-hidden="true">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                </svg>
+                Who We Are
               </Link>
             </div>
           </motion.div>
         </div>
       </div>
 
-      {/* ── Slide indicators ────────────────────────────────────────────── */}
+      {/* ── Slide indicators — centred bottom ───────────────────────────── */}
       <div
-        className="absolute bottom-8 right-6 md:right-12 z-20 flex items-center gap-2"
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2"
         role="tablist"
         aria-label="Hero image navigation"
       >
@@ -164,29 +155,10 @@ export default function HeroSection() {
             aria-label={`Slide ${i + 1}: ${slide.alt}`}
             onClick={() => goTo(i)}
             className={`h-1.5 rounded-full transition-all duration-400 focus-visible:ring-2 focus-visible:ring-gold focus-visible:outline-none
-              ${i === current ? "w-8 bg-gold" : "w-3 bg-white/40 hover:bg-white/70"}`}
+              ${i === current ? "w-10 bg-gold" : "w-3 bg-white/40 hover:bg-white/70"}`}
           />
         ))}
       </div>
-
-      {/* ── Scroll cue ──────────────────────────────────────────────────── */}
-      <motion.div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-1"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 2, duration: 1 }}
-        aria-hidden="true"
-      >
-        <span className="text-white/40 text-[10px] uppercase tracking-widest">Scroll</span>
-        <motion.div
-          animate={{ y: [0, 6, 0] }}
-          transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
-        >
-          <svg className="w-4 h-4 text-white/40" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-          </svg>
-        </motion.div>
-      </motion.div>
     </section>
   );
 }

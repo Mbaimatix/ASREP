@@ -1,26 +1,42 @@
 import Image from "next/image";
 import Link from "next/link";
 
+// ASREP Africa YouTube channel: https://youtube.com/@asrepafrica
+const YOUTUBE_VIDEO_ID = "dQw4w9WgXcQ"; // Replace with actual ASREP video ID when available
+
 export default function WhoWeAreStrip() {
   return (
     <section className="section-pad bg-cream" aria-labelledby="who-we-are-heading">
       <div className="container-asrep">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
 
-          {/* Left — photograph */}
-          <div className="relative h-80 md:h-96 lg:h-[520px] rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-forest to-sage">
-            <Image
-              src="/images/about/who-we-are.jpg"
-              alt="ASREP Africa team and community members gathered in the Isiolo landscape — embodying grassroots, locally-led conservation and peacebuilding"
-              fill
-              className="object-cover"
-              sizes="(max-width: 1024px) 100vw, 50vw"
-            />
-            {/* Subtle overlay label */}
-            <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-forest/80 via-forest/20 to-transparent">
-              <p className="text-white/80 text-xs uppercase tracking-widest font-medium">
-                Isiolo County, Kenya
-              </p>
+          {/* Left — photograph + YouTube embed */}
+          <div className="space-y-5">
+            <div className="relative h-72 md:h-96 rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-forest to-sage">
+              <Image
+                src="/images/about/who-we-are.jpg"
+                alt="ASREP Africa team and community members gathered in the Isiolo landscape"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+              <div className="absolute bottom-0 left-0 right-0 p-5 bg-gradient-to-t from-forest/80 via-forest/20 to-transparent">
+                <p className="text-white/80 text-xs uppercase tracking-widest font-medium">
+                  Isiolo County, Kenya
+                </p>
+              </div>
+            </div>
+
+            {/* YouTube embed */}
+            <div className="rounded-2xl overflow-hidden shadow-lg aspect-video">
+              <iframe
+                src={`https://www.youtube.com/embed/${YOUTUBE_VIDEO_ID}?rel=0&modestbranding=1`}
+                title="ASREP Africa — Our Story"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="w-full h-full"
+                loading="lazy"
+              />
             </div>
           </div>
 
@@ -72,12 +88,12 @@ export default function WhoWeAreStrip() {
 
             <Link
               href="/about"
-              className="inline-flex items-center gap-2 text-forest font-semibold text-sm
-                hover:text-sage transition-colors group border-b-2 border-forest/30 hover:border-sage pb-0.5"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-forest hover:bg-sage text-white
+                font-semibold text-sm rounded-lg transition-colors"
             >
               Learn More About Us
               <svg
-                className="w-4 h-4 group-hover:translate-x-1 transition-transform"
+                className="w-4 h-4"
                 fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}
                 aria-hidden="true"
               >

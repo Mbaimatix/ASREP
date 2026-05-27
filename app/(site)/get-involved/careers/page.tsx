@@ -17,7 +17,7 @@ export default function CareersPage() {
         imageSrc="/images/get-involved/careers-hero.jpg"
         imageAlt="ASREP Africa team in the field — career opportunities in ASAL development"
         breadcrumbs={[
-          { label: "Get Involved", href: "/get-involved/donate" },
+          { label: "Get Involved", href: "/get-involved" },
           { label: "Careers & Tenders" },
         ]}
         tag="Join Us"

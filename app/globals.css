@@ -1,3 +1,4 @@
+
 @import "tailwindcss";
 
 /* ─── ASREP Africa Design System ──────────────────────────────────────────── */
@@ -121,6 +122,37 @@ h3, h4, h5, h6 {
 
 .partner-logo:hover {
   filter: grayscale(0%) opacity(1);
+}
+
+/* ─── News ticker animation ─────────────────────────────────────────────────── */
+
+@keyframes ticker {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ─── Back to top button ────────────────────────────────────────────────────── */
+
+.back-to-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 1.5rem;
+  z-index: 40;
+  width: 2.75rem;
+  height: 2.75rem;
+  background: var(--color-forest);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+  transition: background 0.2s, transform 0.2s, opacity 0.3s;
+}
+
+.back-to-top:hover {
+  background: var(--color-sage);
+  transform: translateY(-3px);
 }
 
 /* ─── Scrollbar (subtle, matches palette) ───────────────────────────────────── */

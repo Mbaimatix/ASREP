@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import HeroSection from "@/components/home/HeroSection";
+import NewsTicker from "@/components/home/NewsTicker";
 import ImpactNumbersBar from "@/components/home/ImpactNumbersBar";
 import WhoWeAreStrip from "@/components/home/WhoWeAreStrip";
 import ThematicFocusCards from "@/components/home/ThematicFocusCards";
 import PullQuoteSection from "@/components/home/PullQuoteSection";
+import PublicationsSection from "@/components/home/PublicationsSection";
 import FeaturedStories from "@/components/home/FeaturedStories";
 import GlobalRecognitionStrip from "@/components/home/GlobalRecognitionStrip";
 import GetInvolvedCTABand from "@/components/home/GetInvolvedCTABand";
@@ -18,38 +20,82 @@ export const metadata: Metadata = {
     description:
       "Locally-led programmes for climate resilience, peacebuilding, and sustainable livelihoods across Kenya's ASALs. Headquartered in Isiolo County.",
     url: "https://www.asrepafrica.org",
-    images: [{ url: "/images/og/home-og.jpg", width: 1200, height: 630, alt: "ASREP Africa" }],
+    images: [{ url: "/images/hero/hero-1.jpg", width: 1200, height: 630, alt: "ASREP Africa — advancing resilience, restoring nature, sustaining peace" }],
   },
+};
+
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "NGO",
+  "name": "ASREP Africa",
+  "alternateName": "ASAL Research & Resilience Programme",
+  "url": "https://www.asrepafrica.org",
+  "logo": "https://www.asrepafrica.org/logos/asrep-logo-white.png",
+  "description": "ASREP Africa is a Kenyan NGO advancing climate resilience, peacebuilding, indigenous knowledge, and civic governance in Kenya's arid and semi-arid lands.",
+  "foundingDate": "2023",
+  "areaServed": {
+    "@type": "Country",
+    "name": "Kenya"
+  },
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Isiolo",
+    "addressRegion": "Isiolo County",
+    "addressCountry": "KE"
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+254733687149",
+    "email": "asrepafrica@gmail.com",
+    "contactType": "main"
+  },
+  "sameAs": [
+    "https://www.linkedin.com/company/asal-research-resilience-programme-asrep-africa/",
+    "https://www.facebook.com/share/1Cpm3uk3uY/",
+    "https://youtube.com/@asrepafrica"
+  ]
 };
 
 export default function HomePage() {
   return (
     <>
+      {/* JSON-LD Organization schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+      />
+
       {/* 1 — Hero slider with Ken Burns effect */}
       <HeroSection />
 
-      {/* 2 — Impact numbers: count-up on scroll */}
+      {/* 2 — Scrolling news ticker */}
+      <NewsTicker />
+
+      {/* 3 — Impact numbers: count-up on scroll */}
       <ImpactNumbersBar />
 
-      {/* 3 — Who We Are: 2-col photo + text */}
+      {/* 4 — Who We Are: 2-col photo + YouTube + text */}
       <WhoWeAreStrip />
 
-      {/* 4 — Six programme cards */}
+      {/* 5 — Six programme cards */}
       <ThematicFocusCards />
 
-      {/* 5 — Indigenous Knowledge pull quote */}
+      {/* 6 — Indigenous Knowledge pull quote */}
       <PullQuoteSection />
 
-      {/* 6 — Latest news & impact stories (CMS) */}
+      {/* 7 — Reports & Publications */}
+      <PublicationsSection />
+
+      {/* 8 — Latest news & impact stories (CMS) */}
       <FeaturedStories />
 
-      {/* 7 — Global media recognition */}
+      {/* 9 — Global media recognition */}
       <GlobalRecognitionStrip />
 
-      {/* 8 — Donate / Partner / Volunteer CTAs */}
+      {/* 10 — Donate / Partner / Volunteer CTAs */}
       <GetInvolvedCTABand />
 
-      {/* 9 — Partners logo grid */}
+      {/* 11 — Partners logo carousel */}
       <PartnersLogoStrip />
     </>
   );
