@@ -2,186 +2,157 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import PageHero from "@/components/shared/PageHero";
 
+const VIDEO_ID = "9aJQzboyOIY";
+const VIDEO_THUMBNAIL = `https://img.youtube.com/vi/${VIDEO_ID}/maxresdefault.jpg`;
+
 export const metadata: Metadata = {
   title: "Videos | ASREP Africa",
   description:
-    "Video documentaries, field highlights, and event recordings from ASREP Africa's programmes across Isiolo County and Kenya's ASALs.",
+    "Watch ASREP Africa in action — field documentaries and programme highlights from Kenya's ASALs.",
   openGraph: {
     title: "Videos | ASREP Africa",
-    description: "Field documentaries and programme videos from ASREP Africa.",
-    images: [{ url: "/images/impact/impact-hero.jpg", width: 1200, height: 630, alt: "ASREP Africa videos" }],
+    description: "Watch ASREP Africa's field work and community-led programmes across Isiolo County, Kenya.",
+    images: [{ url: VIDEO_THUMBNAIL, width: 1280, height: 720, alt: "ASREP Africa — programme video" }],
   },
-};
-
-// TODO: Replace youtubeId values with real ASREP YouTube video IDs from @asrepafrica
-// Leave youtubeId as empty string ("") until real IDs are available
-const videos = [
-  {
-    id: "v1",
-    youtubeId: "", // TODO: Add real ASREP video ID
-    title: "Waso Eco-Champions: 10,000 Trees for Isiolo County",
-    description: "Watch eco-champions restore degraded ASAL landscapes through community-led tree planting across 10 wards of Isiolo County.",
-    category: "Climate Resilience",
-    year: "2024",
-    thumbnail: "/images/gallery/waso-eco-champs-line.jpg",
-  },
-  {
-    id: "v2",
-    youtubeId: "", // TODO: Add real ASREP video ID
-    title: "Isiolo Peace Actors Forum: Building Durable Community Peace",
-    description: "The Isiolo Peace Actors Forum brings together pastoral communities, women leaders, and youth to resolve resource conflicts.",
-    category: "Peacebuilding",
-    year: "2025",
-    thumbnail: "/images/gallery/community-women-peace-prayer.jpg",
-  },
-  {
-    id: "v3",
-    youtubeId: "", // TODO: Add real ASREP video ID
-    title: "ASAL IK Vault: Cows, Women & Land",
-    description: "ASREP launches its debut Indigenous Knowledge publication documenting Borana Oromo ecological and cultural wisdom.",
-    category: "Research",
-    year: "2025",
-    thumbnail: "/images/gallery/asrep-elders-strategic-meeting.jpg",
-  },
-  {
-    id: "v4",
-    youtubeId: "", // TODO: Add real ASREP video ID
-    title: "KSG Under the Tree: Civic Education in the ASALs",
-    description: "The Kenya School of Government partnership brings community-based civic education from Isiolo to all 47 Kenyan counties.",
-    category: "Civic Governance",
-    year: "2025",
-    thumbnail: "/images/gallery/dida-fayo-remarks-under-tree-series-launch-oldonyiro.jpg",
-  },
-  {
-    id: "v5",
-    youtubeId: "", // TODO: Add real ASREP video ID
-    title: "ASREP Africa: Who We Are",
-    description: "An introduction to ASREP Africa's mission, programmes, and community-led approach to building resilience in Kenya's ASALs.",
-    category: "About ASREP",
-    year: "2023",
-    thumbnail: "/images/about/about-hero.jpg",
-  },
-  {
-    id: "v6",
-    youtubeId: "", // TODO: Add real ASREP video ID
-    title: "Eco-Entrepreneurship Webinar: Green Livelihoods in the ASALs",
-    description: "ASREP's inaugural eco-entrepreneurship webinar explores green income pathways for 40+ participants from ASAL communities.",
-    category: "Livelihoods",
-    year: "2025",
-    thumbnail: "/images/gallery/asrep-forest-partnership.jpg",
-  },
-];
-
-const categoryColour: Record<string, string> = {
-  "Climate Resilience": "bg-forest/10 text-forest",
-  "Peacebuilding": "bg-earth/10 text-earth",
-  "Research": "bg-gold/10 text-earth",
-  "Civic Governance": "bg-sage/10 text-sage",
-  "About ASREP": "bg-charcoal/10 text-charcoal",
-  "Livelihoods": "bg-earth/10 text-earth",
 };
 
 export default function VideosPage() {
   return (
     <>
       <PageHero
-        title="Videos"
-        subtitle="Field documentaries, programme highlights, and event recordings from ASREP Africa's work across Kenya's ASALs."
+        title="Watch ASREP Africa"
+        subtitle="Field documentaries and programme highlights from our work across Kenya's ASALs."
         imageSrc="/images/impact/impact-hero.jpg"
-        imageAlt="ASREP Africa field video documentation and programme highlights"
+        imageAlt="ASREP Africa field documentation"
         breadcrumbs={[{ label: "Videos" }]}
         tag="ASREP on YouTube"
       />
 
-      <section className="section-pad bg-cream" aria-labelledby="videos-heading">
+      {/* ─── Featured Video ──────────────────────────────────────────────── */}
+      <section className="section-pad bg-cream" aria-labelledby="featured-video-heading">
         <div className="container-asrep">
-          <div className="text-center max-w-2xl mx-auto mb-12">
-            <p className="text-sage text-xs font-semibold uppercase tracking-[0.2em] mb-3">Watch</p>
-            <h2 id="videos-heading" className="font-display text-earth text-3xl md:text-4xl font-bold mb-4">
-              ASREP Africa <span className="text-forest">in Action</span>
-            </h2>
-            <p className="text-charcoal/65 leading-relaxed">
-              Subscribe to our YouTube channel for field updates, research launches, and event recordings.
-            </p>
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-14 items-start">
+
+            {/* Video embed — takes 3/5 columns on desktop */}
+            <div className="lg:col-span-3">
+              <div className="rounded-2xl overflow-hidden shadow-2xl aspect-video bg-charcoal">
+                <iframe
+                  src={`https://www.youtube.com/embed/${VIDEO_ID}?rel=0&modestbranding=1`}
+                  title="ASREP Africa — Programme Video"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="w-full h-full"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+
+            {/* Description panel — 2/5 columns */}
+            <div className="lg:col-span-2 flex flex-col justify-center">
+              <span className="inline-block px-3 py-1 bg-forest/10 text-forest text-xs font-semibold
+                rounded-full uppercase tracking-widest mb-5 w-fit">
+                Featured
+              </span>
+
+              <h2
+                id="featured-video-heading"
+                className="font-display text-earth text-2xl md:text-3xl font-bold leading-tight mb-4"
+              >
+                ASREP Africa{" "}
+                <span className="text-forest">in Action</span>
+              </h2>
+
+              <p className="text-charcoal/70 leading-relaxed mb-5">
+                From community tree-planting drives in Isiolo to peace dialogues
+                across pastoral boundaries — watch ASREP Africa&apos;s locally-led,
+                evidence-driven programmes creating lasting change in Kenya&apos;s ASALs.
+              </p>
+
+              <ul className="space-y-2.5 mb-7">
+                {[
+                  "10,000 indigenous trees planted with 2,000 eco-champions",
+                  "500 community members engaged in peacebuilding forums",
+                  "Debut IK Vault Series — Cows, Women & Land",
+                ].map((fact) => (
+                  <li key={fact} className="flex items-start gap-3 text-sm text-charcoal/80">
+                    <span className="w-1.5 h-1.5 rounded-full bg-forest mt-2 shrink-0" aria-hidden="true" />
+                    {fact}
+                  </li>
+                ))}
+              </ul>
+
+              <a
+                href={`https://youtu.be/${VIDEO_ID}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2.5 px-5 py-3 bg-[#FF0000] hover:bg-[#CC0000]
+                  text-white font-semibold text-sm rounded-lg transition-colors w-fit"
+              >
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                </svg>
+                Watch on YouTube
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── Thumbnail strip (visual context) ────────────────────────────── */}
+      <section className="py-14 bg-white" aria-label="Video preview">
+        <div className="container-asrep">
+          <div className="relative rounded-3xl overflow-hidden shadow-xl max-w-3xl mx-auto group">
+            <Image
+              src={VIDEO_THUMBNAIL}
+              alt="ASREP Africa — programme video thumbnail"
+              width={1280}
+              height={720}
+              className="w-full h-auto object-cover"
+              priority
+            />
+            {/* Play overlay */}
             <a
-              href="https://youtube.com/@asrepafrica?si=beAToszi5RgoeRNX"
+              href={`https://youtu.be/${VIDEO_ID}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 mt-5 px-6 py-3 bg-[#FF0000] text-white
-                font-semibold text-sm rounded-lg hover:bg-[#CC0000] transition-colors"
+              className="absolute inset-0 flex items-center justify-center
+                bg-black/30 group-hover:bg-black/40 transition-colors"
+              aria-label="Watch ASREP Africa video on YouTube"
             >
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-              </svg>
-              Subscribe on YouTube
+              <div className="w-20 h-20 rounded-full bg-[#FF0000] flex items-center justify-center
+                shadow-2xl group-hover:scale-110 transition-transform duration-300">
+                <svg className="w-9 h-9 text-white ml-2" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+              </div>
             </a>
           </div>
+        </div>
+      </section>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
-            {videos.map((video) => (
-              <article
-                key={video.id}
-                className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow border border-charcoal/8 flex flex-col"
-              >
-                {/* Thumbnail / embed */}
-                {video.youtubeId ? (
-                  <div className="aspect-video bg-charcoal overflow-hidden">
-                    <iframe
-                      src={`https://www.youtube.com/embed/${video.youtubeId}?rel=0&modestbranding=1`}
-                      title={video.title}
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                      className="w-full h-full"
-                      loading="lazy"
-                    />
-                  </div>
-                ) : (
-                  /* Placeholder shown until real YouTube IDs are added */
-                  <a
-                    href="https://youtube.com/@asrepafrica"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="relative aspect-video block overflow-hidden group"
-                    aria-label={`Watch ${video.title} on YouTube`}
-                  >
-                    {video.thumbnail && (
-                      <Image
-                        src={video.thumbnail}
-                        alt={video.title}
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-500"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      />
-                    )}
-                    <div className="absolute inset-0 bg-black/45 group-hover:bg-black/55 transition-colors flex items-center justify-center">
-                      <div className="w-14 h-14 rounded-full bg-[#FF0000] flex items-center justify-center shadow-lg">
-                        <svg className="w-6 h-6 text-white ml-1" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                          <path d="M8 5v14l11-7z" />
-                        </svg>
-                      </div>
-                    </div>
-                    <div className="absolute bottom-2 right-2 bg-black/70 text-white text-[10px] px-2 py-0.5 rounded font-medium">
-                      Watch on YouTube
-                    </div>
-                  </a>
-                )}
-                <div className="p-5 flex flex-col flex-1">
-                  <div className="flex items-center gap-2 mb-3">
-                    <span className={`px-2.5 py-1 rounded-full text-[10px] font-semibold ${categoryColour[video.category] ?? "bg-charcoal/10 text-charcoal"}`}>
-                      {video.category}
-                    </span>
-                    <span className="text-muted text-xs">{video.year}</span>
-                  </div>
-                  <h3 className="font-display font-bold text-charcoal text-base leading-snug mb-2">
-                    {video.title}
-                  </h3>
-                  <p className="text-charcoal/60 text-sm leading-relaxed line-clamp-3 flex-1">
-                    {video.description}
-                  </p>
-                </div>
-              </article>
-            ))}
-          </div>
+      {/* ─── YouTube channel CTA ──────────────────────────────────────────── */}
+      <section className="py-16 bg-forest text-white text-center" aria-label="Subscribe to ASREP Africa on YouTube">
+        <div className="container-asrep max-w-2xl mx-auto">
+          <p className="text-white/50 text-xs font-semibold uppercase tracking-[0.25em] mb-3">Stay Connected</p>
+          <h2 className="font-display text-3xl font-bold mb-4">
+            More videos coming soon
+          </h2>
+          <p className="text-white/65 leading-relaxed mb-8">
+            Subscribe to the ASREP Africa YouTube channel for field updates, research
+            launches, event recordings, and community stories from Kenya&apos;s ASALs.
+          </p>
+          <a
+            href="https://youtube.com/@asrepafrica?si=beAToszi5RgoeRNX"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2.5 px-7 py-4 bg-[#FF0000] hover:bg-[#CC0000]
+              text-white font-semibold text-sm rounded-xl transition-colors"
+          >
+            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+            </svg>
+            Subscribe on YouTube
+          </a>
         </div>
       </section>
     </>

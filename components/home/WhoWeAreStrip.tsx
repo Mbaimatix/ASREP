@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 // ASREP Africa YouTube channel: https://youtube.com/@asrepafrica
-const YOUTUBE_VIDEO_ID = "dQw4w9WgXcQ"; // Replace with actual ASREP video ID when available
+const YOUTUBE_VIDEO_ID = "9aJQzboyOIY";
 
 export default function WhoWeAreStrip() {
   return (

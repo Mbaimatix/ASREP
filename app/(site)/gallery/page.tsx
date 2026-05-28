@@ -315,22 +315,71 @@ export default function GalleryPage() {
         </div>
       </section>
 
-      {/* Video link */}
-      <section className="py-12 bg-cream">
-        <div className="container-asrep text-center">
-          <p className="text-charcoal/60 text-base mb-4">
-            Looking for video content? Visit our video gallery for field documentaries and programme highlights.
-          </p>
-          <a
-            href="/videos"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-[#FF0000] text-white
-              font-semibold text-sm rounded-lg hover:bg-[#CC0000] transition-colors"
-          >
-            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-            </svg>
-            Watch on YouTube
-          </a>
+      {/* Video CTA */}
+      <section className="py-16 bg-forest" aria-label="Featured ASREP Africa video">
+        <div className="container-asrep">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+            {/* Thumbnail */}
+            <a
+              href="/videos"
+              className="relative block rounded-2xl overflow-hidden shadow-2xl aspect-video group"
+              aria-label="Watch ASREP Africa on our video page"
+            >
+              <Image
+                src={`https://img.youtube.com/vi/9aJQzboyOIY/maxresdefault.jpg`}
+                alt="ASREP Africa — programme video"
+                fill
+                className="object-cover group-hover:scale-105 transition-transform duration-500"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+              <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors
+                flex items-center justify-center">
+                <div className="w-16 h-16 rounded-full bg-[#FF0000] flex items-center justify-center
+                  shadow-xl group-hover:scale-110 transition-transform duration-300">
+                  <svg className="w-7 h-7 text-white ml-1.5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </div>
+              </div>
+            </a>
+
+            {/* Text */}
+            <div>
+              <p className="text-white/50 text-xs font-semibold uppercase tracking-[0.2em] mb-4">Video</p>
+              <h2 className="font-display text-white text-2xl md:text-3xl font-bold leading-tight mb-4">
+                Watch ASREP Africa{" "}
+                <span className="text-gold">in Action</span>
+              </h2>
+              <p className="text-white/65 leading-relaxed mb-7">
+                Beyond the photographs — see our eco-champions, community dialogues,
+                and research launches on video. More content coming to our YouTube channel.
+              </p>
+              <div className="flex flex-wrap gap-3">
+                <a
+                  href="/videos"
+                  className="inline-flex items-center gap-2 px-5 py-3 bg-white text-forest
+                    font-semibold text-sm rounded-lg hover:bg-sand transition-colors"
+                >
+                  View Videos
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5} aria-hidden="true">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                  </svg>
+                </a>
+                <a
+                  href="https://youtube.com/@asrepafrica?si=beAToszi5RgoeRNX"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-5 py-3 bg-[#FF0000] hover:bg-[#CC0000]
+                    text-white font-semibold text-sm rounded-lg transition-colors"
+                >
+                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                  </svg>
+                  Subscribe
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
     </>
