@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import nodemailer from "nodemailer";
+import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
+import { isAllowedOrigin } from "@/lib/csrf";
 
 const transporter = nodemailer.createTransport({
   host: process.env.EMAIL_SERVER_HOST,
@@ -13,11 +15,34 @@ const transporter = nodemailer.createTransport({
 });
 
 export async function POST(req: NextRequest) {
+  // Vuln 5 — CSRF origin check
+  if (!isAllowedOrigin(req)) {
+    return NextResponse.json({ message: "Forbidden." }, { status: 403 });
+  }
+
+  // Vuln 1 — rate limiting (5 requests per IP per 10 minutes)
+  const ip = getClientIp(req);
+  const { allowed, retryAfterSeconds } = checkRateLimit(ip);
+  if (!allowed) {
+    return NextResponse.json(
+      { message: "Too many requests. Please try again later." },
+      {
+        status: 429,
+        headers: { "Retry-After": String(retryAfterSeconds) },
+      }
+    );
+  }
+
   try {
     const { email } = await req.json();
 
     if (!email?.trim()) {
       return NextResponse.json({ message: "Email address is required." }, { status: 400 });
+    }
+
+    // Vuln 4 — length limit
+    if (email.trim().length > 254) {
+      return NextResponse.json({ message: "Email must be 254 characters or fewer." }, { status: 400 });
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

@@ -6,12 +6,21 @@ import { useSearchParams, useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 
+// Vuln 6 — validate callbackUrl is a safe relative path (no open redirect)
+function safeCallbackUrl(url: string | null): string {
+  if (!url) return "/admin/dashboard";
+  if (url.startsWith("/") && !url.startsWith("//") && !url.includes("://")) {
+    return url;
+  }
+  return "/admin/dashboard";
+}
+
 // ─── Inner component that reads search params ────────────────────────────────
 // Must be wrapped in <Suspense> to avoid build-time bail-out error.
 function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get("callbackUrl") ?? "/admin/dashboard";
+  const callbackUrl = safeCallbackUrl(searchParams.get("callbackUrl"));
   const errorParam = searchParams.get("error");
 
   const [email, setEmail] = useState("");

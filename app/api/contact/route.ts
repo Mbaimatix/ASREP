@@ -1,6 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 import { prisma } from "@/lib/prisma";
+import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
+import { isAllowedOrigin } from "@/lib/csrf";
+
+// Field length limits (Vuln 4)
+const LIMITS = {
+  fullName: 100,
+  email: 254,
+  organisation: 200,
+  subject: 200,
+  message: 5000,
+};
 
 const transporter = nodemailer.createTransport({
   host: process.env.EMAIL_SERVER_HOST,
@@ -13,15 +24,50 @@ const transporter = nodemailer.createTransport({
 });
 
 export async function POST(req: NextRequest) {
+  // Vuln 5 — CSRF origin check
+  if (!isAllowedOrigin(req)) {
+    return NextResponse.json({ message: "Forbidden." }, { status: 403 });
+  }
+
+  // Vuln 1 — rate limiting (5 requests per IP per 10 minutes)
+  const ip = getClientIp(req);
+  const { allowed, retryAfterSeconds } = checkRateLimit(ip);
+  if (!allowed) {
+    return NextResponse.json(
+      { message: "Too many requests. Please try again later." },
+      {
+        status: 429,
+        headers: { "Retry-After": String(retryAfterSeconds) },
+      }
+    );
+  }
+
   try {
     const { fullName, email, organisation, subject, message } = await req.json();
 
-    // Validation
+    // Presence validation
     if (!fullName?.trim() || !email?.trim() || !subject?.trim() || !message?.trim()) {
       return NextResponse.json(
         { message: "Full name, email, subject, and message are required." },
         { status: 400 }
       );
+    }
+
+    // Vuln 4 — length limits
+    if (fullName.trim().length > LIMITS.fullName) {
+      return NextResponse.json({ message: `Full name must be ${LIMITS.fullName} characters or fewer.` }, { status: 400 });
+    }
+    if (email.trim().length > LIMITS.email) {
+      return NextResponse.json({ message: `Email must be ${LIMITS.email} characters or fewer.` }, { status: 400 });
+    }
+    if (organisation && organisation.trim().length > LIMITS.organisation) {
+      return NextResponse.json({ message: `Organisation must be ${LIMITS.organisation} characters or fewer.` }, { status: 400 });
+    }
+    if (subject.trim().length > LIMITS.subject) {
+      return NextResponse.json({ message: `Subject must be ${LIMITS.subject} characters or fewer.` }, { status: 400 });
+    }
+    if (message.trim().length > LIMITS.message) {
+      return NextResponse.json({ message: `Message must be ${LIMITS.message} characters or fewer.` }, { status: 400 });
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
