@@ -101,6 +101,16 @@ export default function RootLayout({
       lang="en"
       className={`${playfair.variable} ${dmSans.variable} h-full scroll-smooth`}
     >
+      <head>
+        {/* Preconnect to Sanity CDN — eliminates DNS + TLS handshake on first CMS image */}
+        <link rel="preconnect" href="https://cdn.sanity.io" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://cdn.sanity.io" />
+        {/* Preconnect to YouTube for the video embed on the home page */}
+        <link rel="preconnect" href="https://www.youtube-nocookie.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://img.youtube.com" />
+        {/* Preconnect to Google Fonts CDN (next/font uses this internally) */}
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+      </head>
       <body className="min-h-full flex flex-col bg-cream text-charcoal font-body antialiased">
         {/* Accessibility: skip to main content */}
         <a href="#main-content" className="skip-link">

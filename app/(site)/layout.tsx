@@ -1,10 +1,11 @@
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import BackToTop from "@/components/shared/BackToTop";
+import AIChatWidget from "@/components/shared/AIChatWidget";
 
 /**
  * Public-facing site layout — wraps every page under (site)/ with
- * the sticky Navbar and full Footer.
+ * the sticky Navbar, full Footer, back-to-top button, and AI chat widget.
  */
 export default function SiteLayout({
   children,
@@ -19,6 +20,7 @@ export default function SiteLayout({
       </main>
       <Footer />
       <BackToTop />
+      <AIChatWidget />
     </>
   );
 }

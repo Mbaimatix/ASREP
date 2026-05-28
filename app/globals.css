@@ -177,3 +177,35 @@ h3, h4, h5, h6 {
   outline-offset: 3px;
   border-radius: 2px;
 }
+
+/* ─── Performance: defer rendering of off-screen heavy sections ─────────────── */
+
+/* Sections below the fold can be skipped until they near the viewport.
+   Only applied to sections that don't contain scroll-triggered animations,
+   because content-visibility can interfere with IntersectionObserver. */
+.section-pad:not([data-above-fold]) {
+  content-visibility: auto;
+  /* Hint to the browser about the expected rendered height to prevent
+     layout shift when the section is rendered */
+  contain-intrinsic-size: 0 600px;
+}
+
+/* ─── Smooth image fade-in on load (prevents flash of no image) ─────────────── */
+
+img {
+  color: transparent;          /* hide broken-image alt text styling   */
+  transition: opacity 0.3s ease;
+}
+
+/* ─── Chat widget positioning ───────────────────────────────────────────────── */
+
+/* Push the back-to-top button up when the chat widget is present */
+.back-to-top {
+  bottom: 5.5rem;
+}
+
+@media (max-width: 768px) {
+  .back-to-top {
+    bottom: 5rem;
+  }
+}
