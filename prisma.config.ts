@@ -4,28 +4,31 @@ import { resolve } from "path";
 
 /**
  * Prisma v7 configuration.
- * Manually loads DATABASE_URL from .env or .env.local so that
- * `npx prisma db push / migrate deploy / studio` work without
- * having to pass the env var on the command line.
+ * Only used by the Prisma CLI (db push, studio, etc.).
+ * The runtime client reads DATABASE_URL directly from process.env
+ * via the datasource block in schema.prisma.
+ *
+ * Loads DATABASE_URL from .env or .env.local so CLI commands work
+ * without manually exporting the variable in your shell.
  */
-function loadDatabaseUrl(): string | undefined {
-  // Try .env first (Prisma convention), then .env.local (Next.js convention)
+function loadEnvFile() {
   for (const file of [".env", ".env.local"]) {
     try {
       const content = readFileSync(resolve(process.cwd(), file), "utf-8");
-      const match = content.match(/^DATABASE_URL\s*=\s*["']?([^"'\n]+)["']?/m);
-      if (match?.[1]) return match[1].trim();
+      for (const line of content.split("\n")) {
+        const match = line.match(/^([A-Z_][A-Z0-9_]*)\s*=\s*["']?(.+?)["']?\s*$/);
+        if (match && !process.env[match[1]]) {
+          process.env[match[1]] = match[2];
+        }
+      }
     } catch {
-      // file doesn't exist — try next
+      // file doesn't exist — skip
     }
   }
-  return process.env.DATABASE_URL;
 }
+
+loadEnvFile();
 
 export default defineConfig({
   schema: "./prisma/schema.prisma",
-
-  datasource: {
-    url: loadDatabaseUrl(),
-  },
 });

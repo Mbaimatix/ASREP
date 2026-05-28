@@ -3,40 +3,37 @@ import { PrismaPg } from "@prisma/adapter-pg";
 import pg from "pg";
 
 /**
- * Prisma v7 singleton — uses the PrismaPg driver adapter (required when
- * the datasource `url` has been moved out of schema.prisma to prisma.config.ts).
+ * Prisma v7 singleton for Next.js / Vercel.
  *
- * Prevents "Too many database connections" in development by reusing a single
- * PrismaClient instance across hot reloads.
+ * Prisma v7 requires a driver adapter — `new PrismaClient()` without one
+ * throws "Using engine type 'client' requires adapter or accelerateUrl".
+ *
+ * pg.Pool accepts connectionString: undefined without throwing at creation
+ * time, so this module can be safely imported during `next build` even when
+ * DATABASE_URL is not yet in the environment. Actual queries at runtime will
+ * use the DATABASE_URL that Vercel injects before any request is served.
+ *
+ * In development, the singleton is stored on globalThis to survive hot reloads.
  */
-declare global {
-  // eslint-disable-next-line no-var
-  var prisma: PrismaClient | undefined;
-}
+
+const globalForPrisma = globalThis as unknown as { prisma: PrismaClient };
 
 function createPrismaClient(): PrismaClient {
-  const url = process.env.DATABASE_URL;
+  const pool = new pg.Pool({
+    connectionString: process.env.DATABASE_URL,
+  });
 
-  if (!url) {
-    // Build-time or test environments without a live database.
-    // Queries will throw at runtime, but import/compilation succeeds.
-    return new PrismaClient({
-      log: process.env.NODE_ENV === "development" ? ["error", "warn"] : ["error"],
-    });
-  }
-
-  const pool = new pg.Pool({ connectionString: url });
   const adapter = new PrismaPg(pool);
 
   return new PrismaClient({
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    adapter: adapter as any,
+    adapter,
     log: process.env.NODE_ENV === "development" ? ["error", "warn"] : ["error"],
   });
 }
 
-export const prisma: PrismaClient = global.prisma ?? createPrismaClient();
+export const prisma: PrismaClient =
+  globalForPrisma.prisma ?? createPrismaClient();
 
 if (process.env.NODE_ENV !== "production") {
-  global.prisma = prisma;
+  globalForPrisma.prisma = prisma;
 }
