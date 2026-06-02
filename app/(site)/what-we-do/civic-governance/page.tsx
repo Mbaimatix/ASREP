@@ -4,6 +4,7 @@ import PageHero from "@/components/shared/PageHero";
 import SectionHeader from "@/components/shared/SectionHeader";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "https://www.asrepafrica.org/what-we-do/civic-governance" },
   title: "Civic Governance & Youth Leadership | ASREP Africa",
   description:
     "The KSG 'Under the Tree' Series takes civic education to communities across Kenya's 47 counties. ASREP's civic governance programme deepens youth engagement and county accountability.",
@@ -21,7 +22,7 @@ export default function CivicGovernancePage() {
           { label: "What We Do", href: "/what-we-do" },
           { label: "Civic Governance & Youth" },
         ]}
-        tag="Programme 04"
+        tag="Youth Governance"
       />
 
       {/* Context */}
@@ -44,7 +45,7 @@ export default function CivicGovernancePage() {
             The &ldquo;Under the Tree&rdquo; Series
           </h2>
           <p className="text-white/70 text-base leading-relaxed text-center mb-10 max-w-2xl mx-auto">
-            In partnership with the Kenya School of Government, ASREP developed and piloted the &ldquo;Under the Tree&rdquo; civic education format in Isiolo — interactive, community-based sessions held under trees, in community halls, and at watering points. The format proved so effective it was adopted for a 47-county national rollout.
+            In partnership with the Kenya School of Government, ASREP developed and piloted the &ldquo;Under the Tree&rdquo; civic education format in Isiolo — interactive, community-based sessions held under trees, in community halls, and at watering points. The format proved so effective it was adopted for a 47-county national rollout. This work cements ASREP&apos;s position at the intersection of governance innovation and community resilience — making us an essential voice in shaping Kenya&apos;s ASAL governance future.
           </p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
             {[

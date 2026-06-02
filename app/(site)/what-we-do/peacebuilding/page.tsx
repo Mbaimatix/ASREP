@@ -4,6 +4,7 @@ import PageHero from "@/components/shared/PageHero";
 import SectionHeader from "@/components/shared/SectionHeader";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "https://www.asrepafrica.org/what-we-do/peacebuilding" },
   title: "Peacebuilding & Social Cohesion | ASREP Africa",
   description:
     "ASREP Africa's peacebuilding programme convenes the Isiolo Peace Actors Forum and engages 500+ community members in dialogue and conflict resolution across Northern Kenya's pastoral communities.",
@@ -21,7 +22,7 @@ export default function PeacebuildingPage() {
           { label: "What We Do", href: "/what-we-do" },
           { label: "Peacebuilding & Social Cohesion" },
         ]}
-        tag="Programme 02"
+        tag="Conflict Resolution"
       />
 
       {/* Context */}

@@ -21,14 +21,15 @@ const dmSans = DM_Sans({
   weight: ["300", "400", "500", "600", "700"],
 });
 
+const SITE = "https://www.asrepafrica.org";
+
 /* ─── Site-wide metadata ─────────────────────────────────────────────────── */
 export const metadata: Metadata = {
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.asrepafrica.org"
+    process.env.NEXT_PUBLIC_SITE_URL ?? SITE
   ),
   title: {
-    default:
-      "ASREP Africa — ASAL Research & Resilience Programme",
+    default: "ASREP Africa — ASAL Research & Resilience Programme",
     template: "%s | ASREP Africa — ASAL Research & Resilience Programme",
   },
   description:
@@ -46,17 +47,20 @@ export const metadata: Metadata = {
     "Isiolo County NGO",
   ],
   authors: [{ name: "ASAL Research and Resilience Programme (ASREP)" }],
+  alternates: {
+    canonical: SITE,
+  },
   openGraph: {
     type: "website",
     locale: "en_GB",
-    url: "https://www.asrepafrica.org",
+    url: SITE,
     siteName: "ASREP Africa",
     title: "ASREP Africa — ASAL Research & Resilience Programme",
     description:
       "Advancing Resilience. Restoring Nature. Sustaining Peace. — Building resilient communities across Kenya's ASALs.",
     images: [
       {
-        url: "/images/og-default.jpg",
+        url: "/images/gallery/waso-eco-champs-line.jpg",
         width: 1200,
         height: 630,
         alt: "ASREP Africa — Advancing Resilience. Restoring Nature. Sustaining Peace.",
@@ -68,7 +72,7 @@ export const metadata: Metadata = {
     title: "ASREP Africa — ASAL Research & Resilience Programme",
     description:
       "Advancing Resilience. Restoring Nature. Sustaining Peace. Building resilient communities across Kenya's ASALs.",
-    images: ["/images/og-default.jpg"],
+    images: ["/images/gallery/waso-eco-champs-line.jpg"],
   },
   robots: {
     index: true,
@@ -88,6 +92,56 @@ export const metadata: Metadata = {
     ],
     apple: "/apple-touch-icon.png",
   },
+};
+
+/* ─── JSON-LD Structured Data ────────────────────────────────────────────── */
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "NGO",
+      "@id": `${SITE}/#organization`,
+      name: "ASREP Africa",
+      alternateName: "ASAL Research & Resilience Programme",
+      url: SITE,
+      logo: `${SITE}/logos/asrep-logo.png`,
+      foundingDate: "2023",
+      description:
+        "Locally-led NGO building resilient communities across Kenya's arid and semi-arid lands through climate resilience, peacebuilding, research, and governance programmes.",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Isiolo",
+        addressRegion: "Isiolo County",
+        addressCountry: "KE",
+      },
+      contactPoint: {
+        "@type": "ContactPoint",
+        contactType: "general",
+        email: "asrepafrica@gmail.com",
+        telephone: "+254-733-687-149",
+      },
+      sameAs: [
+        "https://www.linkedin.com/company/asal-research-resilience-programme-asrep-africa/",
+        "https://www.facebook.com/share/1Cpm3uk3uY/",
+        "https://x.com/asrepafrica",
+        "https://youtube.com/@asrepafrica",
+        "https://www.instagram.com/asrepafrica/",
+      ],
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${SITE}/#website`,
+      url: SITE,
+      name: "ASREP Africa",
+      publisher: { "@id": `${SITE}/#organization` },
+      inLanguage: "en-GB",
+      potentialAction: {
+        "@type": "SearchAction",
+        target: `${SITE}/news?q={search_term_string}`,
+        "query-input": "required name=search_term_string",
+      },
+    },
+  ],
 };
 
 /* ─── Root layout ─────────────────────────────────────────────────────────── */
@@ -110,6 +164,13 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://img.youtube.com" />
         {/* Preconnect to Google Fonts CDN (next/font uses this internally) */}
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/* Sitemap declaration */}
+        <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+        {/* JSON-LD structured data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
       </head>
       <body className="min-h-full flex flex-col bg-cream text-charcoal font-body antialiased">
         {/* Accessibility: skip to main content */}

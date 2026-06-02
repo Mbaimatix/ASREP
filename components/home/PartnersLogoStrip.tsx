@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 
 const partners = [
@@ -61,10 +61,31 @@ function PartnerTile({ partner }: { partner: typeof partners[0] }) {
 }
 
 export default function PartnersLogoStrip() {
-  const doubled = [...partners, ...partners];
+  const [paused, setPaused] = useState(false);
+  const [reducedMotion, setReducedMotion] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setReducedMotion(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setReducedMotion(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
+
+  const animationStyle: React.CSSProperties = reducedMotion
+    ? { animation: "none" }
+    : {
+        animation: "ticker 45s linear infinite",
+        animationPlayState: paused ? "paused" : "running",
+      };
 
   return (
-    <section className="section-pad bg-cream" aria-labelledby="partners-heading">
+    <section
+      className="section-pad bg-cream"
+      aria-labelledby="partners-heading"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+    >
       <div className="container-asrep">
         <div className="text-center mb-10">
           <p className="text-sage text-xs font-semibold uppercase tracking-[0.2em] mb-3">
@@ -88,15 +109,24 @@ export default function PartnersLogoStrip() {
           <div
             className="flex items-center"
             style={{
-              animation: "ticker 45s linear infinite",
+              ...animationStyle,
               width: "max-content",
             }}
           >
-            {doubled.map((partner, i) => (
+            {/* First set — visible to screen readers */}
+            {partners.map((partner, i) => (
               <div key={`${partner.abbr}-${i}`} role="listitem">
                 <PartnerTile partner={partner} />
               </div>
             ))}
+            {/* Duplicate set — hidden from screen readers to avoid double announcements */}
+            <div aria-hidden="true" className="flex items-center">
+              {partners.map((partner, i) => (
+                <div key={`${partner.abbr}-dup-${i}`}>
+                  <PartnerTile partner={partner} />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 

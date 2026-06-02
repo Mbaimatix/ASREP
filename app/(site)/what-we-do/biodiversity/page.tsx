@@ -4,6 +4,7 @@ import PageHero from "@/components/shared/PageHero";
 import SectionHeader from "@/components/shared/SectionHeader";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "https://www.asrepafrica.org/what-we-do/biodiversity" },
   title: "Biodiversity Restoration | ASREP Africa",
   description:
     "ASREP Africa works with San Diego Zoo Wildlife Alliance to protect iconic ASAL biodiversity and restore habitats across Isiolo County through community-led conservation.",
@@ -21,7 +22,7 @@ export default function BiodiversityPage() {
           { label: "What We Do", href: "/what-we-do" },
           { label: "Biodiversity Restoration" },
         ]}
-        tag="Programme 05"
+        tag="Wildlife & Ecology"
       />
 
       {/* Context */}

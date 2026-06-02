@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import PageHero from "@/components/shared/PageHero";
 import SectionHeader from "@/components/shared/SectionHeader";
 import Accordion from "@/components/shared/Accordion";
@@ -9,6 +8,7 @@ import { createImageUrlBuilder } from "@sanity/image-url";
 import type { SanityImageSource } from "@sanity/image-url";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "https://www.asrepafrica.org/resources" },
   title: "Resources | Publications & Research - ASREP Africa",
   description:
     "Download ASREP Africa's Impact Report 2025-2026, the ASAL IK Vault Series debut, eco-entrepreneurship webinar summary, and policy briefs. Access our full publications library.",
@@ -261,13 +261,21 @@ export default async function ResourcesPage() {
                       Download PDF
                     </a>
                   ) : pub.status === "forthcoming" ? (
-                    <span className="text-muted text-sm font-medium">Coming Soon</span>
+                    <a
+                      href={`/contact?subject=Notify%20Me%3A%20${encodeURIComponent(pub.title)}`}
+                      className="text-forest hover:text-sage text-sm font-medium underline underline-offset-2 transition-colors"
+                    >
+                      Notify me when available →
+                    </a>
                   ) : (
                     <a
-                      href="mailto:asrepafrica@gmail.com?subject=Publication Request"
-                      className="inline-flex items-center gap-2 text-forest font-semibold text-sm hover:text-sage transition-colors"
+                      href={`/contact?subject=Document%20Request%3A%20${encodeURIComponent(pub.title)}`}
+                      className="inline-flex items-center gap-2 px-4 py-2 bg-forest text-white text-sm font-semibold rounded-lg hover:bg-sage transition-colors"
                     >
-                      Request Document &rarr;
+                      Request This Document
+                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                      </svg>
                     </a>
                   )}
                 </div>
@@ -305,9 +313,9 @@ export default async function ResourcesPage() {
             allowMultiple
           />
           <div className="mt-8 text-center">
-            <Link
-              href="/about/policies"
-              className="inline-flex items-center gap-2 text-forest font-semibold text-sm hover:text-sage transition-colors"
+            <a
+              href="/contact?subject=Document%20Request%3A%20Institutional%20Policy%20Documents"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-forest text-white text-sm font-semibold rounded-lg hover:bg-sage transition-colors"
             >
               Request Full Policy Documents
               <svg
@@ -319,7 +327,7 @@ export default async function ResourcesPage() {
               >
                 <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
               </svg>
-            </Link>
+            </a>
           </div>
         </div>
       </section>

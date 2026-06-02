@@ -7,11 +7,13 @@ import ThematicFocusCards from "@/components/home/ThematicFocusCards";
 import PullQuoteSection from "@/components/home/PullQuoteSection";
 import PublicationsSection from "@/components/home/PublicationsSection";
 import FeaturedStories from "@/components/home/FeaturedStories";
+import NewsletterBanner from "@/components/shared/NewsletterBanner";
 import GlobalRecognitionStrip from "@/components/home/GlobalRecognitionStrip";
 import GetInvolvedCTABand from "@/components/home/GetInvolvedCTABand";
 import PartnersLogoStrip from "@/components/home/PartnersLogoStrip";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "https://www.asrepafrica.org" },
   title: "ASREP Africa — ASAL Research & Resilience Programme",
   description:
     "ASREP Africa builds resilient communities across Kenya's arid and semi-arid lands through climate resilience, peacebuilding, indigenous knowledge, and civic governance.",
@@ -89,13 +91,16 @@ export default function HomePage() {
       {/* 8 — Latest news & impact stories (CMS) */}
       <FeaturedStories />
 
-      {/* 9 — Global media recognition */}
+      {/* 9 — Newsletter subscription banner */}
+      <NewsletterBanner />
+
+      {/* 10 — Global media recognition */}
       <GlobalRecognitionStrip />
 
-      {/* 10 — Donate / Partner / Volunteer CTAs */}
+      {/* 11 — Donate / Partner / Volunteer CTAs */}
       <GetInvolvedCTABand />
 
-      {/* 11 — Partners logo carousel */}
+      {/* 12 — Partners logo carousel */}
       <PartnersLogoStrip />
     </>
   );

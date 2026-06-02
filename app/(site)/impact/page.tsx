@@ -10,6 +10,7 @@ import { createImageUrlBuilder } from "@sanity/image-url";
 import type { SanityImageSource } from "@sanity/image-url";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "https://www.asrepafrica.org/impact" },
   title: "Our Impact | ASREP Africa",
   description:
     "Measurable impact across climate resilience, peacebuilding, research, and civic governance. Download ASREP Africa's 2025-2026 Impact Report and explore field stories and photo galleries.",
@@ -127,6 +128,26 @@ export default async function ImpactPage() {
           </div>
         </div>
       </section>
+
+      {/* PDF Download CTA */}
+      <div className="bg-forest">
+        <div className="container-asrep">
+          <div className="mt-0 pb-12 text-center">
+            <p className="text-white/60 text-sm mb-4">Read the full story behind these numbers</p>
+            <a
+              href="/resources"
+              className="inline-flex items-center gap-3 px-8 py-4 bg-gold hover:bg-gold/90 text-forest
+                font-bold text-base rounded-xl transition-all hover:shadow-xl hover:-translate-y-0.5"
+            >
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+              </svg>
+              Download Impact Report 2025–2026 (PDF)
+            </a>
+            <p className="text-white/40 text-xs mt-3">Free download · No sign-up required</p>
+          </div>
+        </div>
+      </div>
 
       {/* Impact areas */}
       <section className="section-pad bg-cream" aria-labelledby="impact-areas-heading">

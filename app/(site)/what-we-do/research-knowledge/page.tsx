@@ -4,6 +4,7 @@ import PageHero from "@/components/shared/PageHero";
 import SectionHeader from "@/components/shared/SectionHeader";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "https://www.asrepafrica.org/what-we-do/research-knowledge" },
   title: "Research & Knowledge Management | ASREP Africa",
   description:
     "ASREP Africa documents ASAL indigenous knowledge through the IK Vault Series and generates evidence-based research and policy briefs to inform decision-makers across Kenya.",
@@ -21,7 +22,7 @@ export default function ResearchKnowledgePage() {
           { label: "What We Do", href: "/what-we-do" },
           { label: "Research & Knowledge" },
         ]}
-        tag="Programme 03"
+        tag="Indigenous Knowledge"
       />
 
       {/* Context */}

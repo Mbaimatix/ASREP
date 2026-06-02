@@ -14,10 +14,10 @@ const coverage = [
   },
   {
     publication: "The Guardian",
-    logo: "/logos/guardian-logo.png",
-    headline: "Conservation in the Age of Trump Aid Cuts",
+    logo: "/logos/guardian-logo.jpg",
+    headline: "Big News: ASREP Africa Global Feature Stories",
     excerpt:
-      "The Guardian's global environment desk highlights ASREP alongside leading conservation voices navigating the challenge of USAID funding reductions.",
+      "The Guardian's global environment desk highlights ASREP alongside leading conservation voices navigating the challenge of USAID funding reductions — affirming ASREP's place in the global conservation conversation.",
     date: "March 2026",
     href: "https://www.theguardian.com/environment/2026/mar/16/conservation-trump-cuts-natural-world-usaid-funding-biodiversity-aoe",
     logoAlt: "The Guardian",

@@ -12,6 +12,7 @@ const programmes = [
     description:
       "Restoring degraded landscapes through nature-based solutions. The Waso Eco-Champs programme has planted 10,000 indigenous trees across 10 wards of Isiolo County.",
     stat: "10,000 trees planted &middot; 2,000 eco-champions",
+    cta: "Explore Climate Resilience →",
   },
   {
     href: "/what-we-do/peacebuilding",
@@ -23,6 +24,7 @@ const programmes = [
     description:
       "Fostering dialogue across pastoral and farming communities to resolve resource conflicts and strengthen inter-community bonds through the Isiolo Peace Actors Forum.",
     stat: "500+ peace actors engaged &middot; 60% women & youth",
+    cta: "Explore Peacebuilding →",
   },
   {
     href: "/what-we-do/research-knowledge",
@@ -34,6 +36,7 @@ const programmes = [
     description:
       "Documenting indigenous knowledge and generating evidence to inform policy. The ASAL IK Vault Series debut — 'Cows, Women & Land' — entered policy discourse nationally.",
     stat: "ASAL IK Vault Series &middot; Borana Oromo Knowledge",
+    cta: "Explore Research & Knowledge →",
   },
   {
     href: "/what-we-do/civic-governance",
@@ -45,6 +48,7 @@ const programmes = [
     description:
       "Deepening citizen engagement through the KSG 'Under the Tree' Series — piloted in Isiolo and now scaling across all 47 Kenyan counties via a landmark KSG partnership.",
     stat: "KSG pilot &rarr; 47-county national rollout",
+    cta: "Explore Civic Governance →",
   },
   {
     href: "/what-we-do/biodiversity",
@@ -56,6 +60,7 @@ const programmes = [
     description:
       "Protecting iconic ASAL wildlife and ecosystems through community-led conservation. ASREP represented Isiolo County in national biodiversity strategy development with SDZWA-K.",
     stat: "SDZWA-K partner &middot; Isiolo County strategy",
+    cta: "Explore Biodiversity →",
   },
   {
     href: "/what-we-do/livelihoods",
@@ -67,6 +72,7 @@ const programmes = [
     description:
       "Creating sustainable income pathways through eco-entrepreneurship, green skills, and market linkages. Over 40 participants in the inaugural eco-entrepreneurship webinar.",
     stat: "40+ participants &middot; Eco-entrepreneurship 2025",
+    cta: "Explore Livelihoods →",
   },
 ];
 
@@ -137,10 +143,7 @@ export default function ThematicFocusCards() {
                 <div className={`inline-flex items-center justify-center gap-2 px-5 py-2.5
                   ${prog.accentBg} text-white text-sm font-semibold rounded-lg
                   group-hover:opacity-90 transition-opacity mx-auto`}>
-                  More Details
-                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5} aria-hidden="true">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                  </svg>
+                  {prog.cta}
                 </div>
               </div>
             </Link>

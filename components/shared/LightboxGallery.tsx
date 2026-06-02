@@ -61,33 +61,42 @@ export default function LightboxGallery({ images, columns = 3 }: Props) {
       {/* ── Thumbnail grid ──────────────────────────────────────────────── */}
       <div className={`grid ${colClass} gap-3`} role="list" aria-label="Photo gallery">
         {images.map((img, i) => (
-          <button
+          <figure
             key={i}
             role="listitem"
-            onClick={() => setActiveIndex(i)}
-            className="group relative aspect-square overflow-hidden rounded-xl bg-sand/40
-              focus-visible:ring-2 focus-visible:ring-forest focus-visible:outline-none"
-            aria-label={`Open full size: ${img.alt}`}
+            className="rounded-xl overflow-hidden bg-sand/40"
           >
-            <Image
-              src={img.src}
-              alt={img.alt}
-              fill
-              className="object-cover group-hover:scale-105 transition-transform duration-500"
-              sizes="(max-width: 768px) 50vw, 33vw"
-            />
-            {/* Hover overlay */}
-            <div className="absolute inset-0 bg-forest/0 group-hover:bg-forest/40 transition-colors
-              flex items-center justify-center">
-              <svg
-                className="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity"
-                fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}
-                aria-hidden="true"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
-              </svg>
-            </div>
-          </button>
+            <button
+              onClick={() => setActiveIndex(i)}
+              className="group relative aspect-square overflow-hidden w-full block
+                focus-visible:ring-2 focus-visible:ring-forest focus-visible:outline-none"
+              aria-label={`Open full size: ${img.alt}`}
+            >
+              <Image
+                src={img.src}
+                alt={img.alt}
+                fill
+                className="object-cover group-hover:scale-105 transition-transform duration-500"
+                sizes="(max-width: 768px) 50vw, 33vw"
+              />
+              {/* Hover overlay */}
+              <div className="absolute inset-0 bg-forest/0 group-hover:bg-forest/40 transition-colors
+                flex items-center justify-center">
+                <svg
+                  className="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity"
+                  fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}
+                  aria-hidden="true"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                </svg>
+              </div>
+            </button>
+            {img.caption && (
+              <figcaption className="px-2 pt-2 pb-3 text-xs text-charcoal/60 leading-snug line-clamp-2">
+                {img.caption}
+              </figcaption>
+            )}
+          </figure>
         ))}
       </div>
 

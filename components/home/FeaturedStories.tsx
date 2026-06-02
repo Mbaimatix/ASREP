@@ -52,7 +52,7 @@ const fallbackStories = [
   },
   {
     _id: "f2",
-    title: "ASREP Featured in The Guardian: Conservation Without US Aid",
+    title: "Big News: ASREP Africa Featured in The Guardian & Biographic Magazine",
     slug: { current: "guardian-conservation-usaid" },
     category: "media-coverage",
     excerpt:

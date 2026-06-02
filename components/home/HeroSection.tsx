@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
@@ -32,20 +32,29 @@ const SLIDE_INTERVAL = 6000;
 
 export default function HeroSection() {
   const [current, setCurrent] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+
+  const next = useCallback(
+    () => setCurrent((c) => (c + 1) % slides.length),
+    []
+  );
+  const prev = useCallback(
+    () => setCurrent((c) => (c - 1 + slides.length) % slides.length),
+    []
+  );
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrent((c) => (c + 1) % slides.length);
-    }, SLIDE_INTERVAL);
+    if (isPaused) return;
+    const timer = setInterval(next, SLIDE_INTERVAL);
     return () => clearInterval(timer);
-  }, []);
-
-  const goTo = (index: number) => setCurrent(index);
+  }, [isPaused, next]);
 
   return (
     <section
       className="relative h-screen min-h-[600px] max-h-[950px] w-full overflow-hidden bg-forest"
       aria-label="ASREP Africa hero — advancing resilience, restoring nature, sustaining peace"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
     >
       {/* ── Slides ──────────────────────────────────────────────────────── */}
       <AnimatePresence mode="sync">
@@ -82,7 +91,7 @@ export default function HeroSection() {
         className="absolute inset-0 z-10"
         style={{
           background:
-            "linear-gradient(to top, rgba(0,0,0,0.80) 0%, rgba(0,0,0,0.45) 50%, rgba(0,0,0,0.20) 100%)",
+            "linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.45) 50%, rgba(0,0,0,0.25) 100%)",
         }}
         aria-hidden="true"
       />
@@ -96,12 +105,18 @@ export default function HeroSection() {
             transition={{ duration: 0.9, delay: 0.3, ease: "easeOut" }}
           >
             {/* Eyebrow */}
-            <p className="text-gold text-xs font-semibold uppercase tracking-[0.2em] mb-5">
+            <p
+              className="text-gold text-xs font-semibold uppercase tracking-[0.2em] mb-5"
+              style={{ textShadow: "0 1px 4px rgba(0,0,0,0.5)" }}
+            >
               ASAL Research &amp; Resilience Programme &middot; Kenya
             </p>
 
-            {/* H1 */}
-            <h1 className="font-display text-white text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6">
+            {/* H1 — text-shadow ensures legibility on every slide */}
+            <h1
+              className="font-display text-white text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6"
+              style={{ textShadow: "0 2px 8px rgba(0,0,0,0.6)" }}
+            >
               Advancing Resilience.{" "}
               <br className="hidden sm:block" />
               Restoring Nature.{" "}
@@ -110,12 +125,15 @@ export default function HeroSection() {
             </h1>
 
             {/* Subline */}
-            <p className="text-white/80 text-lg md:text-xl leading-relaxed mb-10 max-w-2xl mx-auto">
+            <p
+              className="text-white/85 text-lg md:text-xl leading-relaxed mb-10 max-w-2xl mx-auto"
+              style={{ textShadow: "0 1px 6px rgba(0,0,0,0.5)" }}
+            >
               Building resilient communities across Kenya&apos;s arid and semi-arid lands
               through evidence, culture, and community-led action.
             </p>
 
-            {/* Single CTA */}
+            {/* CTAs */}
             <div className="flex flex-wrap gap-4 justify-center">
               <Link
                 href="/what-we-do"
@@ -141,7 +159,34 @@ export default function HeroSection() {
         </div>
       </div>
 
-      {/* ── Slide indicators — centred bottom ───────────────────────────── */}
+      {/* ── Prev / Next arrows ───────────────────────────────────────────── */}
+      <button
+        onClick={prev}
+        className="absolute left-4 md:left-6 top-1/2 -translate-y-1/2 z-30
+          w-11 h-11 rounded-full bg-black/30 hover:bg-black/50 border border-white/20
+          flex items-center justify-center text-white transition-all duration-200
+          hover:scale-110 focus-visible:ring-2 focus-visible:ring-gold focus-visible:outline-none"
+        aria-label="Previous slide"
+      >
+        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5} aria-hidden="true">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+
+      <button
+        onClick={next}
+        className="absolute right-4 md:right-6 top-1/2 -translate-y-1/2 z-30
+          w-11 h-11 rounded-full bg-black/30 hover:bg-black/50 border border-white/20
+          flex items-center justify-center text-white transition-all duration-200
+          hover:scale-110 focus-visible:ring-2 focus-visible:ring-gold focus-visible:outline-none"
+        aria-label="Next slide"
+      >
+        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5} aria-hidden="true">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+
+      {/* ── Slide indicators ────────────────────────────────────────────── */}
       <div
         className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2"
         role="tablist"
@@ -152,13 +197,24 @@ export default function HeroSection() {
             key={i}
             role="tab"
             aria-selected={i === current}
+            aria-current={i === current ? "true" : undefined}
             aria-label={`Slide ${i + 1}: ${slide.alt}`}
-            onClick={() => goTo(i)}
+            onClick={() => setCurrent(i)}
             className={`h-1.5 rounded-full transition-all duration-400 focus-visible:ring-2 focus-visible:ring-gold focus-visible:outline-none
               ${i === current ? "w-10 bg-gold" : "w-3 bg-white/40 hover:bg-white/70"}`}
           />
         ))}
       </div>
+
+      {/* ── Pause indicator (shown only when paused) ────────────────────── */}
+      {isPaused && (
+        <div className="absolute bottom-10 right-6 z-20" aria-hidden="true">
+          <div className="w-7 h-7 rounded-full bg-black/40 flex items-center justify-center gap-0.5">
+            <span className="w-1 h-3 bg-white/70 rounded-full block" />
+            <span className="w-1 h-3 bg-white/70 rounded-full block" />
+          </div>
+        </div>
+      )}
     </section>
   );
 }

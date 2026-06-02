@@ -5,6 +5,7 @@ import PageHero from "@/components/shared/PageHero";
 import SectionHeader from "@/components/shared/SectionHeader";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "https://www.asrepafrica.org/what-we-do" },
   title: "What We Do | ASREP Africa Programmes",
   description:
     "Six integrated programmes addressing climate resilience, peacebuilding, research, civic governance, biodiversity restoration, and livelihoods across Kenya's arid and semi-arid lands.",

@@ -54,9 +54,9 @@ const milestones = [
   },
   {
     year: "2026",
-    title: "Global Media Recognition",
+    title: "Big News: Global Media Recognition",
     description:
-      "ASREP's work was featured in Biographic Magazine ('The Future of Conservation Without US Aid') and The Guardian's global environment section, putting Isiolo-based community conservation on the world map.",
+      "ASREP's work received major international recognition — featured in Biographic Magazine ('The Future of Conservation Without US Aid') and The Guardian's global environment section. These global feature stories put Isiolo-based community conservation on the world map and affirmed ASREP's place in the global conservation conversation.",
   },
 ];
 
