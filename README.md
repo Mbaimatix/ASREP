@@ -30,6 +30,23 @@ Open [http://localhost:3000](http://localhost:3000).
 
 Copy `.env.local` and fill in all credentials — see the file for full instructions.
 
+## Sanity CMS Setup
+
+1. Go to https://www.sanity.io/organizations/oHgdKkPwZ/project/4cfxiux0/api
+2. Create two API tokens:
+   - **ASREP Read** → Viewer permissions → copy value into `SANITY_API_READ_TOKEN`
+   - **ASREP Write** → Editor permissions → copy value into `SANITY_API_WRITE_TOKEN`
+3. Go to **API → CORS Origins** → add:
+   - `http://localhost:3000` (development)
+   - `https://www.asrepafrica.org` (production)
+   - `https://your-vercel-url.vercel.app` (Vercel preview)
+4. Add all four Sanity env vars to **Vercel → Project Settings → Environment Variables**
+5. Create the client editor account: `npm run seed:editor`
+6. Share with the client:
+   - URL: `https://www.asrepafrica.org/studio`
+   - Login: `client@asrepafrica.org` / `ChangeMe123!`
+   - **Ask them to change their password after first login**
+
 ## Licence
 
 (c) 2026 ASREP Africa. All rights reserved.

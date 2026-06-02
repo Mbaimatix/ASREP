@@ -1,26 +1,26 @@
+// sanity/sanity.config.ts
 import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
 import { visionTool } from "@sanity/vision";
-import { newsSchema } from "./schemas/news";
-import { teamMemberSchema } from "./schemas/teamMember";
-import { impactStorySchema } from "./schemas/impactStory";
-import { publicationSchema } from "./schemas/publication";
-import { gallerySchema } from "./schemas/gallery";
+import { newsSchema }         from "./schemas/news";
+import { teamMemberSchema }   from "./schemas/teamMember";
+import { impactStorySchema }  from "./schemas/impactStory";
+import { publicationSchema }  from "./schemas/publication";
+import { gallerySchema }      from "./schemas/gallery";
 import { siteSettingsSchema } from "./schemas/siteSettings";
-
-const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!;
-const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET ?? "production";
 
 export default defineConfig({
   basePath: "/studio",
-  projectId,
-  dataset,
-  title: "ASREP Africa CMS",
+
+  // Hardcoded so Studio works both locally and on Vercel without env-var issues
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID ?? "4cfxiux0",
+  dataset:   process.env.NEXT_PUBLIC_SANITY_DATASET   ?? "production",
+
+  title: "ASREP Africa — Content Studio",
+
   schema: {
     types: [
-      // Singleton — always first in structure
       siteSettingsSchema,
-      // Content types
       newsSchema,
       impactStorySchema,
       teamMemberSchema,
@@ -28,15 +28,16 @@ export default defineConfig({
       gallerySchema,
     ],
   },
+
   plugins: [
     structureTool({
       structure: (S) =>
         S.list()
           .title("ASREP Content")
           .items([
-            // Singleton: Site Settings
+            // Singleton: the one-and-only Site Settings document
             S.listItem()
-              .title("⚙️ Site Settings (Home Page)")
+              .title("⚙️  Home Page / Site Settings")
               .id("siteSettings")
               .child(
                 S.document()
@@ -44,15 +45,14 @@ export default defineConfig({
                   .documentId("siteSettings")
               ),
             S.divider(),
-            // Standard document lists
-            S.documentTypeListItem("news").title("📰 News & Media"),
-            S.documentTypeListItem("impactStory").title("🌍 Impact Stories"),
-            S.documentTypeListItem("teamMember").title("👥 Team & Board"),
-            S.documentTypeListItem("publication").title("📄 Publications & Reports"),
-            S.documentTypeListItem("gallery").title("🖼️ Photo & Video Gallery"),
+            S.documentTypeListItem("news")        .title("📰  News & Media"),
+            S.documentTypeListItem("impactStory") .title("🌍  Impact Stories"),
+            S.documentTypeListItem("teamMember")  .title("👥  Team & Board"),
+            S.documentTypeListItem("publication") .title("📄  Publications & Reports"),
+            S.documentTypeListItem("gallery")     .title("🖼️  Photo & Video Gallery"),
           ]),
     }),
-    // GROQ query tester — only visible in development
+    // GROQ playground — dev only
     ...(process.env.NODE_ENV === "development" ? [visionTool()] : []),
   ],
 });
