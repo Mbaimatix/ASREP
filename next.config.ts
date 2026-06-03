@@ -37,13 +37,36 @@ const nextConfig: NextConfig = {
       {
         source: "/(.*)",
         headers: [
-          // Enable browser-side caching for static assets served by Next.js
           { key: "X-Content-Type-Options", value: "nosniff" },
           { key: "X-Frame-Options", value: "SAMEORIGIN" },
           { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
           {
             key: "Permissions-Policy",
             value: "camera=(), microphone=(), geolocation=()",
+          },
+          {
+            // HSTS — enforces HTTPS on repeat visits for 2 years
+            key: "Strict-Transport-Security",
+            value: "max-age=63072000; includeSubDomains; preload",
+          },
+          {
+            // CSP — prevents XSS. unsafe-inline/eval required by Next.js/Framer/Sanity.
+            // Tighten with nonce-based policy post-launch.
+            key: "Content-Security-Policy",
+            value: [
+              "default-src 'self'",
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.youtube.com https://s.ytimg.com",
+              "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+              "font-src 'self' https://fonts.gstatic.com",
+              "img-src 'self' data: blob: https://cdn.sanity.io https://lh3.googleusercontent.com https://img.youtube.com https://i.ytimg.com",
+              "media-src 'self' https://www.youtube.com",
+              "frame-src https://www.youtube.com https://youtube.com",
+              "connect-src 'self' https://api.sanity.io wss://*.sanity.io https://pay.pesapal.com https://cybqa.pesapal.com",
+              "object-src 'none'",
+              "base-uri 'self'",
+              "form-action 'self'",
+              "frame-ancestors 'none'",
+            ].join("; "),
           },
         ],
       },

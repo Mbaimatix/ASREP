@@ -60,7 +60,7 @@ async function registerIpn(token: string): Promise<string> {
   // Return cached IPN ID — only register once per server process lifetime
   if (cachedIpnId !== null) return cachedIpnId;
 
-  const ipnUrl = process.env.NEXT_PUBLIC_PESAPAL_IPN_URL ??
+  const ipnUrl = process.env.PESAPAL_IPN_URL ??
     `${process.env.NEXT_PUBLIC_SITE_URL}/api/donate/pesapal/ipn`;
 
   const res = await fetch(`${PESAPAL_API}/api/URLSetup/RegisterIPN`, {

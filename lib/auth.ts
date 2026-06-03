@@ -4,17 +4,6 @@ import bcrypt from "bcryptjs";
 import { prisma } from "./prisma";
 import type { Role } from "@prisma/client";
 
-// Vuln 7 — fail fast at runtime in production if AUTH_SECRET is missing.
-// Skips during `next build` (NEXT_PHASE === "phase-production-build") to
-// allow CI/CD pipelines to build without secrets in the environment.
-if (
-  process.env.NODE_ENV === "production" &&
-  process.env.NEXT_PHASE !== "phase-production-build" &&
-  !process.env.AUTH_SECRET
-) {
-  throw new Error("AUTH_SECRET environment variable is required in production");
-}
-
 /**
  * ASREP Africa — NextAuth v5 Configuration
  *
@@ -22,7 +11,6 @@ if (
  * User role is injected into the JWT and available on the session object.
  */
 export const { handlers, auth, signIn, signOut } = NextAuth({
-  // Vuln 7 — explicit secret prevents silent JWT failures when env var is missing
   secret: process.env.AUTH_SECRET,
   providers: [
     Credentials({

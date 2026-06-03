@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 
 /**
  * ASREP Africa — Local AI Chat Assistant
@@ -234,6 +235,16 @@ function findBestResponse(userMessage: string): string {
 /* ─── Route handler ──────────────────────────────────────────────────────── */
 
 export async function POST(req: NextRequest) {
+  // Rate limit: 5 requests per IP per 10 minutes (same limit as other API routes)
+  const ip = getClientIp(req);
+  const { allowed, retryAfterSeconds } = checkRateLimit(ip);
+  if (!allowed) {
+    return NextResponse.json(
+      { error: "Too many requests. Please try again shortly." },
+      { status: 429, headers: { "Retry-After": String(retryAfterSeconds) } }
+    );
+  }
+
   const { messages } = (await req.json()) as {
     messages: { role: string; content: string }[];
   };

@@ -71,16 +71,39 @@ model VolunteerEnquiry {
   message      String?  @db.Text
   createdAt    DateTime @default(now())
   isReviewed   Boolean  @default(false)
+
+  @@index([createdAt])
 }
 
 // ─── Partner Enquiries ────────────────────────────────────────────────────────
 model PartnerEnquiry {
-  id              String   @id @default(cuid())
+  id               String   @id @default(cuid())
   organisationName String
-  contactName     String
-  email           String
-  partnerType     String   // institutional | funding | corporate
-  message         String   @db.Text
-  createdAt       DateTime @default(now())
-  isReviewed      Boolean  @default(false)
+  contactName      String
+  email            String
+  partnerType      String   // institutional | funding | corporate
+  message          String   @db.Text
+  createdAt        DateTime @default(now())
+  isReviewed       Boolean  @default(false)
+
+  @@index([createdAt])
+}
+
+// ─── Donation Records ─────────────────────────────────────────────────────────
+model Donation {
+  id                     String   @id @default(cuid())
+  orderTrackingId        String   @unique
+  orderMerchantReference String
+  status                 String   // COMPLETED | FAILED | INVALID | REVERSED
+  amount                 Float
+  currency               String   @default("KES")
+  paymentMethod          String   @default("")
+  donorName              String   @default("")
+  donorEmail             String   @default("")
+  programme              String   @default("General")
+  createdAt              DateTime @default(now())
+  updatedAt              DateTime @updatedAt
+
+  @@index([createdAt])
+  @@index([status])
 }
