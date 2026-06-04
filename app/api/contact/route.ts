@@ -23,15 +23,23 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+export const dynamic = "force-dynamic";
+
+// Hard limit: 32 KB per contact form submission
 export async function POST(req: NextRequest) {
-  // Vuln 5 — CSRF origin check
+  const contentLength = Number(req.headers.get("content-length") ?? 0);
+  if (contentLength > 32_768) {
+    return NextResponse.json({ message: "Request too large." }, { status: 413 });
+  }
+
+  // CSRF origin check
   if (!isAllowedOrigin(req)) {
     return NextResponse.json({ message: "Forbidden." }, { status: 403 });
   }
 
-  // Vuln 1 — rate limiting (5 requests per IP per 10 minutes)
+  // Rate limiting (5 requests per IP per 10 minutes)
   const ip = getClientIp(req);
-  const { allowed, retryAfterSeconds } = checkRateLimit(ip);
+  const { allowed, retryAfterSeconds } = await checkRateLimit(ip);
   if (!allowed) {
     return NextResponse.json(
       { message: "Too many requests. Please try again later." },

@@ -1,17 +1,21 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 
 /**
  * Pesapal IPN (Instant Payment Notification) Handler
  *
  * Pesapal calls this endpoint via GET after every transaction state change.
  * We must:
- *   1. Authenticate with Pesapal to get a token
- *   2. Query the transaction status using the OrderTrackingId
- *   3. Upsert the donation record in our database
- *   4. Return HTTP 200 so Pesapal stops retrying
+ *   1. Verify the secret token in the query string (set during IPN registration)
+ *   2. Authenticate with Pesapal to get a token
+ *   3. Query the transaction status using the OrderTrackingId
+ *   4. Upsert the donation record in our database
+ *   5. Return HTTP 200 so Pesapal stops retrying
  *
  * Pesapal retries the IPN URL every 15 minutes if it receives anything other than 200.
+ * The secret token (PESAPAL_IPN_SECRET) is appended to the IPN URL during registration
+ * so only Pesapal (who received the URL) knows it.
  */
 
 const PESAPAL_API =
@@ -27,6 +31,7 @@ async function getPesapalToken(): Promise<string> {
       consumer_key: process.env.PESAPAL_CONSUMER_KEY,
       consumer_secret: process.env.PESAPAL_CONSUMER_SECRET,
     }),
+    cache: "no-store",
   });
   if (!res.ok) throw new Error(`IPN: Pesapal auth failed (${res.status})`);
   const data = await res.json();
@@ -36,6 +41,25 @@ async function getPesapalToken(): Promise<string> {
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
+
+  // Rate limit IPN endpoint to prevent flood attacks
+  const ip = getClientIp(req);
+  const { allowed } = await checkRateLimit(ip, 30, 60_000); // 30 req/min per IP for IPN
+  if (!allowed) {
+    // Still return 200 so Pesapal doesn't mark the IPN as failed
+    return NextResponse.json({ status: 200 }, { status: 200 });
+  }
+
+  // Verify secret token to authenticate the caller as Pesapal
+  const ipnSecret = process.env.PESAPAL_IPN_SECRET;
+  if (ipnSecret) {
+    const receivedToken = searchParams.get("token");
+    if (receivedToken !== ipnSecret) {
+      console.warn("IPN: rejected request with invalid token");
+      // Return 200 to avoid Pesapal retries, but don't process the request
+      return NextResponse.json({ status: 200 }, { status: 200 });
+    }
+  }
 
   const orderTrackingId       = searchParams.get("OrderTrackingId");
   const orderMerchantReference = searchParams.get("OrderMerchantReference");

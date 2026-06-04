@@ -6,37 +6,29 @@ import { isAllowedOrigin } from "@/lib/csrf";
  * Pesapal Donation API Route
  *
  * Flow:
- * 1. Authenticate with Pesapal OAuth to get access token (cached, Vuln 2)
- * 2. Register IPN URL — cached after first call (Vuln 2)
+ * 1. Authenticate with Pesapal OAuth to get a fresh access token per request
+ * 2. Register IPN URL (idempotent — same URL returns same IPN ID)
  * 3. Submit order to Pesapal and receive redirect URL
- * 4. Validate redirect URL origin (Vuln 9)
+ * 4. Validate redirect URL origin
  * 5. Return redirect URL to client → client redirects to Pesapal checkout
+ *
+ * Token caching at module level was removed: serverless environments (Vercel)
+ * spawn isolated function instances that don't share module state, so cached
+ * tokens were silently expiring or being refetched anyway. Stateless auth per
+ * request is the correct model here.
  */
 
 const PESAPAL_API = process.env.PESAPAL_ENV === "production"
   ? "https://pay.pesapal.com/v3"
   : "https://cybqa.pesapal.com/pesapalv3";
 
-// Allowed Pesapal redirect URL prefixes (Vuln 9)
+// Allowed Pesapal redirect URL prefixes
 const ALLOWED_REDIRECT_PREFIXES = [
   "https://pay.pesapal.com",
   "https://cybqa.pesapal.com",
 ];
 
-// Vuln 2 — module-level token cache
-let cachedToken: string | null = null;
-let tokenExpiry = 0; // Unix ms timestamp
-
-// Vuln 2 — module-level IPN ID cache
-let cachedIpnId: string | null = null;
-
 async function getPesapalToken(): Promise<string> {
-  const now = Date.now();
-  // Return cached token if it won't expire within 60 seconds
-  if (cachedToken && tokenExpiry - now > 60_000) {
-    return cachedToken;
-  }
-
   const res = await fetch(`${PESAPAL_API}/api/Auth/RequestToken`, {
     method: "POST",
     headers: { "Content-Type": "application/json", Accept: "application/json" },
@@ -44,24 +36,22 @@ async function getPesapalToken(): Promise<string> {
       consumer_key: process.env.PESAPAL_CONSUMER_KEY,
       consumer_secret: process.env.PESAPAL_CONSUMER_SECRET,
     }),
+    // Disable Next.js fetch caching — auth tokens must never be stale
+    cache: "no-store",
   });
 
   if (!res.ok) throw new Error("Pesapal authentication failed");
   const data = await res.json();
   if (!data.token) throw new Error("No token received from Pesapal");
-
-  cachedToken = data.token as string;
-  // Pesapal tokens typically expire in 5 minutes; use 4 minutes to be safe
-  tokenExpiry = now + 4 * 60 * 1000;
-  return cachedToken;
+  return data.token as string;
 }
 
 async function registerIpn(token: string): Promise<string> {
-  // Return cached IPN ID — only register once per server process lifetime
-  if (cachedIpnId !== null) return cachedIpnId;
-
-  const ipnUrl = process.env.PESAPAL_IPN_URL ??
+  // IPN URL includes a secret token to authenticate Pesapal callbacks
+  const secret = process.env.PESAPAL_IPN_SECRET ?? "";
+  const baseIpnUrl = process.env.PESAPAL_IPN_URL ??
     `${process.env.NEXT_PUBLIC_SITE_URL}/api/donate/pesapal/ipn`;
+  const ipnUrl = secret ? `${baseIpnUrl}?token=${encodeURIComponent(secret)}` : baseIpnUrl;
 
   const res = await fetch(`${PESAPAL_API}/api/URLSetup/RegisterIPN`, {
     method: "POST",
@@ -73,22 +63,29 @@ async function registerIpn(token: string): Promise<string> {
       url: ipnUrl,
       ipn_notification_type: "GET",
     }),
+    cache: "no-store",
   });
 
   const data = await res.json();
-  cachedIpnId = (data.ipn_id as string | undefined) ?? "";
-  return cachedIpnId;
+  return (data.ipn_id as string | undefined) ?? "";
 }
 
+export const dynamic = "force-dynamic";
+
 export async function POST(req: NextRequest) {
-  // Vuln 5 — CSRF origin check
+  const contentLength = Number(req.headers.get("content-length") ?? 0);
+  if (contentLength > 8_192) {
+    return NextResponse.json({ message: "Request too large." }, { status: 413 });
+  }
+
+  // CSRF origin check
   if (!isAllowedOrigin(req)) {
     return NextResponse.json({ message: "Forbidden." }, { status: 403 });
   }
 
-  // Vuln 1 — rate limiting (5 requests per IP per 10 minutes)
+  // Rate limiting (5 requests per IP per 10 minutes)
   const ip = getClientIp(req);
-  const { allowed, retryAfterSeconds } = checkRateLimit(ip);
+  const { allowed, retryAfterSeconds } = await checkRateLimit(ip);
   if (!allowed) {
     return NextResponse.json(
       { message: "Too many requests. Please try again later." },
@@ -158,7 +155,7 @@ export async function POST(req: NextRequest) {
       throw new Error("No payment redirect URL received.");
     }
 
-    // Vuln 9 — validate redirect URL comes from a known Pesapal domain
+    // Validate redirect URL comes from a known Pesapal domain
     const isValidRedirect = ALLOWED_REDIRECT_PREFIXES.some((prefix) =>
       (orderData.redirect_url as string).startsWith(prefix)
     );

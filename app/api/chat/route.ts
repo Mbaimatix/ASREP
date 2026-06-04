@@ -234,10 +234,17 @@ function findBestResponse(userMessage: string): string {
 
 /* ─── Route handler ──────────────────────────────────────────────────────── */
 
+export const dynamic = "force-dynamic";
+
 export async function POST(req: NextRequest) {
-  // Rate limit: 5 requests per IP per 10 minutes (same limit as other API routes)
+  const contentLength = Number(req.headers.get("content-length") ?? 0);
+  if (contentLength > 8_192) {
+    return NextResponse.json({ error: "Request too large." }, { status: 413 });
+  }
+
+  // Rate limit: 5 requests per IP per 10 minutes
   const ip = getClientIp(req);
-  const { allowed, retryAfterSeconds } = checkRateLimit(ip);
+  const { allowed, retryAfterSeconds } = await checkRateLimit(ip);
   if (!allowed) {
     return NextResponse.json(
       { error: "Too many requests. Please try again shortly." },
@@ -245,9 +252,14 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const { messages } = (await req.json()) as {
-    messages: { role: string; content: string }[];
-  };
+  let body: { messages?: { role: string; content: string }[] };
+  try {
+    body = await req.json();
+  } catch {
+    return NextResponse.json({ error: "Invalid request body." }, { status: 400 });
+  }
+
+  const { messages } = body;
 
   if (!messages || !Array.isArray(messages) || messages.length === 0) {
     return NextResponse.json({ error: "messages required" }, { status: 400 });
@@ -256,6 +268,11 @@ export async function POST(req: NextRequest) {
   // Take the last user message
   const lastUserMessage =
     [...messages].reverse().find((m) => m.role === "user")?.content ?? "";
+
+  // Guard against excessively long inputs
+  if (lastUserMessage.length > 500) {
+    return NextResponse.json({ error: "Message too long. Maximum 500 characters." }, { status: 400 });
+  }
 
   const response = findBestResponse(lastUserMessage);
 

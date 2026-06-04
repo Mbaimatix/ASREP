@@ -3,6 +3,19 @@ import { prisma } from "@/lib/prisma";
 import nodemailer from "nodemailer";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 import { isAllowedOrigin } from "@/lib/csrf";
+import { createHmac } from "crypto";
+
+/**
+ * Builds a tamper-proof unsubscribe URL.
+ * The email is base64url-encoded; the signature prevents arbitrary unsubscription
+ * of third-party email addresses without the NEXTAUTH_SECRET.
+ */
+function buildUnsubscribeUrl(email: string): string {
+  const secret = process.env.NEXTAUTH_SECRET ?? "fallback-secret";
+  const encoded = Buffer.from(email).toString("base64url");
+  const sig = createHmac("sha256", secret).update(encoded).digest("hex");
+  return `${process.env.NEXT_PUBLIC_SITE_URL}/unsubscribe?e=${encoded}&s=${sig}`;
+}
 
 const transporter = nodemailer.createTransport({
   host: process.env.EMAIL_SERVER_HOST,
@@ -14,15 +27,22 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+export const dynamic = "force-dynamic";
+
 export async function POST(req: NextRequest) {
-  // Vuln 5 — CSRF origin check
+  const contentLength = Number(req.headers.get("content-length") ?? 0);
+  if (contentLength > 4_096) {
+    return NextResponse.json({ message: "Request too large." }, { status: 413 });
+  }
+
+  // CSRF origin check
   if (!isAllowedOrigin(req)) {
     return NextResponse.json({ message: "Forbidden." }, { status: 403 });
   }
 
-  // Vuln 1 — rate limiting (5 requests per IP per 10 minutes)
+  // Rate limiting (5 requests per IP per 10 minutes)
   const ip = getClientIp(req);
-  const { allowed, retryAfterSeconds } = checkRateLimit(ip);
+  const { allowed, retryAfterSeconds } = await checkRateLimit(ip);
   if (!allowed) {
     return NextResponse.json(
       { message: "Too many requests. Please try again later." },
@@ -77,7 +97,7 @@ export async function POST(req: NextRequest) {
             </div>
             <p style="color: #6B7280; font-size: 11px; margin-top: 12px; text-align: center;">
               ASREP Africa · Isiolo County, Kenya · asrepafrica@gmail.com<br />
-              <a href="${process.env.NEXT_PUBLIC_SITE_URL}/unsubscribe?email=${encodeURIComponent(normalised)}" style="color: #6B7280;">Unsubscribe</a>
+              <a href="${buildUnsubscribeUrl(normalised)}" style="color: #6B7280;">Unsubscribe</a>
             </p>
           </div>
         `,
