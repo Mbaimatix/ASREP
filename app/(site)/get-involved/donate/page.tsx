@@ -81,18 +81,48 @@ export default function DonatePage() {
                     <p className="text-charcoal/60 text-xs mt-1">Paybill registration in progress. For immediate M-Pesa transfers, email <a href="mailto:asrepafrica@gmail.com" className="text-forest hover:underline">asrepafrica@gmail.com</a> or call +254 733 687 149.</p>
                   </div>
                   <div>
-                    <p className="text-xs font-semibold text-charcoal/50 uppercase tracking-wider mb-1">
-                      Bank Transfer
+                    <p className="text-xs font-semibold text-charcoal/50 uppercase tracking-wider mb-3">
+                      Bank Transfer — Equity Bank Kenya
                     </p>
-                    <p className="text-charcoal font-medium text-sm">Account Name: <strong className="text-earth">ASREP Africa</strong></p>
-                    <p className="text-charcoal/60 text-xs mt-1">For full bank details, email <a href="mailto:asrepafrica@gmail.com" className="text-forest hover:underline">asrepafrica@gmail.com</a></p>
+                    <dl className="space-y-1.5">
+                      {[
+                        ["Account Name", "ASAL RESEARCH AND RESILIENCE PROGRAMME"],
+                        ["Account Number", "0410286986248"],
+                        ["Currency", "KES"],
+                        ["Branch", "Isiolo"],
+                        ["Branch Code", "041"],
+                        ["Bank Code", "68"],
+                      ].map(([label, value]) => (
+                        <div key={label} className="flex justify-between gap-2">
+                          <dt className="text-charcoal/50 text-xs shrink-0">{label}</dt>
+                          <dd className="text-charcoal font-medium text-xs text-right">{value}</dd>
+                        </div>
+                      ))}
+                    </dl>
                   </div>
                   <div>
-                    <p className="text-xs font-semibold text-charcoal/50 uppercase tracking-wider mb-1">
-                      Wire Transfer / International
+                    <p className="text-xs font-semibold text-charcoal/50 uppercase tracking-wider mb-3">
+                      International Wire Transfer
                     </p>
-                    <p className="text-charcoal/60 text-xs leading-relaxed">
-                      SWIFT/IBAN details available on request for international donors
+                    <dl className="space-y-1.5">
+                      {[
+                        ["Bank", "Equity Bank Kenya"],
+                        ["SWIFT / BIC", "EQBLKENA"],
+                        ["Account", "0410286986248"],
+                        ["Beneficiary", "ASAL RESEARCH AND RESILIENCE PROGRAMME"],
+                      ].map(([label, value]) => (
+                        <div key={label} className="flex justify-between gap-2">
+                          <dt className="text-charcoal/50 text-xs shrink-0">{label}</dt>
+                          <dd className="text-charcoal font-medium text-xs text-right">{value}</dd>
+                        </div>
+                      ))}
+                    </dl>
+                    <p className="text-charcoal/50 text-xs mt-2 leading-relaxed">
+                      For international transfers please email{" "}
+                      <a href="mailto:asrepafrica@gmail.com" className="text-forest hover:underline">
+                        asrepafrica@gmail.com
+                      </a>{" "}
+                      so we can confirm receipt.
                     </p>
                   </div>
                 </div>
