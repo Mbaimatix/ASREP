@@ -30,6 +30,7 @@ type Publication = {
   isFeatured: boolean;
   pdfFile?: { asset: { url: string } };
   externalUrl?: string;
+  downloadUrl?: string;
   coverImage?: SanityImageSource & { alt?: string };
 };
 
@@ -44,6 +45,7 @@ const fallbackPublications: Publication[] = [
       "Comprehensive review of ASREP's work across all six thematic programmes, covering 2023-2026 impact data, financial highlights, and strategic outlook.",
     status: "available",
     isFeatured: true,
+    downloadUrl: "/downloads/asrep-impact-report-2025-2026.pdf",
   },
   {
     _id: "p2",
@@ -54,6 +56,7 @@ const fallbackPublications: Publication[] = [
       "Debut publication of the ASAL Indigenous Knowledge Vault Series - documenting Borana Oromo ecological and cultural knowledge from Isiolo County.",
     status: "available",
     isFeatured: true,
+    downloadUrl: "/downloads/cows-women-land.pdf",
   },
   {
     _id: "p3",
@@ -237,11 +240,12 @@ export default async function ResourcesPage() {
                 )}
 
                 <div className="mt-auto">
-                  {pub.status === "available" && (pub.pdfFile?.asset?.url || pub.externalUrl) ? (
+                  {pub.status === "available" && (pub.downloadUrl || pub.pdfFile?.asset?.url || pub.externalUrl) ? (
                     <a
-                      href={pub.pdfFile?.asset?.url || pub.externalUrl}
+                      href={pub.downloadUrl || pub.pdfFile?.asset?.url || pub.externalUrl}
                       target="_blank"
                       rel="noopener noreferrer"
+                      download
                       className="inline-flex items-center gap-2 px-5 py-2.5 bg-forest hover:bg-sage text-white font-semibold text-sm rounded-xl transition-colors"
                     >
                       <svg
