@@ -11,6 +11,7 @@ import NewsletterBanner from "@/components/shared/NewsletterBanner";
 import GlobalRecognitionStrip from "@/components/home/GlobalRecognitionStrip";
 import GetInvolvedCTABand from "@/components/home/GetInvolvedCTABand";
 import PartnersLogoStrip from "@/components/home/PartnersLogoStrip";
+import ProgrammeQuickLinks from "@/components/home/ProgrammeQuickLinks";
 
 export const metadata: Metadata = {
   alternates: { canonical: "https://www.asrepafrica.org" },
@@ -69,6 +70,9 @@ export default function HomePage() {
 
       {/* 1 — Hero slider with Ken Burns effect */}
       <HeroSection />
+
+      {/* 1b — Programme quick-links strip */}
+      <ProgrammeQuickLinks />
 
       {/* 2 — Scrolling news ticker */}
       <NewsTicker />
