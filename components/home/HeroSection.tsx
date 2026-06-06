@@ -117,9 +117,9 @@ export default function HeroSection() {
               className="font-display text-white text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6"
               style={{ textShadow: "0 2px 8px rgba(0,0,0,0.6)" }}
             >
-              Advancing Resilience.{" "}
+              <span className="text-gold">Advancing Resilience.</span>{" "}
               <br className="hidden sm:block" />
-              Restoring Nature.{" "}
+              <span className="text-sand">Restoring Nature.</span>{" "}
               <br className="hidden sm:block" />
               <span className="text-gold">Sustaining Peace.</span>
             </h1>

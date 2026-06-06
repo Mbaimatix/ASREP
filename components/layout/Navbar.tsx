@@ -103,11 +103,101 @@ export default function Navbar() {
 
   return (
     <>
-      <nav
-        role="navigation"
-        aria-label="Main navigation"
-        className="fixed top-0 left-0 right-0 z-50 bg-forest shadow-lg"
-      >
+      <header className="fixed top-0 left-0 right-0 z-50 w-full shadow-lg">
+
+        {/* ── Strip 1: TopBar — desktop only ─────────────────────────────── */}
+        <div className="bg-forest hidden md:block">
+          <div
+            aria-label="Site contact information"
+            className="max-w-7xl mx-auto px-6 py-2 flex items-center justify-between"
+          >
+            {/* Left: location + email */}
+            <div className="flex items-center">
+              <div className="text-sand text-xs flex items-center gap-1.5">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-3.5 h-3.5"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M11.54 22.351l.07.04.028.016a.76.76 0 00.723 0l.028-.015.071-.041a16.975 16.975 0 001.144-.742 19.58 19.58 0 002.683-2.282c1.944-2.003 3.5-4.697 3.5-8.127a8 8 0 10-16 0c0 3.43 1.557 6.124 3.5 8.127a19.58 19.58 0 002.682 2.282 16.975 16.975 0 001.145.742zM12 13.5a3.5 3.5 0 100-7 3.5 3.5 0 000 7z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+                ASREP Africa · Isiolo County, Kenya
+              </div>
+
+              <span className="mx-4 h-3 border-l border-sage/40" aria-hidden="true" />
+
+              <a
+                href="mailto:info@asrepafrica.org"
+                className="text-sand text-xs flex items-center gap-1.5 hover:text-gold transition-colors"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-3.5 h-3.5"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path d="M1.5 8.67v8.58a3 3 0 003 3h15a3 3 0 003-3V8.67l-8.928 5.493a3 3 0 01-3.144 0L1.5 8.67z" />
+                  <path d="M22.5 6.908V6.75a3 3 0 00-3-3h-15a3 3 0 00-3 3v.158l9.714 5.978a1.5 1.5 0 001.572 0L22.5 6.908z" />
+                </svg>
+                info@asrepafrica.org
+              </a>
+            </div>
+
+            {/* Right: social icons + donate */}
+            <div className="flex items-center gap-3">
+              <a
+                href="https://www.facebook.com/share/1Cpm3uk3uY/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Facebook"
+                className="text-sand hover:text-gold transition-colors opacity-75 hover:opacity-100"
+              >
+                <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    fillRule="evenodd"
+                    d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </a>
+
+              <a
+                href="https://x.com/asrepafrica"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Twitter"
+                className="text-sand hover:text-gold transition-colors opacity-75 hover:opacity-100"
+              >
+                <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                </svg>
+              </a>
+
+              <Link
+                href="/get-involved/donate"
+                aria-label="Donate to ASREP Africa"
+                className="ml-1 px-3 py-1 border border-gold text-gold text-xs font-semibold rounded
+                  hover:bg-gold hover:text-forest transition-colors whitespace-nowrap"
+              >
+                Donate →
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        {/* ── Strip 2: Main Nav (existing — unchanged) ─────────────────────── */}
+        <nav
+          role="navigation"
+          aria-label="Main navigation"
+          className="bg-forest"
+        >
         <div className="container-asrep">
           <div className="flex items-center justify-between h-18 md:h-20">
             {/* ─── Logo ──────────────────────────────────────────────────── */}
@@ -249,10 +339,12 @@ export default function Navbar() {
             </div>
           </div>
         </div>
-      </nav>
+        </nav>
 
-      {/* Spacer to push content below fixed navbar */}
-      <div className="h-18 md:h-20" aria-hidden="true" />
+      </header>
+
+      {/* Spacer: mobile = main nav only (h-18=72px); desktop = topbar (~36px) + main nav (80px) */}
+      <div className="h-18 md:h-[116px]" aria-hidden="true" />
 
       {/* Mobile full-screen overlay */}
       <MobileMenu
