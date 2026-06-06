@@ -72,7 +72,7 @@ export default function HeroSection() {
             className="absolute inset-0"
             initial={{ scale: 1 }}
             animate={{ scale: 1.08 }}
-            transition={{ duration: SLIDE_INTERVAL / 1000 + 1.2, ease: "linear" }}
+            transition={{ duration: (SLIDE_INTERVAL / 1000) * 1.2, ease: "linear" }}
           >
             <Image
               src={slides[current].src}
@@ -100,7 +100,7 @@ export default function HeroSection() {
       <div className="absolute inset-0 z-20 flex items-center justify-center">
         <div className="text-center px-6 max-w-4xl">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.3, ease: "easeOut" }}
           >
@@ -112,14 +112,14 @@ export default function HeroSection() {
               ASAL Research &amp; Resilience Programme &middot; Kenya
             </p>
 
-            {/* H1 — text-shadow ensures legibility on every slide */}
+            {/* H1 — gold / white / gold, text-shadow cascades to all children */}
             <h1
               className="font-display text-white text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6"
               style={{ textShadow: "0 2px 8px rgba(0,0,0,0.6)" }}
             >
               <span className="text-gold">Advancing Resilience.</span>{" "}
               <br className="hidden sm:block" />
-              <span className="text-sand">Restoring Nature.</span>{" "}
+              Restoring Nature.{" "}
               <br className="hidden sm:block" />
               <span className="text-gold">Sustaining Peace.</span>
             </h1>
@@ -142,7 +142,14 @@ export default function HeroSection() {
                   hover:-translate-y-0.5 focus-visible:ring-2 focus-visible:ring-cta focus-visible:outline-none"
               >
                 Explore Our Work
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5} aria-hidden="true">
+                <svg
+                  className="w-5 h-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2.5}
+                  aria-hidden="true"
+                >
                   <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
                 </svg>
               </Link>
@@ -168,7 +175,14 @@ export default function HeroSection() {
           hover:scale-110 focus-visible:ring-2 focus-visible:ring-gold focus-visible:outline-none"
         aria-label="Previous slide"
       >
-        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5} aria-hidden="true">
+        <svg
+          className="w-5 h-5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth={2.5}
+          aria-hidden="true"
+        >
           <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
         </svg>
       </button>
@@ -181,7 +195,14 @@ export default function HeroSection() {
           hover:scale-110 focus-visible:ring-2 focus-visible:ring-gold focus-visible:outline-none"
         aria-label="Next slide"
       >
-        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5} aria-hidden="true">
+        <svg
+          className="w-5 h-5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth={2.5}
+          aria-hidden="true"
+        >
           <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
         </svg>
       </button>
@@ -200,7 +221,8 @@ export default function HeroSection() {
             aria-current={i === current ? "true" : undefined}
             aria-label={`Slide ${i + 1}: ${slide.alt}`}
             onClick={() => setCurrent(i)}
-            className={`h-1.5 rounded-full transition-all duration-400 focus-visible:ring-2 focus-visible:ring-gold focus-visible:outline-none
+            className={`h-1.5 rounded-full transition-all duration-400
+              focus-visible:ring-2 focus-visible:ring-gold focus-visible:outline-none
               ${i === current ? "w-10 bg-gold" : "w-3 bg-white/40 hover:bg-white/70"}`}
           />
         ))}
