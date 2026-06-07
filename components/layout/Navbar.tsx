@@ -98,12 +98,14 @@ export default function Navbar() {
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(href + "/");
 
+  const isHome = pathname === "/";
+
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50 w-full shadow-lg">
+      <header className={`fixed top-0 left-0 right-0 z-50 w-full ${isHome ? "" : "shadow-lg"}`}>
 
         {/* ── Strip 1: Utility bar — desktop only ────────────────────────── */}
-        <div className="bg-forest hidden md:block">
+        <div className={`${isHome ? "bg-transparent" : "bg-forest"} hidden md:block`}>
           <div className="max-w-7xl mx-auto px-6 py-2 flex items-center justify-between">
 
             {/* Left: location + email */}
@@ -192,7 +194,7 @@ export default function Navbar() {
         </div>
 
         {/* ── Strip 2: Main navigation ────────────────────────────────────── */}
-        <nav role="navigation" aria-label="Main navigation" className="bg-forest">
+        <nav role="navigation" aria-label="Main navigation" className={isHome ? "bg-transparent" : "bg-forest"}>
           <div className="max-w-7xl mx-auto px-6">
             <div className="flex items-center justify-between h-[72px]">
 
