@@ -119,7 +119,7 @@ export default function HeroSection() {
             >
               <span className="text-gold">Advancing Resilience.</span>{" "}
               <br className="hidden sm:block" />
-              Restoring Nature.{" "}
+              <span className="text-gold">Restoring Nature.</span>{" "}
               <br className="hidden sm:block" />
               <span className="text-gold">Sustaining Peace.</span>
             </h1>
