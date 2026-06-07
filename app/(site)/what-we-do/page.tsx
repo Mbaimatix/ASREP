@@ -85,6 +85,7 @@ export default function WhatWeDoPage() {
         overlayOpacity={65}
         breadcrumbs={[{ label: "What We Do" }]}
         tag="Our Programmes"
+        imagePosition="object-top"
       />
 
       {/* Intro */}

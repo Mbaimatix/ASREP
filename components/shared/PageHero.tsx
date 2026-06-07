@@ -13,6 +13,8 @@ type Props = {
   tag?: string;
   /** Dark overlay opacity, 0–100. Defaults to 60 */
   overlayOpacity?: number;
+  /** Tailwind object-position class for the background image. Defaults to object-center */
+  imagePosition?: string;
 };
 
 export default function PageHero({
@@ -23,6 +25,7 @@ export default function PageHero({
   breadcrumbs,
   tag,
   overlayOpacity = 60,
+  imagePosition = "object-center",
 }: Props) {
   return (
     <section
@@ -35,7 +38,7 @@ export default function PageHero({
         alt={imageAlt}
         fill
         priority
-        className="object-cover"
+        className={`object-cover ${imagePosition}`}
         sizes="100vw"
       />
 
