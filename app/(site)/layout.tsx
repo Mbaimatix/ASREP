@@ -14,7 +14,14 @@ export default function SiteLayout({
 }) {
   return (
     <>
+      {/* ── Top-pinned duplicate primary nav (static, always visible) ── */}
+      <div className="relative z-[60] w-full">
+        <Navbar />
+      </div>
+
+      {/* ── Original sticky/fixed Navbar (unchanged behaviour) ── */}
       <Navbar />
+
       <main id="main-content" tabIndex={-1} className="outline-none">
         {children}
       </main>
