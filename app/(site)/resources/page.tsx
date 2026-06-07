@@ -181,6 +181,92 @@ export default async function ResourcesPage() {
         tag="Publications & Research"
       />
 
+      {/* ── Featured Report: State of the Ewaso Nyiro 2026 ────────────────── */}
+      <section className="section-pad bg-forest text-white" aria-labelledby="ewaso-report-heading">
+        <div className="container-asrep max-w-4xl">
+
+          {/* Tag */}
+          <p className="text-gold text-xs font-semibold uppercase tracking-[0.2em] mb-4">
+            Feature Paper · World Environment Day 2026
+          </p>
+
+          {/* Title */}
+          <h2
+            id="ewaso-report-heading"
+            className="font-display font-bold text-white text-3xl sm:text-4xl leading-tight mb-3"
+          >
+            State of the Ewaso Nyiro River 2026
+          </h2>
+
+          {/* Subtitle */}
+          <p className="text-sand text-lg font-medium mb-8 leading-snug">
+            Environmental Crisis, Climate Injustice and the Future of Kenya&apos;s Drylands
+          </p>
+
+          {/* Body */}
+          <div className="space-y-5 text-white/80 text-base leading-relaxed mb-10">
+            <p>
+              The Ewaso Nyiro &mdash; meaning &ldquo;river of muddy water&rdquo; in the Maa language &mdash; runs
+              1,716&thinsp;km from Lake Olbosat in Kenya&apos;s Central Highlands through the country&apos;s arid
+              north, sustaining 3.6 million people across Laikipia, Isiolo, Samburu, Marsabit, Wajir and beyond
+              before reaching the Lorian Swamp and eventually the Indian Ocean. The river&apos;s basin covers
+              roughly 210,000&thinsp;km&sup2; &mdash; about 36% of Kenya&apos;s total land area.
+            </p>
+            <p>
+              This feature paper documents the environmental crisis now unfolding along the river. Cumulative
+              water discharge fell from 964 million cubic metres in 1969 to 572 million cubic metres by 2010 &mdash;
+              a 40% decline in four decades. Drought cycles that once occurred every 8&ndash;10 years now repeat
+              every 3&ndash;5 years. In 2021, Iresaboru, a 40-year-old village of 300 households, was entirely
+              displaced by flooding. Nearly 190,000 acres of grazing land burned in wildfires across Lorian Swamp
+              and Basa. Meanwhile, Kenya&apos;s greenhouse gas emissions stand at 1.75 tonnes per person &mdash;
+              just 0.19% of the global share &mdash; yet pastoralist communities here absorb impacts far out of
+              proportion to what they contributed.
+            </p>
+            <p>
+              The paper presents evidence on six crisis categories &mdash; drought frequency, rainfall
+              unpredictability, shrinking river flows, flooding and displacement, wildfires, and resource-based
+              conflict &mdash; and proposes five immediate interventions, from catchment restoration and climate
+              finance to indigenous knowledge frameworks and a recurring State of the River monitoring mechanism.
+            </p>
+          </div>
+
+          {/* Download + citation */}
+          <div className="flex flex-col sm:flex-row sm:items-start gap-5">
+            <a
+              href="/reports/state-of-ewaso-nyiro-2026.pdf"
+              download="State-of-Ewaso-Nyiro-2026-ASREP.pdf"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-gold hover:bg-gold/90 text-forest
+                font-bold text-sm rounded-xl transition-all duration-200 hover:shadow-lg
+                hover:-translate-y-0.5 focus-visible:ring-2 focus-visible:ring-offset-2
+                focus-visible:ring-gold focus-visible:outline-none whitespace-nowrap"
+            >
+              <svg
+                className="w-4 h-4 shrink-0"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
+                aria-hidden="true"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                />
+              </svg>
+              Download Full Report (PDF)
+            </a>
+
+            <p className="text-white/45 text-xs leading-relaxed sm:pt-1 max-w-lg italic">
+              ASREP (2026). <span className="not-italic">The State of Ewaso Nyiro 2026: Environmental Crisis,
+              Climate Injustice and the Future of Kenya&apos;s Drylands.</span> World Environment Day 2026 Feature
+              Paper, ASAL Research &amp; Resilience Programme, Isiolo, Kenya.
+            </p>
+          </div>
+
+        </div>
+      </section>
+
       {/* Publications grid */}
       <section className="section-pad bg-cream" aria-labelledby="publications-heading">
         <div className="container-asrep">
