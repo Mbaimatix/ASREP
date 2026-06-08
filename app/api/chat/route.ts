@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+﻿import { NextRequest, NextResponse } from "next/server";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 
 /**
@@ -103,35 +103,35 @@ const KNOWLEDGE_BASE: KnowledgeEntry[] = [
   {
     keywords: ["partners", "partnerships", "funders", "donors", "collaborate", "institutions", "supported by"],
     response:
-      "We work with a wide range of partners across government, civil society, and the international community:\n\n🏛️ **Government**: KSG, KFS, KWS, NDMA, NCIC, FCDC\n🤝 **Civil Society**: Mercy Corps, Interpeace, RPPL, MID-P, IUA, HAIPS, PROCMURA, GEN\n🌐 **International**: San Diego Zoo Wildlife Alliance Kenya, Alliance for Peacebuilding, Jameel Observatory\n\nInterested in partnering with us? Visit our Partner page or email asrepafrica@gmail.com!",
+      "We work with a wide range of partners across government, civil society, and the international community:\n\n🏛️ **Government**: KSG, KFS, KWS, NDMA, NCIC, FCDC\n🤝 **Civil Society**: Mercy Corps, Interpeace, RPPL, MID-P, IUA, HAIPS, PROCMURA, GEN\n🌐 **International**: San Diego Zoo Wildlife Alliance Kenya, Alliance for Peacebuilding, Jameel Observatory\n\nInterested in partnering with us? Visit our Partner page or email info@asrepafrica.org!",
   },
 
   /* ── Donate ─────────────────────────────────────────────────────────────── */
   {
     keywords: ["donate", "donation", "support", "give", "fund", "money", "contribute", "sponsor", "financial", "mpesa", "payment"],
     response:
-      "Thank you for considering supporting ASREP Africa's work! 🙏\n\nYou can donate through our website's **Donate page**, which supports:\n• 📱 **M-Pesa** (mobile money)\n• 💳 **Card payments**\n• 🏦 **Bank transfer**\n\nEvery contribution — large or small — helps communities in Kenya's ASALs build resilience, restore nature, and sustain peace.\n\nYou can also email us at asrepafrica@gmail.com for direct donation arrangements.",
+      "Thank you for considering supporting ASREP Africa's work! 🙏\n\nYou can donate through our website's **Donate page**, which supports:\n• 📱 **M-Pesa** (mobile money)\n• 💳 **Card payments**\n• 🏦 **Bank transfer**\n\nEvery contribution — large or small — helps communities in Kenya's ASALs build resilience, restore nature, and sustain peace.\n\nYou can also email us at info@asrepafrica.org for direct donation arrangements.",
   },
 
   /* ── Volunteer ──────────────────────────────────────────────────────────── */
   {
     keywords: ["volunteer", "volunteering", "help", "intern", "internship", "work with", "join"],
     response:
-      "We welcome volunteers who are passionate about ASAL resilience, peacebuilding, conservation, and community development!\n\nFill out our **Volunteer Form** on the Get Involved page, sharing your skills and availability. We'll be in touch about current opportunities.\n\nYou can also email us at asrepafrica@gmail.com to start a conversation.",
+      "We welcome volunteers who are passionate about ASAL resilience, peacebuilding, conservation, and community development!\n\nFill out our **Volunteer Form** on the Get Involved page, sharing your skills and availability. We'll be in touch about current opportunities.\n\nYou can also email us at info@asrepafrica.org to start a conversation.",
   },
 
   /* ── Careers / Jobs ─────────────────────────────────────────────────────── */
   {
     keywords: ["career", "job", "vacancy", "hiring", "employment", "position", "application", "tender"],
     response:
-      "We occasionally advertise open positions and tenders on our **Careers & Tenders page**. We recommend checking it regularly as opportunities arise.\n\nFor proactive enquiries, you're welcome to send your CV and a cover letter to asrepafrica@gmail.com.",
+      "We occasionally advertise open positions and tenders on our **Careers & Tenders page**. We recommend checking it regularly as opportunities arise.\n\nFor proactive enquiries, you're welcome to send your CV and a cover letter to info@asrepafrica.org.",
   },
 
   /* ── Contact ────────────────────────────────────────────────────────────── */
   {
     keywords: ["contact", "reach", "email", "phone", "address", "location", "office", "where", "find you"],
     response:
-      "You can reach ASREP Africa through:\n\n📧 **Email**: asrepafrica@gmail.com\n📞 **Phone**: +254-7336-87149\n📍 **Location**: Isiolo County, Kenya\n🌐 **Website**: asrepafrica.org\n\nOur **Contact page** also has a direct message form — we aim to respond within 3–5 working days.",
+      "You can reach ASREP Africa through:\n\n📧 **Email**: info@asrepafrica.org\n📞 **Phone**: +254-7336-87149\n📍 **Location**: Isiolo County, Kenya\n🌐 **Website**: asrepafrica.org\n\nOur **Contact page** also has a direct message form — we aim to respond within 3–5 working days.",
   },
 
   /* ── Media / Press ──────────────────────────────────────────────────────── */
@@ -152,14 +152,14 @@ const KNOWLEDGE_BASE: KnowledgeEntry[] = [
   {
     keywords: ["partner with", "institutional partner", "csr", "corporate", "organisation partner", "mou", "memorandum"],
     response:
-      "ASREP Africa welcomes partnerships with institutions, funders, and corporates committed to ASAL resilience.\n\nWe offer three partnership tracks:\n• 🏛️ **Institutional partnerships** — co-design and co-implement programmes\n• 💰 **Funding partnerships** — support specific programmes or operations\n• 🏢 **Corporate CSR** — align your ESG commitments with community impact\n\nVisit our **Partner with Us** page or email asrepafrica@gmail.com to start the conversation!",
+      "ASREP Africa welcomes partnerships with institutions, funders, and corporates committed to ASAL resilience.\n\nWe offer three partnership tracks:\n• 🏛️ **Institutional partnerships** — co-design and co-implement programmes\n• 💰 **Funding partnerships** — support specific programmes or operations\n• 🏢 **Corporate CSR** — align your ESG commitments with community impact\n\nVisit our **Partner with Us** page or email info@asrepafrica.org to start the conversation!",
   },
 
   /* ── Publications / Resources ───────────────────────────────────────────── */
   {
     keywords: ["publication", "resources", "report", "annual report", "download", "pdf", "document", "policy brief"],
     response:
-      "ASREP Africa's key publications are available on our **Resources page**:\n\n📗 **ASAL IK Vault Series — \"Cows, Women & Land\"** (debut publication)\n📊 **Impact Report 2025–2026** (annual report PDF)\n📋 **Eco-Entrepreneurship Webinar Summary**\n📑 **Institutional Policies** (23 governance & safeguarding documents)\n\nThese are available for download or by request via asrepafrica@gmail.com.",
+      "ASREP Africa's key publications are available on our **Resources page**:\n\n📗 **ASAL IK Vault Series — \"Cows, Women & Land\"** (debut publication)\n📊 **Impact Report 2025–2026** (annual report PDF)\n📋 **Eco-Entrepreneurship Webinar Summary**\n📑 **Institutional Policies** (23 governance & safeguarding documents)\n\nThese are available for download or by request via info@asrepafrica.org.",
   },
 
   /* ── Social media / YouTube ─────────────────────────────────────────────── */
@@ -180,7 +180,7 @@ const KNOWLEDGE_BASE: KnowledgeEntry[] = [
   {
     keywords: ["thank", "thanks", "bye", "goodbye", "see you", "take care", "great", "helpful", "awesome", "wonderful"],
     response:
-      "You're very welcome! It's a pleasure sharing ASREP Africa's story with you. 🌿\n\nIf you have more questions, I'm always here. And don't forget — you can reach the team directly at asrepafrica@gmail.com.\n\nTogether, we build resilience. Together, we restore nature. Together, we sustain peace. 🕊️",
+      "You're very welcome! It's a pleasure sharing ASREP Africa's story with you. 🌿\n\nIf you have more questions, I'm always here. And don't forget — you can reach the team directly at info@asrepafrica.org.\n\nTogether, we build resilience. Together, we restore nature. Together, we sustain peace. 🕊️",
     weight: 2,
   },
 

@@ -1,11 +1,11 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import PageHero from "@/components/shared/PageHero";
 import SectionHeader from "@/components/shared/SectionHeader";
 
 export const metadata: Metadata = {
-  alternates: { canonical: "https://www.asrepafrica.org/what-we-do/climate-resilience" },
+  alternates: { canonical: "https://asrepafrica.org/what-we-do/climate-resilience" },
   title: "Climate Resilience & Nature-Based Solutions | ASREP Africa",
   description:
     "ASREP's Waso Eco-Champions programme has planted 10,000 trees and mobilised 2,000+ community members across 10 Isiolo wards to restore ASAL landscapes through nature-based solutions.",

@@ -70,8 +70,19 @@ export default function NotFound() {
             Back to Homepage
           </Link>
 
+          <p className="text-charcoal/50 text-sm mt-8">
+            Looking for something specific?{" "}
+            <Link href="/news" className="text-forest hover:underline font-medium">
+              Browse all news stories
+            </Link>{" "}
+            or{" "}
+            <Link href="/contact" className="text-forest hover:underline font-medium">
+              contact us
+            </Link>.
+          </p>
+
           {/* ASAL tagline */}
-          <p className="text-charcoal/40 text-xs mt-8 italic">
+          <p className="text-charcoal/40 text-xs mt-4 italic">
             &ldquo;Rooted in the ASALs. Driven by Evidence. United for Peace and Resilience.&rdquo;
           </p>
         </div>

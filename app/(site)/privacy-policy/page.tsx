@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Link from "next/link";
 import PageHero from "@/components/shared/PageHero";
 
@@ -40,7 +40,7 @@ export default function PrivacyPolicyPage() {
               Programme (hereinafter &ldquo;ASREP&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;,
               &ldquo;our&rdquo;) collects, uses, stores, and protects personal information
               obtained through our website at{" "}
-              <a href="https://www.asrepafrica.org">www.asrepafrica.org</a>.
+              <a href="https://asrepafrica.org">www.asrepafrica.org</a>.
             </p>
             <p>
               We are committed to protecting your privacy and handling your personal data in
@@ -136,7 +136,7 @@ export default function PrivacyPolicyPage() {
             <ul>
               <li>
                 Email:{" "}
-                <a href="mailto:asrepafrica@gmail.com">asrepafrica@gmail.com</a>
+                <a href="mailto:info@asrepafrica.org">info@asrepafrica.org</a>
               </li>
               <li>Address: Isiolo Town, Isiolo County, Kenya</li>
             </ul>

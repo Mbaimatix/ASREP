@@ -1,10 +1,10 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Link from "next/link";
 import PageHero from "@/components/shared/PageHero";
 import SectionHeader from "@/components/shared/SectionHeader";
 
 export const metadata: Metadata = {
-  alternates: { canonical: "https://www.asrepafrica.org/what-we-do/research-knowledge" },
+  alternates: { canonical: "https://asrepafrica.org/what-we-do/research-knowledge" },
   title: "Research & Knowledge Management | ASREP Africa",
   description:
     "ASREP Africa documents ASAL indigenous knowledge through the IK Vault Series and generates evidence-based research and policy briefs to inform decision-makers across Kenya.",

@@ -22,7 +22,7 @@ const dmSans = DM_Sans({
   weight: ["300", "400", "500", "600", "700"],
 });
 
-const SITE = "https://www.asrepafrica.org";
+const SITE = "https://asrepafrica.org";
 
 /* ─── Site-wide metadata ─────────────────────────────────────────────────── */
 export const metadata: Metadata = {
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   ),
   title: {
     default: "ASREP Africa — ASAL Research & Resilience Programme",
-    template: "%s | ASREP Africa — ASAL Research & Resilience Programme",
+    template: "%s | ASREP Africa",
   },
   description:
     "ASREP advances climate resilience, peacebuilding, and nature-based solutions across Kenya's Arid and Semi-Arid Lands. Rooted in the ASALs. Driven by Evidence. United for Peace and Resilience.",
@@ -61,7 +61,7 @@ export const metadata: Metadata = {
       "Advancing Resilience. Restoring Nature. Sustaining Peace. — Building resilient communities across Kenya's ASALs.",
     images: [
       {
-        url: "/images/gallery/waso-eco-champs-line.jpg",
+        url: `${SITE}/images/og/asrep-og-default.jpg`,
         width: 1200,
         height: 630,
         alt: "ASREP Africa — Advancing Resilience. Restoring Nature. Sustaining Peace.",
@@ -73,7 +73,7 @@ export const metadata: Metadata = {
     title: "ASREP Africa — ASAL Research & Resilience Programme",
     description:
       "Advancing Resilience. Restoring Nature. Sustaining Peace. Building resilient communities across Kenya's ASALs.",
-    images: ["/images/gallery/waso-eco-champs-line.jpg"],
+    images: [`${SITE}/images/og/asrep-og-default.jpg`],
   },
   robots: {
     index: true,
@@ -118,7 +118,7 @@ const structuredData = {
       contactPoint: {
         "@type": "ContactPoint",
         contactType: "general",
-        email: "asrepafrica@gmail.com",
+        email: "info@asrepafrica.org",
         telephone: "+254-733-687-149",
       },
       sameAs: [

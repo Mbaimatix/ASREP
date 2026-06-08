@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
@@ -555,7 +555,7 @@ export default async function NewsPostPage({ params }: { params: Promise<{ slug:
     day: "numeric", month: "long", year: "numeric",
   });
 
-  const shareUrl = `https://www.asrepafrica.org/news/${slug}`;
+  const shareUrl = `https://asrepafrica.org/news/${slug}`;
   const encodedUrl = encodeURIComponent(shareUrl);
   const encodedTitle = encodeURIComponent(post.title);
 
@@ -579,9 +579,9 @@ export default async function NewsPostPage({ params }: { params: Promise<{ slug:
     "publisher": {
       "@type": "Organization",
       "name": "ASREP Africa",
-      "logo": { "@type": "ImageObject", "url": "https://www.asrepafrica.org/logos/asrep-logo.png" }
+      "logo": { "@type": "ImageObject", "url": "https://asrepafrica.org/logos/asrep-logo.png" }
     },
-    "image": `https://www.asrepafrica.org${heroSrc.startsWith("/") ? heroSrc : "/" + heroSrc}`,
+    "image": `https://asrepafrica.org${heroSrc.startsWith("/") ? heroSrc : "/" + heroSrc}`,
     "description": post.excerpt,
   };
 

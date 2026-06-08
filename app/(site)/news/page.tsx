@@ -1,4 +1,7 @@
 ﻿import type { Metadata } from "next";
+
+export const revalidate = 60;
+
 import PageHero from "@/components/shared/PageHero";
 import SectionHeader from "@/components/shared/SectionHeader";
 import NewsCard from "@/components/shared/NewsCard";
@@ -8,7 +11,7 @@ import { createImageUrlBuilder } from "@sanity/image-url";
 import type { SanityImageSource } from "@sanity/image-url";
 
 export const metadata: Metadata = {
-  alternates: { canonical: "https://www.asrepafrica.org/news" },
+  alternates: { canonical: "https://asrepafrica.org/news" },
   title: "News & Media | ASREP Africa",
   description:
     "Latest news, field stories, media coverage, and research announcements from ASREP Africa's programmes across Kenya's arid and semi-arid lands.",

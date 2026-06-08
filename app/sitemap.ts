@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { readClient } from "@/sanity/lib/client";
 import { ALL_NEWS_SLUGS_QUERY, ALL_IMPACT_STORY_SLUGS_QUERY } from "@/sanity/lib/queries";
 
-const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.asrepafrica.org";
+const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://asrepafrica.org";
 
 const staticRoutes: MetadataRoute.Sitemap = [
   { url: BASE, lastModified: new Date(), changeFrequency: "weekly", priority: 1.0 },

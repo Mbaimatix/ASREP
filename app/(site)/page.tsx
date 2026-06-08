@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import HeroSection from "@/components/home/HeroSection";
 import NewsTicker from "@/components/home/NewsTicker";
 import ImpactNumbersBar from "@/components/home/ImpactNumbersBar";
@@ -14,7 +14,7 @@ import PartnersLogoStrip from "@/components/home/PartnersLogoStrip";
 import ProgrammeQuickLinks from "@/components/home/ProgrammeQuickLinks";
 
 export const metadata: Metadata = {
-  alternates: { canonical: "https://www.asrepafrica.org" },
+  alternates: { canonical: "https://asrepafrica.org" },
   title: "ASREP Africa — ASAL Research & Resilience Programme",
   description:
     "ASREP Africa builds resilient communities across Kenya's arid and semi-arid lands through climate resilience, peacebuilding, indigenous knowledge, and civic governance.",
@@ -22,52 +22,14 @@ export const metadata: Metadata = {
     title: "ASREP Africa — Advancing Resilience. Restoring Nature. Sustaining Peace.",
     description:
       "Locally-led programmes for climate resilience, peacebuilding, and sustainable livelihoods across Kenya's ASALs. Headquartered in Isiolo County.",
-    url: "https://www.asrepafrica.org",
+    url: "https://asrepafrica.org",
     images: [{ url: "/images/hero/hero-1.jpg", width: 1200, height: 630, alt: "ASREP Africa — advancing resilience, restoring nature, sustaining peace" }],
   },
-};
-
-const organizationJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "NGO",
-  "name": "ASREP Africa",
-  "alternateName": "ASAL Research & Resilience Programme",
-  "url": "https://www.asrepafrica.org",
-  "logo": "https://www.asrepafrica.org/logos/asrep-logo-white.png",
-  "description": "ASREP Africa is a Kenyan NGO advancing climate resilience, peacebuilding, indigenous knowledge, and civic governance in Kenya's arid and semi-arid lands.",
-  "foundingDate": "2023",
-  "areaServed": {
-    "@type": "Country",
-    "name": "Kenya"
-  },
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Isiolo",
-    "addressRegion": "Isiolo County",
-    "addressCountry": "KE"
-  },
-  "contactPoint": {
-    "@type": "ContactPoint",
-    "telephone": "+254733687149",
-    "email": "asrepafrica@gmail.com",
-    "contactType": "main"
-  },
-  "sameAs": [
-    "https://www.linkedin.com/company/asal-research-resilience-programme-asrep-africa/",
-    "https://www.facebook.com/share/1Cpm3uk3uY/",
-    "https://youtube.com/@asrepafrica"
-  ]
 };
 
 export default function HomePage() {
   return (
     <>
-      {/* JSON-LD Organization schema */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
-      />
-
       {/* 1 — Hero slider with Ken Burns effect */}
       <HeroSection />
 

@@ -31,6 +31,18 @@ const nextConfig: NextConfig = {
   // Strict mode for better React debugging
   reactStrictMode: true,
 
+  // 301 redirect www → non-www (canonical domain is asrepafrica.org)
+  async redirects() {
+    return [
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.asrepafrica.org" }],
+        destination: "https://asrepafrica.org/:path*",
+        permanent: true,
+      },
+    ];
+  },
+
   // Add security + performance headers to every route
   async headers() {
     return [

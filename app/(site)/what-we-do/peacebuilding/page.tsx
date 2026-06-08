@@ -1,10 +1,10 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Link from "next/link";
 import PageHero from "@/components/shared/PageHero";
 import SectionHeader from "@/components/shared/SectionHeader";
 
 export const metadata: Metadata = {
-  alternates: { canonical: "https://www.asrepafrica.org/what-we-do/peacebuilding" },
+  alternates: { canonical: "https://asrepafrica.org/what-we-do/peacebuilding" },
   title: "Peacebuilding & Social Cohesion | ASREP Africa",
   description:
     "ASREP Africa's peacebuilding programme convenes the Isiolo Peace Actors Forum and engages 500+ community members in dialogue and conflict resolution across Northern Kenya's pastoral communities.",

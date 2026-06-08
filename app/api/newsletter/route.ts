@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+﻿import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import nodemailer from "nodemailer";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
@@ -96,7 +96,7 @@ export async function POST(req: NextRequest) {
               <p style="color: #6B7280; font-size: 14px; font-style: italic;">"Rooted in the ASALs. Driven by Evidence. United for Peace and Resilience."</p>
             </div>
             <p style="color: #6B7280; font-size: 11px; margin-top: 12px; text-align: center;">
-              ASREP Africa · Isiolo County, Kenya · asrepafrica@gmail.com<br />
+              ASREP Africa · Isiolo County, Kenya · info@asrepafrica.org<br />
               <a href="${buildUnsubscribeUrl(normalised)}" style="color: #6B7280;">Unsubscribe</a>
             </p>
           </div>

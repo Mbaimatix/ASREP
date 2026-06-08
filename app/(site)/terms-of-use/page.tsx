@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Link from "next/link";
 import PageHero from "@/components/shared/PageHero";
 
@@ -37,7 +37,7 @@ export default function TermsOfUsePage() {
             <h2 id="terms-heading">1. Acceptance of Terms</h2>
             <p>
               By accessing and using the ASREP Africa website at{" "}
-              <a href="https://www.asrepafrica.org">www.asrepafrica.org</a> (the &ldquo;Website&rdquo;),
+              <a href="https://asrepafrica.org">www.asrepafrica.org</a> (the &ldquo;Website&rdquo;),
               you accept and agree to be bound by these Terms of Use. If you do not agree to these
               terms, please do not use this Website.
             </p>
@@ -80,7 +80,7 @@ export default function TermsOfUsePage() {
             </p>
             <p>
               To request permission to use ASREP Africa content, contact{" "}
-              <a href="mailto:asrepafrica@gmail.com">asrepafrica@gmail.com</a>.
+              <a href="mailto:info@asrepafrica.org">info@asrepafrica.org</a>.
             </p>
 
             <h2>5. Donations</h2>
@@ -93,7 +93,7 @@ export default function TermsOfUsePage() {
             <p>
               All donations are non-refundable unless an error occurred during processing. For
               donation enquiries, contact{" "}
-              <a href="mailto:asrepafrica@gmail.com">asrepafrica@gmail.com</a>.
+              <a href="mailto:info@asrepafrica.org">info@asrepafrica.org</a>.
             </p>
 
             <h2>6. Third-Party Links</h2>
@@ -139,7 +139,7 @@ export default function TermsOfUsePage() {
             <ul>
               <li>
                 Email:{" "}
-                <a href="mailto:asrepafrica@gmail.com">asrepafrica@gmail.com</a>
+                <a href="mailto:info@asrepafrica.org">info@asrepafrica.org</a>
               </li>
               <li>Address: Isiolo Town, Isiolo County, Kenya</li>
             </ul>

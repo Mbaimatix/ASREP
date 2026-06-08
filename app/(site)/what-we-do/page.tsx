@@ -1,11 +1,11 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import PageHero from "@/components/shared/PageHero";
 import SectionHeader from "@/components/shared/SectionHeader";
 
 export const metadata: Metadata = {
-  alternates: { canonical: "https://www.asrepafrica.org/what-we-do" },
+  alternates: { canonical: "https://asrepafrica.org/what-we-do" },
   title: "What We Do | ASREP Africa Programmes",
   description:
     "Six integrated programmes addressing climate resilience, peacebuilding, research, civic governance, biodiversity restoration, and livelihoods across Kenya's arid and semi-arid lands.",
@@ -18,7 +18,7 @@ const programmes = [
     tagline: "Restoring landscapes. Building adaptive capacity.",
     stat1: { value: "10,000", label: "trees planted" },
     stat2: { value: "2,000+", label: "eco-champions trained" },
-    image: "/images/programmes/climate-resilience.jpg",
+    image: "/images/programmes/climate-resilience-hero.jpg",
     imageAlt: "Waso Eco-Champions planting indigenous trees in Isiolo County",
     body: "Through the flagship Waso Eco-Champions programme, ASREP mobilises communities across 10 wards to restore degraded ASAL landscapes using indigenous species and nature-based solutions that build long-term climate adaptive capacity.",
   },
@@ -28,7 +28,7 @@ const programmes = [
     tagline: "Dialogue. Trust. Shared futures.",
     stat1: { value: "500+", label: "peace actors engaged" },
     stat2: { value: "1", label: "county-wide peace forum" },
-    image: "/images/programmes/peacebuilding.jpg",
+    image: "/images/programmes/peacebuilding-hero.jpg",
     imageAlt: "Inter-community peace dialogue convened by ASREP in Isiolo County",
     body: "Kenya's ASAL communities have faced generations of resource-driven conflict between pastoral groups. ASREP's peacebuilding programme convenes dialogue spaces, trains conflict mediators, and facilitates inter-community agreements that hold over time.",
   },
@@ -38,7 +38,7 @@ const programmes = [
     tagline: "Documenting indigenous wisdom. Informing evidence-based policy.",
     stat1: { value: "1", label: "IK Vault publication" },
     stat2: { value: "2025", label: "debut release year" },
-    image: "/images/programmes/research-knowledge.jpg",
+    image: "/images/programmes/research-hero.jpg",
     imageAlt: "ASREP researcher documenting oral indigenous knowledge with Borana elders",
     body: "The ASAL Indigenous Knowledge Vault Series documents centuries of ecological and social wisdom held by ASAL communities. Paired with applied research and policy briefs, ASREP's knowledge work informs decision-makers from county to international level.",
   },
@@ -48,7 +48,7 @@ const programmes = [
     tagline: "Citizens at the centre. Youth at the front.",
     stat1: { value: "47", label: "counties targeted" },
     stat2: { value: "1", label: "KSG national partnership" },
-    image: "/images/programmes/civic-governance.jpg",
+    image: "/images/programmes/civic-governance-hero.jpg",
     imageAlt: "Youth civic governance training session under acacia trees, Isiolo",
     body: "The KSG 'Under the Tree' Series brings interactive civic education directly to communities, building county-level accountability and deepening youth engagement in governance processes. From an Isiolo pilot, it has scaled to a 47-county national rollout.",
   },
@@ -58,7 +58,7 @@ const programmes = [
     tagline: "Protecting ASAL wildlife. Restoring ecological integrity.",
     stat1: { value: "1", label: "county represented" },
     stat2: { value: "SDZWA", label: "strategic partner" },
-    image: "/images/programmes/biodiversity.jpg",
+    image: "/images/programmes/biodiversity-hero.jpg",
     imageAlt: "Grevy's zebra in the Isiolo landscape — iconic ASAL biodiversity under community protection",
     body: "Working alongside the San Diego Zoo Wildlife Alliance, ASREP brings Isiolo County's community conservation voice into Kenya-wide biodiversity strategy. Our community rangers and eco-champions form the frontline of habitat protection in the northern ASAL belt.",
   },
@@ -68,7 +68,7 @@ const programmes = [
     tagline: "Green skills. Market linkages. Community enterprise.",
     stat1: { value: "40+", label: "webinar participants" },
     stat2: { value: "2025", label: "eco-entrepreneurship launch" },
-    image: "/images/programmes/livelihoods.jpg",
+    image: "/images/programmes/livelihoods-hero.jpg",
     imageAlt: "ASAL women entrepreneurs participating in ASREP's eco-entrepreneurship programme",
     body: "Sustainable livelihoods reduce community vulnerability to climate shocks and conflict. ASREP's eco-entrepreneurship programme builds green business skills, creates market linkages, and supports community enterprises that generate income while protecting the environment.",
   },

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { Suspense, useState } from "react";
 import { signIn } from "next-auth/react";
@@ -105,8 +105,8 @@ function LoginForm() {
 
       <p className="text-muted text-xs text-center mt-5">
         Forgotten your password? Contact{" "}
-        <a href="mailto:asrepafrica@gmail.com" className="text-forest hover:underline">
-          asrepafrica@gmail.com
+        <a href="mailto:info@asrepafrica.org" className="text-forest hover:underline">
+          info@asrepafrica.org
         </a>
       </p>
     </div>

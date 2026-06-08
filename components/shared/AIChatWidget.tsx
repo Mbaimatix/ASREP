@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useRef, useEffect, useCallback } from "react";
 import Image from "next/image";
@@ -167,7 +167,7 @@ export default function AIChatWidget() {
               ? {
                   ...m,
                   content:
-                    "I'm sorry, I couldn't process that. Please try again or email us at asrepafrica@gmail.com.",
+                    "I'm sorry, I couldn't process that. Please try again or email us at info@asrepafrica.org.",
                   streaming: false,
                 }
               : m

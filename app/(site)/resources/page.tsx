@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import PageHero from "@/components/shared/PageHero";
 import SectionHeader from "@/components/shared/SectionHeader";
 import Accordion from "@/components/shared/Accordion";
@@ -8,7 +8,7 @@ import { createImageUrlBuilder } from "@sanity/image-url";
 import type { SanityImageSource } from "@sanity/image-url";
 
 export const metadata: Metadata = {
-  alternates: { canonical: "https://www.asrepafrica.org/resources" },
+  alternates: { canonical: "https://asrepafrica.org/resources" },
   title: "Resources | Publications & Research - ASREP Africa",
   description:
     "Download ASREP Africa's Impact Report 2025-2026, the ASAL IK Vault Series debut, eco-entrepreneurship webinar summary, and policy briefs. Access our full publications library.",

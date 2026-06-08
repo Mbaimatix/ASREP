@@ -1,9 +1,9 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import PageHero from "@/components/shared/PageHero";
 import ContactForm from "@/components/forms/ContactForm";
 
 export const metadata: Metadata = {
-  alternates: { canonical: "https://www.asrepafrica.org/contact" },
+  alternates: { canonical: "https://asrepafrica.org/contact" },
   title: "Contact Us | ASREP Africa",
   description:
     "Get in touch with ASREP Africa — for programme enquiries, partnership discussions, media requests, or general questions. Headquartered in Isiolo County, Kenya.",
@@ -55,10 +55,10 @@ export default function ContactPage() {
               </div>
               <h3 className="font-display font-bold text-white text-lg mb-2">Email Us</h3>
               <a
-                href="mailto:asrepafrica@gmail.com"
+                href="mailto:info@asrepafrica.org"
                 className="text-white/80 hover:text-white text-sm transition-colors break-all"
               >
-                asrepafrica@gmail.com
+                info@asrepafrica.org
               </a>
               <p className="text-white/50 text-xs mt-2">Response within 3-5 working days</p>
             </div>
