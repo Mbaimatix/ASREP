@@ -136,7 +136,7 @@ export default function PrivacyPolicyPage() {
             <ul>
               <li>
                 Email:{" "}
-                <a href="mailto:info@asrepafrica.org">info@asrepafrica.org</a>
+                <a href="mailto:asrepafrica@gmail.com">asrepafrica@gmail.com</a>
               </li>
               <li>Address: Isiolo Town, Isiolo County, Kenya</li>
             </ul>

@@ -96,7 +96,7 @@ export async function POST(req: NextRequest) {
               <p style="color: #6B7280; font-size: 14px; font-style: italic;">"Rooted in the ASALs. Driven by Evidence. United for Peace and Resilience."</p>
             </div>
             <p style="color: #6B7280; font-size: 11px; margin-top: 12px; text-align: center;">
-              ASREP Africa · Isiolo County, Kenya · info@asrepafrica.org<br />
+              ASREP Africa · Isiolo County, Kenya · asrepafrica@gmail.com<br />
               <a href="${buildUnsubscribeUrl(normalised)}" style="color: #6B7280;">Unsubscribe</a>
             </p>
           </div>

@@ -167,7 +167,7 @@ export default function AIChatWidget() {
               ? {
                   ...m,
                   content:
-                    "I'm sorry, I couldn't process that. Please try again or email us at info@asrepafrica.org.",
+                    "I'm sorry, I couldn't process that. Please try again or email us at asrepafrica@gmail.com.",
                   streaming: false,
                 }
               : m

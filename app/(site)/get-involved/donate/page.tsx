@@ -78,7 +78,7 @@ export default function DonatePage() {
                       M-Pesa Paybill
                     </p>
                     <p className="text-charcoal font-medium text-sm">Business No: <strong className="text-earth">Coming soon</strong></p>
-                    <p className="text-charcoal/60 text-xs mt-1">Paybill registration in progress. For immediate M-Pesa transfers, email <a href="mailto:info@asrepafrica.org" className="text-forest hover:underline">info@asrepafrica.org</a> or call +254 733 687 149.</p>
+                    <p className="text-charcoal/60 text-xs mt-1">Paybill registration in progress. For immediate M-Pesa transfers, email <a href="mailto:asrepafrica@gmail.com" className="text-forest hover:underline">asrepafrica@gmail.com</a> or call +254 733 687 149.</p>
                   </div>
                   <div>
                     <p className="text-xs font-semibold text-charcoal/50 uppercase tracking-wider mb-3">
@@ -119,8 +119,8 @@ export default function DonatePage() {
                     </dl>
                     <p className="text-charcoal/50 text-xs mt-2 leading-relaxed">
                       For international transfers please email{" "}
-                      <a href="mailto:info@asrepafrica.org" className="text-forest hover:underline">
-                        info@asrepafrica.org
+                      <a href="mailto:asrepafrica@gmail.com" className="text-forest hover:underline">
+                        asrepafrica@gmail.com
                       </a>{" "}
                       so we can confirm receipt.
                     </p>

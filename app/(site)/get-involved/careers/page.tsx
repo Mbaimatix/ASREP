@@ -71,7 +71,7 @@ export default function CareersPage() {
                 We don&apos;t have any advertised roles at this time, but we&apos;re always interested in hearing from exceptional candidates.
               </p>
               <a
-                href="mailto:info@asrepafrica.org?subject=Speculative Application — ASREP Africa"
+                href="mailto:asrepafrica@gmail.com?subject=Speculative Application — ASREP Africa"
                 className="inline-flex items-center gap-2 px-6 py-3 border-2 border-forest text-forest
                   hover:bg-forest hover:text-white font-semibold text-sm rounded-xl transition-all"
               >
@@ -88,7 +88,7 @@ export default function CareersPage() {
               <div className="bg-white rounded-2xl p-10 border-2 border-dashed border-charcoal/15 text-center">
                 <p className="text-charcoal/55 text-sm">No active tenders at this time.</p>
                 <p className="text-charcoal/40 text-xs mt-2">
-                  Procurement enquiries: <a href="mailto:info@asrepafrica.org" className="text-forest hover:underline">info@asrepafrica.org</a>
+                  Procurement enquiries: <a href="mailto:asrepafrica@gmail.com" className="text-forest hover:underline">asrepafrica@gmail.com</a>
                 </p>
               </div>
             </div>

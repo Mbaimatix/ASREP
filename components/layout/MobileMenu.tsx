@@ -167,7 +167,7 @@ export default function MobileMenu({ isOpen, onClose, navItems, pathname }: Prop
               Partner with Us
             </Link>
             <p className="text-center text-white/40 text-xs mt-2">
-              info@asrepafrica.org · +254-7336-87149
+              asrepafrica@gmail.com · +254-7336-87149
             </p>
           </div>
         </motion.div>

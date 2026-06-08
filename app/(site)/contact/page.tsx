@@ -55,10 +55,10 @@ export default function ContactPage() {
               </div>
               <h3 className="font-display font-bold text-white text-lg mb-2">Email Us</h3>
               <a
-                href="mailto:info@asrepafrica.org"
+                href="mailto:asrepafrica@gmail.com"
                 className="text-white/80 hover:text-white text-sm transition-colors break-all"
               >
-                info@asrepafrica.org
+                asrepafrica@gmail.com
               </a>
               <p className="text-white/50 text-xs mt-2">Response within 3-5 working days</p>
             </div>

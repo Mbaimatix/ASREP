@@ -73,8 +73,8 @@ export default async function UnsubscribePage({
           {isSuccess
             ? "You've been successfully removed from our mailing list. You won't receive any further newsletter emails from ASREP Africa."
             : isError
-            ? "We couldn't process your unsubscribe request. The link may have expired or been used already. Please contact us directly at info@asrepafrica.org and we'll remove you manually."
-            : "Use the unsubscribe link from any ASREP Africa newsletter email to unsubscribe. If you're having trouble, email us at info@asrepafrica.org."}
+            ? "We couldn't process your unsubscribe request. The link may have expired or been used already. Please contact us directly at asrepafrica@gmail.com and we'll remove you manually."
+            : "Use the unsubscribe link from any ASREP Africa newsletter email to unsubscribe. If you're having trouble, email us at asrepafrica@gmail.com."}
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center">

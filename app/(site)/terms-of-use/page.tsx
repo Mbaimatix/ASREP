@@ -80,7 +80,7 @@ export default function TermsOfUsePage() {
             </p>
             <p>
               To request permission to use ASREP Africa content, contact{" "}
-              <a href="mailto:info@asrepafrica.org">info@asrepafrica.org</a>.
+              <a href="mailto:asrepafrica@gmail.com">asrepafrica@gmail.com</a>.
             </p>
 
             <h2>5. Donations</h2>
@@ -93,7 +93,7 @@ export default function TermsOfUsePage() {
             <p>
               All donations are non-refundable unless an error occurred during processing. For
               donation enquiries, contact{" "}
-              <a href="mailto:info@asrepafrica.org">info@asrepafrica.org</a>.
+              <a href="mailto:asrepafrica@gmail.com">asrepafrica@gmail.com</a>.
             </p>
 
             <h2>6. Third-Party Links</h2>
@@ -139,7 +139,7 @@ export default function TermsOfUsePage() {
             <ul>
               <li>
                 Email:{" "}
-                <a href="mailto:info@asrepafrica.org">info@asrepafrica.org</a>
+                <a href="mailto:asrepafrica@gmail.com">asrepafrica@gmail.com</a>
               </li>
               <li>Address: Isiolo Town, Isiolo County, Kenya</li>
             </ul>
