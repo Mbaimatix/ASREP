@@ -2,18 +2,8 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { PortableText } from "@portabletext/react";
-import { readClient } from "@/sanity/lib/client";
-import { NEWS_POST_QUERY, NEWS_RELATED_QUERY, ALL_NEWS_SLUGS_QUERY } from "@/sanity/lib/queries";
 import BreadcrumbNav from "@/components/shared/BreadcrumbNav";
 import NewsCard from "@/components/shared/NewsCard";
-import { createImageUrlBuilder } from "@sanity/image-url";
-import type { SanityImageSource } from "@sanity/image-url";
-
-const builder = createImageUrlBuilder(readClient);
-function urlFor(source: SanityImageSource) {
-  return builder.image(source);
-}
 
 const categoryLabel: Record<string, string> = {
   "announcements": "Announcement",
@@ -24,11 +14,10 @@ const categoryLabel: Record<string, string> = {
   "media-coverage": "Media Coverage",
 };
 
-/* ─── Static fallback articles (shown when CMS is unavailable) ─────────── */
-type FallbackPost = {
+/* ─── Static articles — the sole content source ─────────────────────────── */
+type Article = {
   title: string; category: string; publishedAt: string;
   author: string; authorRole: string; excerpt: string;
-  featuredImage?: undefined; content?: undefined;
   heroImage: string; heroAlt: string;
   body: string;
 };
@@ -69,8 +58,8 @@ function parseInlineLinks(text: string): React.ReactNode[] {
   return parts.length > 0 ? parts : [text];
 }
 
-/* ─── Fallback body renderer ────────────────────────────────────────────── */
-function renderFallbackBody(body: string): React.ReactNode {
+/* ─── Article body renderer (markdown-lite) ─────────────────────────────── */
+function renderArticleBody(body: string): React.ReactNode {
   const blocks = body.split(/\n\n+/);
   const rendered: React.ReactNode[] = [];
   let listItems: string[] = [];
@@ -151,7 +140,7 @@ function renderFallbackBody(body: string): React.ReactNode {
   return <>{rendered}</>;
 }
 
-const fallbackArticles: Record<string, FallbackPost> = {
+const articles: Record<string, Article> = {
   "waso-eco-champions-10000-trees": {
     title: "Waso Eco-Champions Plant 10,000 Indigenous Trees Across Isiolo County",
     category: "climate-environment",
@@ -453,8 +442,8 @@ Learn more about [ASREP Africa's biodiversity programme](/what-we-do/biodiversit
   },
 };
 
-/* Related articles for sidebar — shown when CMS has no related posts */
-const fallbackRelated = Object.entries(fallbackArticles)
+/* Related-article index for sidebar and related-stories grid */
+const relatedIndex = Object.entries(articles)
   .map(([slug, post]) => ({
     _id: slug,
     title: post.title,
@@ -462,50 +451,24 @@ const fallbackRelated = Object.entries(fallbackArticles)
     category: post.category,
     excerpt: post.excerpt,
     publishedAt: post.publishedAt,
-    featuredImage: undefined as undefined,
+    image: post.heroImage,
   }));
 
-export async function generateStaticParams() {
-  // Include both CMS slugs and static fallback slugs
-  const staticSlugs = Object.keys(fallbackArticles).map((slug) => ({ slug }));
-  try {
-    const cmsSlugs = await readClient.fetch(ALL_NEWS_SLUGS_QUERY);
-    const combined = [...staticSlugs, ...cmsSlugs.map((s: { slug: string }) => ({ slug: s.slug }))];
-    // Deduplicate
-    return combined.filter((v, i, a) => a.findIndex((t) => t.slug === v.slug) === i);
-  } catch {
-    return staticSlugs;
-  }
+export function generateStaticParams() {
+  return Object.keys(articles).map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  try {
-    const post = await readClient.fetch(NEWS_POST_QUERY, { slug });
-    if (post) {
-      return {
-        title: post.title,
-        description: post.metaDescription ?? post.excerpt,
-        openGraph: {
-          title: post.title,
-          description: post.excerpt,
-          images: post.featuredImage
-            ? [{ url: urlFor(post.featuredImage).width(1200).height(630).url() }]
-            : [],
-        },
-      };
-    }
-  } catch { /* fall through to static */ }
-
-  const fallback = fallbackArticles[slug];
-  if (fallback) {
+  const post = articles[slug];
+  if (post) {
     return {
-      title: fallback.title,
-      description: fallback.excerpt,
+      title: post.title,
+      description: post.excerpt,
       openGraph: {
-        title: fallback.title,
-        description: fallback.excerpt,
-        images: [{ url: fallback.heroImage, width: 1200, height: 630, alt: fallback.heroAlt }],
+        title: post.title,
+        description: post.excerpt,
+        images: [{ url: post.heroImage, width: 1200, height: 630, alt: post.heroAlt }],
       },
     };
   }
@@ -515,41 +478,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 export default async function NewsPostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
 
-  let post: {
-    title: string; category: string; publishedAt: string; author?: string; authorRole?: string;
-    excerpt: string; featuredImage?: SanityImageSource & { alt?: string };
-    content?: unknown[];
-    heroImage?: string; heroAlt?: string;
-    body?: string;
-  } | null = null;
-
-  let relatedPosts: {
-    _id: string; title: string; slug: { current: string }; category: string;
-    excerpt: string; publishedAt: string; featuredImage?: SanityImageSource & { alt?: string };
-  }[] = [];
-
-  // Try CMS first
-  try {
-    const cmsPost = await readClient.fetch(NEWS_POST_QUERY, { slug }, { next: { revalidate: 60 } });
-    if (cmsPost) {
-      post = cmsPost;
-      relatedPosts = await readClient.fetch(NEWS_RELATED_QUERY, {
-        category: post!.category, slug,
-      }, { next: { revalidate: 60 } });
-    }
-  } catch { /* CMS unavailable */ }
-
-  // Fall back to static article data
-  if (!post) {
-    const fallback = fallbackArticles[slug];
-    if (!fallback) notFound();
-    post = fallback;
-    relatedPosts = fallbackRelated
-      .filter((r) => r.category === fallback.category && r._id !== slug)
-      .slice(0, 3);
-  }
-
+  const post = articles[slug];
   if (!post) notFound();
+
+  const relatedPosts = relatedIndex
+    .filter((r) => r.category === post.category && r._id !== slug)
+    .slice(0, 3);
 
   const formattedDate = new Date(post.publishedAt).toLocaleDateString("en-GB", {
     day: "numeric", month: "long", year: "numeric",
@@ -559,15 +493,8 @@ export default async function NewsPostPage({ params }: { params: Promise<{ slug:
   const encodedUrl = encodeURIComponent(shareUrl);
   const encodedTitle = encodeURIComponent(post.title);
 
-  // Determine hero image
-  const heroSrc = post.featuredImage
-    ? urlFor(post.featuredImage).width(1920).height(900).url()
-    : (post as { heroImage?: string }).heroImage ?? "/images/about/about-hero.jpg";
-  const heroAlt = (post.featuredImage as { alt?: string } | undefined)?.alt
-    ?? (post as { heroAlt?: string }).heroAlt ?? post.title;
-
-  // Determine body for reading time (fallback only)
-  const fallbackBody = (post as { body?: string }).body;
+  const heroSrc = post.heroImage;
+  const heroAlt = post.heroAlt;
 
   // JSON-LD structured data
   const articleStructuredData = {
@@ -575,7 +502,7 @@ export default async function NewsPostPage({ params }: { params: Promise<{ slug:
     "@type": "NewsArticle",
     "headline": post.title,
     "datePublished": post.publishedAt,
-    "author": { "@type": "Person", "name": post.author ?? "ASREP Africa" },
+    "author": { "@type": "Person", "name": post.author },
     "publisher": {
       "@type": "Organization",
       "name": "ASREP Africa",
@@ -618,18 +545,10 @@ export default async function NewsPostPage({ params }: { params: Promise<{ slug:
             </h1>
             <div className="flex flex-wrap items-center gap-4 text-white/60 text-sm">
               <time dateTime={post.publishedAt}>{formattedDate}</time>
-              {post.author && (
-                <>
-                  <span aria-hidden="true">·</span>
-                  <span>{post.author}{post.authorRole ? `, ${post.authorRole}` : ""}</span>
-                </>
-              )}
-              {fallbackBody && (
-                <>
-                  <span aria-hidden="true">·</span>
-                  <span>{readingTime(fallbackBody)} min read</span>
-                </>
-              )}
+              <span aria-hidden="true">·</span>
+              <span>{post.author}{post.authorRole ? `, ${post.authorRole}` : ""}</span>
+              <span aria-hidden="true">·</span>
+              <span>{readingTime(post.body)} min read</span>
             </div>
           </div>
         </div>
@@ -647,52 +566,10 @@ export default async function NewsPostPage({ params }: { params: Promise<{ slug:
                 {post.excerpt}
               </p>
 
-              {/* Portable text body from CMS */}
-              {post.content && (
-                <div className="prose prose-lg max-w-none
-                  prose-headings:font-display prose-headings:text-earth
-                  prose-h2:text-2xl prose-h3:text-xl
-                  prose-p:text-charcoal/75 prose-p:leading-relaxed
-                  prose-a:text-forest prose-a:underline hover:prose-a:text-sage
-                  prose-blockquote:border-gold prose-blockquote:text-earth prose-blockquote:font-display prose-blockquote:italic
-                  prose-img:rounded-xl prose-img:shadow-md
-                  prose-strong:text-charcoal">
-                  <PortableText value={post.content as Parameters<typeof PortableText>[0]["value"]} />
-                </div>
-              )}
-
-              {/* Fallback body content */}
-              {!post.content && fallbackBody && (
-                <div className="space-y-0">
-                  {renderFallbackBody(fallbackBody)}
-                </div>
-              )}
-
-              {/* CTA to full story / external source when no body content at all */}
-              {!post.content && !fallbackBody && (
-                <div className="bg-white rounded-2xl p-8 border border-charcoal/8 shadow-sm">
-                  <p className="text-charcoal/70 leading-relaxed mb-6">
-                    For the full story and latest updates from ASREP Africa, visit our social media channels
-                    or subscribe to our newsletter.
-                  </p>
-                  <div className="flex flex-wrap gap-3">
-                    <Link
-                      href="/contact"
-                      className="px-5 py-2.5 bg-forest text-white font-semibold text-sm rounded-lg hover:bg-sage transition-colors"
-                    >
-                      Subscribe to Updates
-                    </Link>
-                    <a
-                      href="https://www.linkedin.com/company/asal-research-resilience-programme-asrep-africa/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="px-5 py-2.5 border border-forest text-forest font-semibold text-sm rounded-lg hover:bg-forest/5 transition-colors"
-                    >
-                      Follow on LinkedIn
-                    </a>
-                  </div>
-                </div>
-              )}
+              {/* Article body */}
+              <div className="space-y-0">
+                {renderArticleBody(post.body)}
+              </div>
 
               {/* Social share */}
               <div className="mt-12 pt-8 border-t border-charcoal/10">
@@ -755,9 +632,7 @@ export default async function NewsPostPage({ params }: { params: Promise<{ slug:
                   excerpt={rel.excerpt}
                   category={rel.category}
                   publishedAt={rel.publishedAt}
-                  imageUrl={rel.featuredImage
-                    ? urlFor(rel.featuredImage).width(640).height(400).url()
-                    : undefined}
+                  imageUrl={rel.image}
                 />
               ))}
             </div>

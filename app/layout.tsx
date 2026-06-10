@@ -155,9 +155,6 @@ export default function RootLayout({
       className={`${playfair.variable} ${dmSans.variable} h-full scroll-smooth`}
     >
       <head>
-        {/* Preconnect to Sanity CDN — eliminates DNS + TLS handshake on first CMS image */}
-        <link rel="preconnect" href="https://cdn.sanity.io" crossOrigin="anonymous" />
-        <link rel="dns-prefetch" href="https://cdn.sanity.io" />
         {/* Preconnect to YouTube for the video embed on the home page */}
         <link rel="preconnect" href="https://www.youtube-nocookie.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://img.youtube.com" />

@@ -5,11 +5,6 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "cdn.sanity.io",
-        pathname: "/images/**",
-      },
-      {
-        protocol: "https",
         hostname: "lh3.googleusercontent.com",
       },
       {
@@ -24,9 +19,6 @@ const nextConfig: NextConfig = {
     // Limit concurrent image optimisations to avoid cold-start spikes
     dangerouslyAllowSVG: false,
   },
-
-  // Allow Sanity Studio to be embedded at /studio
-  transpilePackages: ["next-sanity"],
 
   // Strict mode for better React debugging
   reactStrictMode: true,
@@ -62,7 +54,7 @@ const nextConfig: NextConfig = {
             value: "max-age=63072000; includeSubDomains; preload",
           },
           {
-            // CSP — prevents XSS. unsafe-inline/eval required by Next.js/Framer/Sanity.
+            // CSP — prevents XSS. unsafe-inline/eval required by Next.js/Framer.
             // Tighten with nonce-based policy post-launch.
             key: "Content-Security-Policy",
             value: [
@@ -70,10 +62,10 @@ const nextConfig: NextConfig = {
               "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.youtube.com https://s.ytimg.com https://www.googletagmanager.com",
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
               "font-src 'self' https://fonts.gstatic.com",
-              "img-src 'self' data: blob: https://cdn.sanity.io https://lh3.googleusercontent.com https://img.youtube.com https://i.ytimg.com",
+              "img-src 'self' data: blob: https://lh3.googleusercontent.com https://img.youtube.com https://i.ytimg.com",
               "media-src 'self' https://www.youtube.com",
               "frame-src https://www.youtube.com https://youtube.com",
-              "connect-src 'self' https://api.sanity.io wss://*.sanity.io https://pay.pesapal.com https://cybqa.pesapal.com https://www.google-analytics.com https://analytics.google.com",
+              "connect-src 'self' https://pay.pesapal.com https://cybqa.pesapal.com https://www.google-analytics.com https://analytics.google.com",
               "object-src 'none'",
               "base-uri 'self'",
               "form-action 'self'",

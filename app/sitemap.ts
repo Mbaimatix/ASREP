@@ -1,6 +1,4 @@
 import type { MetadataRoute } from "next";
-import { readClient } from "@/sanity/lib/client";
-import { ALL_NEWS_SLUGS_QUERY, ALL_IMPACT_STORY_SLUGS_QUERY } from "@/sanity/lib/queries";
 
 const BASE = "https://asrepafrica.org";
 
@@ -36,8 +34,8 @@ const staticRoutes: MetadataRoute.Sitemap = [
   { url: `${BASE}/terms-of-use`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.3 },
 ];
 
-// Static fallback news slugs — always in sitemap even without CMS
-const staticNewsSlugs = [
+// News slugs — kept in sync with app/(site)/news/[slug]/page.tsx
+const newsSlugs = [
   { slug: "waso-eco-champions-10000-trees", publishedAt: "2026-04-01" },
   { slug: "guardian-conservation-usaid", publishedAt: "2026-03-16" },
   { slug: "ksg-under-tree-national", publishedAt: "2026-02-20" },
@@ -46,19 +44,10 @@ const staticNewsSlugs = [
   { slug: "isiolo-peace-forum-500", publishedAt: "2025-08-10" },
 ];
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  let cmsNewsSlugs: { slug: string; publishedAt?: string }[] = [];
-  try {
-    cmsNewsSlugs = await readClient.fetch(ALL_NEWS_SLUGS_QUERY);
-  } catch { /* CMS unavailable */ }
-
-  // Merge CMS slugs with static slugs, deduplicating by slug value
-  const allNewsSlugs = [...staticNewsSlugs, ...cmsNewsSlugs]
-    .filter((v, i, a) => a.findIndex((t) => t.slug === v.slug) === i);
-
-  const newsRoutes: MetadataRoute.Sitemap = allNewsSlugs.map((item) => ({
+export default function sitemap(): MetadataRoute.Sitemap {
+  const newsRoutes: MetadataRoute.Sitemap = newsSlugs.map((item) => ({
     url: `${BASE}/news/${item.slug}`,
-    lastModified: item.publishedAt ? new Date(item.publishedAt) : new Date(),
+    lastModified: new Date(item.publishedAt),
     changeFrequency: "monthly" as const,
     priority: 0.7,
   }));

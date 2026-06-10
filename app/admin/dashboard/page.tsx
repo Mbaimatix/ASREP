@@ -27,7 +27,6 @@ export default async function AdminDashboardPage({
   } catch { /* DB may not be connected in dev */ }
 
   const quickLinks = [
-    { label: "Content Studio", href: "/studio", icon: "🎨", desc: "Manage news, team bios, gallery, and site settings.", access: ["SUPER_ADMIN", "EDITOR", "AUTHOR"] },
     { label: "Unread Messages", href: "/admin/contacts", icon: "📬", desc: `${contactCount} unread contact form submissions.`, access: ["SUPER_ADMIN", "EDITOR"] },
     { label: "Newsletter Subscribers", href: "/admin/newsletter", icon: "📧", desc: `${newsletterCount} active subscribers.`, access: ["SUPER_ADMIN", "EDITOR"] },
     { label: "User Management", href: "/admin/user-management", icon: "👥", desc: "Add, edit, or deactivate staff accounts.", access: ["SUPER_ADMIN"] },

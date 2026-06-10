@@ -5,7 +5,7 @@ import type { NextRequest } from "next/server";
 /**
  * ASREP Africa — Edge Middleware (RBAC Guard)
  *
- * Intercepts all requests to /admin/* and /studio/*
+ * Intercepts all requests to /admin/*
  * Redirects unauthenticated users to the login page.
  * Enforces role-based access within the admin area.
  */
@@ -38,19 +38,9 @@ export default auth((req: NextRequest & { auth: { user?: { role?: string } } | n
     );
   }
 
-  // ─── Studio — SUPER_ADMIN + EDITOR only ─────────────────────────────────
-  if (
-    pathname.startsWith("/studio") &&
-    !["SUPER_ADMIN", "EDITOR", "AUTHOR"].includes(role ?? "")
-  ) {
-    return NextResponse.redirect(
-      new URL("/admin/dashboard?error=unauthorized", req.url)
-    );
-  }
-
   return NextResponse.next();
 });
 
 export const config = {
-  matcher: ["/admin/:path*", "/studio/:path*"],
+  matcher: ["/admin/:path*"],
 };

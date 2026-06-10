@@ -2,10 +2,6 @@
 import PageHero from "@/components/shared/PageHero";
 import SectionHeader from "@/components/shared/SectionHeader";
 import Accordion from "@/components/shared/Accordion";
-import { readClient } from "@/sanity/lib/client";
-import { PUBLICATIONS_QUERY, ANNUAL_REPORTS_QUERY } from "@/sanity/lib/queries";
-import { createImageUrlBuilder } from "@sanity/image-url";
-import type { SanityImageSource } from "@sanity/image-url";
 
 export const metadata: Metadata = {
   alternates: { canonical: "https://asrepafrica.org/resources" },
@@ -13,12 +9,6 @@ export const metadata: Metadata = {
   description:
     "Download ASREP Africa's Impact Report 2025-2026, the ASAL IK Vault Series debut, eco-entrepreneurship webinar summary, and policy briefs. Access our full publications library.",
 };
-
-const builder = createImageUrlBuilder(readClient);
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-function urlFor(source: SanityImageSource) {
-  return builder.image(source);
-}
 
 type Publication = {
   _id: string;
@@ -28,14 +18,10 @@ type Publication = {
   description?: string;
   status: "available" | "forthcoming" | "request-only";
   isFeatured: boolean;
-  pdfFile?: { asset: { url: string } };
-  externalUrl?: string;
   downloadUrl?: string;
-  coverImage?: SanityImageSource & { alt?: string };
 };
 
-// Fallback publications shown when CMS is unavailable
-const fallbackPublications: Publication[] = [
+const publications: Publication[] = [
   {
     _id: "p1",
     title: "ASREP Africa Impact Report 2025-2026",
@@ -152,24 +138,7 @@ const policyCategories = [
   },
 ];
 
-export default async function ResourcesPage() {
-  let publications: Publication[] = fallbackPublications;
-  let annualReports: Publication[] = [];
-
-  try {
-    const [pubs, reports] = await Promise.all([
-      readClient.fetch(PUBLICATIONS_QUERY, {}, { next: { revalidate: 3600 } }),
-      readClient.fetch(ANNUAL_REPORTS_QUERY, {}, { next: { revalidate: 3600 } }),
-    ]);
-    if (pubs && pubs.length > 0) publications = pubs;
-    if (reports && reports.length > 0) annualReports = reports;
-  } catch {
-    /* CMS unavailable */
-  }
-
-  // annualReports used for future report download section
-  void annualReports;
-
+export default function ResourcesPage() {
   return (
     <>
       <PageHero
@@ -326,9 +295,9 @@ export default async function ResourcesPage() {
                 )}
 
                 <div className="mt-auto">
-                  {pub.status === "available" && (pub.downloadUrl || pub.pdfFile?.asset?.url || pub.externalUrl) ? (
+                  {pub.status === "available" && pub.downloadUrl ? (
                     <a
-                      href={pub.downloadUrl || pub.pdfFile?.asset?.url || pub.externalUrl}
+                      href={pub.downloadUrl}
                       target="_blank"
                       rel="noopener noreferrer"
                       download

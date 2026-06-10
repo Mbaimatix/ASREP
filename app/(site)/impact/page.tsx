@@ -1,13 +1,7 @@
 ﻿import type { Metadata } from "next";
-import Link from "next/link";
-import Image from "next/image";
 import PageHero from "@/components/shared/PageHero";
 import SectionHeader from "@/components/shared/SectionHeader";
 import LightboxGallery from "@/components/shared/LightboxGallery";
-import { readClient } from "@/sanity/lib/client";
-import { IMPACT_STORIES_QUERY, ANNUAL_REPORTS_QUERY } from "@/sanity/lib/queries";
-import { createImageUrlBuilder } from "@sanity/image-url";
-import type { SanityImageSource } from "@sanity/image-url";
 
 export const metadata: Metadata = {
   alternates: { canonical: "https://asrepafrica.org/impact" },
@@ -15,11 +9,6 @@ export const metadata: Metadata = {
   description:
     "Measurable impact across climate resilience, peacebuilding, research, and civic governance. Download ASREP Africa's 2025-2026 Impact Report and explore field stories and photo galleries.",
 };
-
-const builder = createImageUrlBuilder(readClient);
-function urlFor(source: SanityImageSource) {
-  return builder.image(source);
-}
 
 const impactAreas = [
   {
@@ -89,13 +78,7 @@ const galleryImages = [
   { src: "/images/gallery/sdzwa-k-biodiversity-strategy-validation-meeting-laikipia.jpg", alt: "ASREP and SDZWA-K officials at the national biodiversity strategy validation meeting in Laikipia", caption: "Biodiversity strategy validation - Laikipia, 2026" },
 ];
 
-export default async function ImpactPage() {
-  let annualReports: { title: string; year: number; pdfFile?: { asset: { url: string } }; externalUrl?: string }[] = [];
-  try {
-    const data = await readClient.fetch(ANNUAL_REPORTS_QUERY, {}, { next: { revalidate: 3600 } });
-    if (data && data.length > 0) annualReports = data;
-  } catch { /* CMS unavailable */ }
-
+export default function ImpactPage() {
   return (
     <>
       <PageHero
@@ -194,29 +177,13 @@ export default async function ImpactPage() {
             Download our comprehensive impact report, covering all six programmes, financial
             highlights, partner acknowledgements, and our vision for 2026-2027.
           </p>
-          {annualReports.length > 0 ? (
-            <a
-              href={annualReports[0].pdfFile?.asset?.url || annualReports[0].externalUrl || "#"}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 px-8 py-4 bg-white text-forest
-                font-semibold text-sm rounded-xl hover:bg-cream transition-colors"
-              aria-label="Download ASREP Africa Impact Report 2025-2026 (PDF)"
-            >
-              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-              </svg>
-              Download Impact Report 2025-2026 (PDF)
-            </a>
-          ) : (
-            <a
-              href="/resources"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-white text-forest
-                font-semibold text-sm rounded-xl hover:bg-cream transition-colors"
-            >
-              View All Publications
-            </a>
-          )}
+          <a
+            href="/resources"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-white text-forest
+              font-semibold text-sm rounded-xl hover:bg-cream transition-colors"
+          >
+            View All Publications
+          </a>
         </div>
       </section>
 
