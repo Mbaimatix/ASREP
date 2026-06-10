@@ -5,7 +5,7 @@ import SectionHeader from "@/components/shared/SectionHeader";
 
 export const metadata: Metadata = {
   alternates: { canonical: "https://asrepafrica.org/what-we-do/research-knowledge" },
-  title: "Research & Knowledge Management | ASREP Africa",
+  title: "Research & Knowledge Management",
   description:
     "ASREP Africa documents ASAL indigenous knowledge through the IK Vault Series and generates evidence-based research and policy briefs to inform decision-makers across Kenya.",
 };

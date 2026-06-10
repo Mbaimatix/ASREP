@@ -1,10 +1,10 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import PageHero from "@/components/shared/PageHero";
 import SectionHeader from "@/components/shared/SectionHeader";
 import TimelineItem from "@/components/about/TimelineItem";
 
 export const metadata: Metadata = {
-  title: "Our History | About ASREP Africa",
+  title: "Our History",
   description:
     "From founding in 2023 to global media recognition in 2026 — trace the key milestones of ASREP Africa's journey across Kenya's arid and semi-arid lands.",
 };

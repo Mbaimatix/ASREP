@@ -14,7 +14,7 @@ function buildUnsubscribeUrl(email: string): string {
   const secret = process.env.NEXTAUTH_SECRET ?? "fallback-secret";
   const encoded = Buffer.from(email).toString("base64url");
   const sig = createHmac("sha256", secret).update(encoded).digest("hex");
-  return `${process.env.NEXT_PUBLIC_SITE_URL}/unsubscribe?e=${encoded}&s=${sig}`;
+  return `https://asrepafrica.org/unsubscribe?e=${encoded}&s=${sig}`;
 }
 
 const transporter = nodemailer.createTransport({

@@ -15,7 +15,7 @@ import ProgrammeQuickLinks from "@/components/home/ProgrammeQuickLinks";
 
 export const metadata: Metadata = {
   alternates: { canonical: "https://asrepafrica.org" },
-  title: "ASREP Africa — ASAL Research & Resilience Programme",
+  title: { absolute: "ASREP Africa — ASAL Research & Resilience Programme" },
   description:
     "ASREP Africa builds resilient communities across Kenya's arid and semi-arid lands through climate resilience, peacebuilding, indigenous knowledge, and civic governance.",
   openGraph: {

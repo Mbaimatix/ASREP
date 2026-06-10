@@ -3,7 +3,7 @@ import Link from "next/link";
 import PageHero from "@/components/shared/PageHero";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | ASREP Africa",
+  title: "Privacy Policy",
   description:
     "Privacy policy for the ASREP Africa website (asrepafrica.org). Information on how we collect, use, and protect your personal data.",
 };
@@ -92,7 +92,7 @@ export default function PrivacyPolicyPage() {
             <p>
               Personal information is stored securely. We use industry-standard encryption and
               security measures to protect your data. Contact form submissions and newsletter
-              emails are transmitted to ASREP's secured email systems.
+              emails are transmitted to ASREP&apos;s secured email systems.
             </p>
             <p>
               Donation payments are processed by Pesapal, a PCI-DSS compliant payment gateway.

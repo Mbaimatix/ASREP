@@ -1,10 +1,10 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import PageHero from "@/components/shared/PageHero";
 import SectionHeader from "@/components/shared/SectionHeader";
 import PartnerForm from "@/components/forms/PartnerForm";
 
 export const metadata: Metadata = {
-  title: "Partner with Us | ASREP Africa",
+  title: "Partner with Us",
   description:
     "Partner with ASREP Africa — institutional, funding, corporate CSR, or academic partnerships that align your organisation with proven, locally-led ASAL resilience programmes.",
 };

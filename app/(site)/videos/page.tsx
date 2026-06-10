@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Image from "next/image";
 import PageHero from "@/components/shared/PageHero";
 
@@ -6,7 +6,7 @@ const VIDEO_ID = "9aJQzboyOIY";
 const VIDEO_THUMBNAIL = `https://img.youtube.com/vi/${VIDEO_ID}/maxresdefault.jpg`;
 
 export const metadata: Metadata = {
-  title: "Videos | ASREP Africa",
+  title: "Videos",
   description:
     "Watch ASREP Africa in action — field documentaries and programme highlights from Kenya's ASALs.",
   openGraph: {

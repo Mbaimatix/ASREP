@@ -17,6 +17,7 @@ export default function NewsTicker() {
   return (
     <div
       className="bg-earth text-white py-2.5 overflow-hidden relative z-40"
+      role="region"
       aria-label="Latest news ticker"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
@@ -32,6 +33,7 @@ export default function NewsTicker() {
             className="flex items-center whitespace-nowrap"
             style={{ animation: "ticker 45s linear infinite", animationPlayState: paused ? "paused" : "running" }}
           >
+            {/* Primary set — read by screen readers */}
             {tickerItems.map((item, i) => (
               <Link
                 key={i}
@@ -43,19 +45,21 @@ export default function NewsTicker() {
                 <span className="text-white/30 ml-4" aria-hidden="true">&bull;</span>
               </Link>
             ))}
-            {tickerItems.map((item, i) => (
-              <Link
-                key={`dup-${i}`}
-                href={item.href}
-                className="inline-flex items-center gap-2 text-xs hover:text-gold transition-colors mx-8 shrink-0"
-                aria-hidden="true"
-                tabIndex={-1}
-              >
-                <span className="text-gold font-bold uppercase text-[10px] tracking-widest">{item.label}</span>
-                <span className="text-white/85">{item.text}</span>
-                <span className="text-white/30 ml-4" aria-hidden="true">&bull;</span>
-              </Link>
-            ))}
+            {/* Duplicate set for seamless loop — hidden from screen readers */}
+            <span aria-hidden="true" className="inline-flex items-center">
+              {tickerItems.map((item, i) => (
+                <Link
+                  key={`dup-${i}`}
+                  href={item.href}
+                  className="inline-flex items-center gap-2 text-xs hover:text-gold transition-colors mx-8 shrink-0"
+                  tabIndex={-1}
+                >
+                  <span className="text-gold font-bold uppercase text-[10px] tracking-widest">{item.label}</span>
+                  <span className="text-white/85">{item.text}</span>
+                  <span className="text-white/30 ml-4" aria-hidden="true">&bull;</span>
+                </Link>
+              ))}
+            </span>
           </div>
         </div>
       </div>

@@ -4,16 +4,16 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 
 const partners = [
-  { name: "Kenya School of Government", abbr: "KSG", logo: null },
-  { name: "Kenya Wildlife Service", abbr: "KWS", logo: null },
-  { name: "Alliance for Peacebuilding", abbr: "AfP", logo: null },
-  { name: "Inclusion Unfolding Africa", abbr: "IUA", logo: null },
-  { name: "Horn of Africa Institute for Peace & Security", abbr: "HAIPS", logo: null },
-  { name: "Regional Pastoralists Peace Link", abbr: "RPPL", logo: null },
-  { name: "WSMTF Water Services Trust Fund", abbr: "WSMTF", logo: null },
-  { name: "AGAR — African Agency for Arid Resources", abbr: "AGAR", logo: null },
-  { name: "ASAL Humanitarian Network", abbr: "ASAL-HN", logo: null },
-  { name: "Mwangaza Light", abbr: "Mwangaza", logo: null },
+  { name: "Kenya School of Government", abbr: "KSG", logo: "/logos/partners/ksg.jpg" },
+  { name: "Kenya Wildlife Service", abbr: "KWS", logo: "/logos/partners/kws.jpg" },
+  { name: "Alliance for Peacebuilding", abbr: "AfP", logo: "/logos/partners/afp.jpg" },
+  { name: "Inclusion Unfolding Africa", abbr: "IUA", logo: "/logos/partners/iua.jpg" },
+  { name: "Horn of Africa Institute for Peace & Security", abbr: "HAIPS", logo: "/logos/partners/haips.jpg" },
+  { name: "Regional Pastoralists Peace Link", abbr: "RPPL", logo: "/logos/partners/rppl.jpg" },
+  { name: "WSMTF Water Services Trust Fund", abbr: "WSMTF", logo: "/logos/partners/wsmtf.jpg" },
+  { name: "AGAR — African Agency for Arid Resources", abbr: "AGAR", logo: "/logos/partners/agar.jpg" },
+  { name: "ASAL Humanitarian Network", abbr: "ASAL-HN", logo: "/logos/partners/asal-hn.jpg" },
+  { name: "Mwangaza Light", abbr: "Mwangaza", logo: "/logos/partners/mwangaza.jpg" },
   { name: "Kenya Forest Service", abbr: "KFS", logo: null },
   { name: "National Drought Management Authority", abbr: "NDMA", logo: null },
   { name: "Mercy Corps", abbr: "Mercy Corps", logo: null },
@@ -32,27 +32,22 @@ function PartnerTile({ partner }: { partner: typeof partners[0] }) {
   const [imgError, setImgError] = useState(false);
 
   return (
-    <div className="flex-shrink-0 flex flex-col items-center justify-center w-32 h-20 mx-5 gap-1">
+    <div className="flex-shrink-0 flex flex-col items-center justify-center w-36 h-20 mx-4 gap-1">
       {partner.logo && !imgError ? (
-        <div className="relative h-12 w-28 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
+        <div className="relative h-12 w-32 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
           <Image
             src={partner.logo}
             alt={partner.name}
             fill
             className="object-contain"
             onError={() => setImgError(true)}
-            sizes="112px"
+            sizes="128px"
           />
         </div>
       ) : (
-        <div className="flex flex-col items-center gap-1">
-          <div className="w-10 h-10 rounded-full bg-forest/12 flex items-center justify-center">
-            <span className="text-forest/50 text-[10px] font-bold">
-              {partner.abbr.slice(0, 3)}
-            </span>
-          </div>
-          <span className="text-charcoal/40 text-[9px] font-medium text-center leading-tight max-w-[100px]">
-            {partner.abbr}
+        <div className="px-3 py-2 rounded-lg bg-forest/8 border border-forest/10 max-w-[130px] text-center">
+          <span className="text-forest/60 text-[10px] font-semibold leading-tight block">
+            {partner.name}
           </span>
         </div>
       )}
@@ -62,11 +57,14 @@ function PartnerTile({ partner }: { partner: typeof partners[0] }) {
 
 export default function PartnersLogoStrip() {
   const [paused, setPaused] = useState(false);
-  const [reducedMotion, setReducedMotion] = useState(false);
+  const [reducedMotion, setReducedMotion] = useState<boolean>(() =>
+    typeof window !== "undefined"
+      ? window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      : false
+  );
 
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setReducedMotion(mq.matches);
     const handler = (e: MediaQueryListEvent) => setReducedMotion(e.matches);
     mq.addEventListener("change", handler);
     return () => mq.removeEventListener("change", handler);

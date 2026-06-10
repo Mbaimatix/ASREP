@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 import CountUp from "react-countup";
 
@@ -12,7 +13,19 @@ const stats = [
 ];
 
 export default function ImpactNumbersBar() {
+  const [reducedMotion, setReducedMotion] = useState<boolean>(() =>
+    typeof window !== "undefined"
+      ? window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      : false
+  );
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.25 });
+
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const handler = (e: MediaQueryListEvent) => setReducedMotion(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
 
   return (
     <section
@@ -36,9 +49,9 @@ export default function ImpactNumbersBar() {
               <div className="flex items-baseline justify-center gap-0.5 mb-1.5">
                 <span
                   className="font-display text-white text-4xl md:text-5xl font-bold leading-none"
-                  aria-label={`${stat.value}${stat.suffix}`}
+                  aria-label={`${stat.value.toLocaleString("en")}${stat.suffix}`}
                 >
-                  {inView ? (
+                  {inView && !reducedMotion ? (
                     <CountUp
                       end={stat.value}
                       duration={1.8}
@@ -47,7 +60,7 @@ export default function ImpactNumbersBar() {
                       useEasing
                     />
                   ) : (
-                    <span>0</span>
+                    stat.value.toLocaleString("en")
                   )}
                 </span>
                 {stat.suffix && (

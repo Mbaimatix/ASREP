@@ -9,7 +9,7 @@ import type { SanityImageSource } from "@sanity/image-url";
 
 export const metadata: Metadata = {
   alternates: { canonical: "https://asrepafrica.org/resources" },
-  title: "Resources | Publications & Research - ASREP Africa",
+  title: "Resources | Publications & Research",
   description:
     "Download ASREP Africa's Impact Report 2025-2026, the ASAL IK Vault Series debut, eco-entrepreneurship webinar summary, and policy briefs. Access our full publications library.",
 };

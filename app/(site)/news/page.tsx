@@ -12,7 +12,7 @@ import type { SanityImageSource } from "@sanity/image-url";
 
 export const metadata: Metadata = {
   alternates: { canonical: "https://asrepafrica.org/news" },
-  title: "News & Media | ASREP Africa",
+  title: "News & Media",
   description:
     "Latest news, field stories, media coverage, and research announcements from ASREP Africa's programmes across Kenya's arid and semi-arid lands.",
 };

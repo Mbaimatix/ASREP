@@ -11,7 +11,7 @@ import type { SanityImageSource } from "@sanity/image-url";
 
 export const metadata: Metadata = {
   alternates: { canonical: "https://asrepafrica.org/impact" },
-  title: "Our Impact | ASREP Africa",
+  title: "Our Impact",
   description:
     "Measurable impact across climate resilience, peacebuilding, research, and civic governance. Download ASREP Africa's 2025-2026 Impact Report and explore field stories and photo galleries.",
 };

@@ -5,7 +5,7 @@ import SectionHeader from "@/components/shared/SectionHeader";
 
 export const metadata: Metadata = {
   alternates: { canonical: "https://asrepafrica.org/what-we-do/civic-governance" },
-  title: "Civic Governance & Youth Leadership | ASREP Africa",
+  title: "Civic Governance & Youth Leadership",
   description:
     "The KSG 'Under the Tree' Series takes civic education to communities across Kenya's 47 counties. ASREP's civic governance programme deepens youth engagement and county accountability.",
 };

@@ -138,9 +138,9 @@ function renderFallbackBody(body: string): React.ReactNode {
           <div key="newsletter-cta" className="my-8 p-6 bg-forest/5 border border-forest/15 rounded-2xl">
             <p className="font-display font-bold text-forest text-lg mb-1">Get field updates from Kenya&apos;s ASALs</p>
             <p className="text-charcoal/60 text-sm mb-4">Join our community of supporters receiving ASREP&apos;s latest news and impact stories.</p>
-            <a href="/#newsletter" className="inline-flex items-center gap-2 px-5 py-2.5 bg-forest text-white text-sm font-semibold rounded-lg hover:bg-sage transition-colors">
+            <Link href="/#newsletter" className="inline-flex items-center gap-2 px-5 py-2.5 bg-forest text-white text-sm font-semibold rounded-lg hover:bg-sage transition-colors">
               Subscribe to updates →
-            </a>
+            </Link>
           </div>
         );
       }
@@ -484,7 +484,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     const post = await readClient.fetch(NEWS_POST_QUERY, { slug });
     if (post) {
       return {
-        title: `${post.title} | ASREP Africa`,
+        title: post.title,
         description: post.metaDescription ?? post.excerpt,
         openGraph: {
           title: post.title,
@@ -500,7 +500,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const fallback = fallbackArticles[slug];
   if (fallback) {
     return {
-      title: `${fallback.title} | ASREP Africa`,
+      title: fallback.title,
       description: fallback.excerpt,
       openGraph: {
         title: fallback.title,
@@ -509,7 +509,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       },
     };
   }
-  return { title: "Article Not Found | ASREP Africa" };
+  return { title: "Article Not Found" };
 }
 
 export default async function NewsPostPage({ params }: { params: Promise<{ slug: string }> }) {

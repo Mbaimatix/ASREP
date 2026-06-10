@@ -1,9 +1,9 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import PageHero from "@/components/shared/PageHero";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Events & Summits | ASREP Africa",
+  title: "Events & Summits",
   description:
     "Upcoming and past events from ASREP Africa — summits, forums, workshops, and community dialogues across Kenya's ASALs.",
   openGraph: {

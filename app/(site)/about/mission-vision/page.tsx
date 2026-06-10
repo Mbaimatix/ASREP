@@ -1,10 +1,10 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import PageHero from "@/components/shared/PageHero";
 import SectionHeader from "@/components/shared/SectionHeader";
 import CoreValueCard from "@/components/about/CoreValueCard";
 
 export const metadata: Metadata = {
-  title: "Mission, Vision & Values | About ASREP Africa",
+  title: "Mission, Vision & Values",
   description:
     "ASREP Africa's mission is locally-led, evidence-driven interventions for climate resilience and peace. Discover the six core values guiding our work across Kenya's ASALs.",
 };

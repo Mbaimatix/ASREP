@@ -26,9 +26,7 @@ const SITE = "https://asrepafrica.org";
 
 /* ─── Site-wide metadata ─────────────────────────────────────────────────── */
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL ?? SITE
-  ),
+  metadataBase: new URL("https://asrepafrica.org"),
   title: {
     default: "ASREP Africa — ASAL Research & Resilience Programme",
     template: "%s | ASREP Africa",

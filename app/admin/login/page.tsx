@@ -122,7 +122,7 @@ export default function AdminLoginPage() {
         <div className="text-center mb-10">
           <Link href="/" className="inline-flex items-center gap-3 justify-center mb-4">
             <div className="relative w-10 h-10">
-              <Image src="/logos/asrep-logo-white.png" alt="ASREP Africa" fill className="object-contain" />
+              <Image src="/logos/asrep-logo-white.png" alt="ASREP Africa" fill className="object-contain" sizes="40px" />
             </div>
             <div>
               <p className="text-white font-display font-bold text-xl">ASREP <span className="text-gold">AFRICA</span></p>

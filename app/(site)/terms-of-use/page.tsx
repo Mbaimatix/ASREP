@@ -3,7 +3,7 @@ import Link from "next/link";
 import PageHero from "@/components/shared/PageHero";
 
 export const metadata: Metadata = {
-  title: "Terms of Use | ASREP Africa",
+  title: "Terms of Use",
   description:
     "Terms and conditions governing the use of the ASREP Africa website (asrepafrica.org).",
 };

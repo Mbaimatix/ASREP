@@ -5,7 +5,7 @@ import SectionHeader from "@/components/shared/SectionHeader";
 
 export const metadata: Metadata = {
   alternates: { canonical: "https://asrepafrica.org/what-we-do/livelihoods" },
-  title: "Livelihoods & Economic Empowerment | ASREP Africa",
+  title: "Livelihoods & Economic Empowerment",
   description:
     "ASREP Africa's livelihoods programme builds eco-entrepreneurship skills, creates market linkages, and supports community enterprises that generate income while protecting ASAL environments.",
 };

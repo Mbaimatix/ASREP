@@ -1,11 +1,11 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import PageHero from "@/components/shared/PageHero";
 import LightboxGallery from "@/components/shared/LightboxGallery";
 
 export const metadata: Metadata = {
-  title: "Photo Gallery | ASREP Africa",
+  title: "Photo Gallery",
   description:
     "Photos from ASREP Africa's programmes — eco-champions, peace dialogues, indigenous knowledge research, and civic governance across Isiolo County.",
   openGraph: {

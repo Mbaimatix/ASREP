@@ -1,10 +1,10 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import PageHero from "@/components/shared/PageHero";
 import SectionHeader from "@/components/shared/SectionHeader";
 import LeadershipCard from "@/components/about/LeadershipCard";
 
 export const metadata: Metadata = {
-  title: "Leadership & Governance | About ASREP Africa",
+  title: "Leadership & Governance",
   description:
     "Meet ASREP Africa's Board of Directors and Executive Director — a team of ASAL specialists, peacebuilders, researchers, and development professionals committed to resilient communities.",
 };

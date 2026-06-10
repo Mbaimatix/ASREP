@@ -6,7 +6,7 @@ import SectionHeader from "@/components/shared/SectionHeader";
 
 export const metadata: Metadata = {
   alternates: { canonical: "https://asrepafrica.org/about" },
-  title: "About ASREP Africa",
+  title: { absolute: "About ASREP Africa" },
   description:
     "Founded in 2023 and headquartered in Isiolo County, ASREP Africa delivers locally-led, evidence-driven programmes for climate resilience, peacebuilding, and sustainable livelihoods across Kenya's ASALs.",
 };

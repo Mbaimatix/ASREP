@@ -4,7 +4,7 @@ import ContactForm from "@/components/forms/ContactForm";
 
 export const metadata: Metadata = {
   alternates: { canonical: "https://asrepafrica.org/contact" },
-  title: "Contact Us | ASREP Africa",
+  title: "Contact Us",
   description:
     "Get in touch with ASREP Africa — for programme enquiries, partnership discussions, media requests, or general questions. Headquartered in Isiolo County, Kenya.",
   openGraph: {

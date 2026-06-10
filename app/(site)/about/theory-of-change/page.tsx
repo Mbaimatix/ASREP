@@ -1,10 +1,10 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import PageHero from "@/components/shared/PageHero";
 import SectionHeader from "@/components/shared/SectionHeader";
 import TheoryOfChangeFlow from "@/components/about/TheoryOfChangeFlow";
 
 export const metadata: Metadata = {
-  title: "Theory of Change | About ASREP Africa",
+  title: "Theory of Change",
   description:
     "ASREP Africa's five-step Theory of Change: from community inputs and integrated activities to resilient ASAL communities. Grounded in the Impact Report 2025-2026.",
 };

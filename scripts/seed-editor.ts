@@ -4,16 +4,19 @@
  * Creates (or updates) the client editor account in the database.
  * Run once after deploying:
  *
- *   npx ts-node --project tsconfig.json scripts/seed-editor.ts
+ *   SEED_PASSWORD=<strong-password> npx ts-node --project tsconfig.json scripts/seed-editor.ts
  *
  * Or via npm script:
  *
- *   npm run seed:editor
+ *   SEED_PASSWORD=<strong-password> npm run seed:editor
  *
- * Defaults (change via env vars before running if needed):
+ * Required env vars:
+ *   SEED_PASSWORD — must be set; no insecure default is provided
+ * Optional:
  *   SEED_EMAIL    = client@asrepafrica.org
- *   SEED_PASSWORD = ChangeMe123!
  *   SEED_NAME     = ASREP Client Editor
+ *
+ * Credentials are shared with the client through a secure channel — see internal handover doc.
  */
 
 import { PrismaClient } from "@prisma/client";
@@ -23,10 +26,15 @@ const prisma = new PrismaClient();
 
 async function main() {
   const email    = process.env.SEED_EMAIL    ?? "client@asrepafrica.org";
-  const password = process.env.SEED_PASSWORD ?? "ChangeMe123!";
+  const password = process.env.SEED_PASSWORD;
   const name     = process.env.SEED_NAME     ?? "ASREP Client Editor";
 
-  const hashed = await bcrypt.hash(password, 12);
+  if (!password) {
+    console.error("❌  SEED_PASSWORD env var is required. Set it before running this script.");
+    process.exit(1);
+  }
+
+  const hashed = await bcrypt.hash(password as string, 12);
 
   const user = await prisma.user.upsert({
     where:  { email },

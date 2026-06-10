@@ -5,7 +5,7 @@ import SectionHeader from "@/components/shared/SectionHeader";
 
 export const metadata: Metadata = {
   alternates: { canonical: "https://asrepafrica.org/what-we-do/peacebuilding" },
-  title: "Peacebuilding & Social Cohesion | ASREP Africa",
+  title: "Peacebuilding & Social Cohesion",
   description:
     "ASREP Africa's peacebuilding programme convenes the Isiolo Peace Actors Forum and engages 500+ community members in dialogue and conflict resolution across Northern Kenya's pastoral communities.",
 };

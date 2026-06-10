@@ -33,6 +33,11 @@ const SLIDE_INTERVAL = 6000;
 export default function HeroSection() {
   const [current, setCurrent] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [reducedMotion, setReducedMotion] = useState<boolean>(() =>
+    typeof window !== "undefined"
+      ? window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      : false
+  );
 
   const next = useCallback(
     () => setCurrent((c) => (c + 1) % slides.length),
@@ -44,10 +49,17 @@ export default function HeroSection() {
   );
 
   useEffect(() => {
-    if (isPaused) return;
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const handler = (e: MediaQueryListEvent) => setReducedMotion(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
+
+  useEffect(() => {
+    if (isPaused || reducedMotion) return;
     const timer = setInterval(next, SLIDE_INTERVAL);
     return () => clearInterval(timer);
-  }, [isPaused, next]);
+  }, [isPaused, reducedMotion, next]);
 
   return (
     <section

@@ -32,20 +32,17 @@ Copy `.env.local` and fill in all credentials — see the file for full instruct
 
 ## Sanity CMS Setup
 
-1. Go to https://www.sanity.io/organizations/oHgdKkPwZ/project/4cfxiux0/api
-2. Create two API tokens:
+1. Go to the Sanity project dashboard → **API** → create two tokens:
    - **ASREP Read** → Viewer permissions → copy value into `SANITY_API_READ_TOKEN`
    - **ASREP Write** → Editor permissions → copy value into `SANITY_API_WRITE_TOKEN`
-3. Go to **API → CORS Origins** → add:
+2. Go to **API → CORS Origins** → add:
    - `http://localhost:3000` (development)
-   - `https://www.asrepafrica.org` (production)
-   - `https://your-vercel-url.vercel.app` (Vercel preview)
-4. Add all four Sanity env vars to **Vercel → Project Settings → Environment Variables**
-5. Create the client editor account: `npm run seed:editor`
-6. Share with the client:
-   - URL: `https://www.asrepafrica.org/studio`
-   - Login: `client@asrepafrica.org` / `ChangeMe123!`
-   - **Ask them to change their password after first login**
+   - `https://asrepafrica.org` (production)
+3. Add all four Sanity env vars to **Vercel → Project Settings → Environment Variables**
+4. Create the client editor account: `npm run seed:editor`
+5. Studio credentials are shared with the client through a secure channel — see internal handover doc.
+
+> **⚠ SECURITY — ACTION REQUIRED:** The Studio password that was previously documented here has been removed from this file. If it was ever committed to the repository, **rotate the password immediately** in the Sanity Studio user settings. Treat any password that appeared in a public git history as compromised.
 
 ## Licence
 

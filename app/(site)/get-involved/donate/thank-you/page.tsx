@@ -1,8 +1,8 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Thank You for Donating | ASREP Africa",
+  title: "Thank You for Donating",
   description: "Your donation to ASREP Africa has been received. Thank you for supporting resilience in Kenya's ASALs.",
 };
 

@@ -131,6 +131,17 @@ h3, h4, h5, h6 {
   100% { transform: translateX(-50%); }
 }
 
+/* ─── Reduced-motion: disable ticker and Ken Burns animations ───────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  /* Stop the news ticker and partner carousel scrolling */
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 /* ─── Back to top button ────────────────────────────────────────────────────── */
 
 .back-to-top {

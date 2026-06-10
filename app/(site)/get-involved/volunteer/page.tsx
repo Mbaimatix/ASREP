@@ -4,7 +4,7 @@ import SectionHeader from "@/components/shared/SectionHeader";
 import VolunteerForm from "@/components/forms/VolunteerForm";
 
 export const metadata: Metadata = {
-  title: "Volunteer | Get Involved with ASREP Africa",
+  title: "Volunteer",
   description:
     "Volunteer your skills with ASREP Africa — research, communications, field work, or mentorship in Kenya's ASAL communities. Apply online.",
 };

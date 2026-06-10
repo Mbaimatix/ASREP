@@ -1,10 +1,10 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import PageHero from "@/components/shared/PageHero";
 import SectionHeader from "@/components/shared/SectionHeader";
 import Accordion from "@/components/shared/Accordion";
 
 export const metadata: Metadata = {
-  title: "Institutional Policies | About ASREP Africa",
+  title: "Institutional Policies",
   description:
     "ASREP Africa operates under 23 institutional policies covering governance, financial management, HR & safeguarding, programmatic integrity, and digital operations.",
 };

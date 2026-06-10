@@ -1,9 +1,9 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import PageHero from "@/components/shared/PageHero";
 import LeadershipCard from "@/components/about/LeadershipCard";
 
 export const metadata: Metadata = {
-  title: "Our Team | ASREP Africa",
+  title: "Our Team",
   description:
     "Meet the leadership and governance team of ASREP Africa — a diverse board of experts spanning climate, peacebuilding, research, governance, and finance.",
   openGraph: {

@@ -4,7 +4,7 @@ import DonationForm from "@/components/forms/DonationForm";
 
 export const metadata: Metadata = {
   alternates: { canonical: "https://asrepafrica.org/get-involved/donate" },
-  title: "Donate | Support ASREP Africa",
+  title: "Donate",
   description:
     "Support ASREP Africa's work in Kenya's ASALs. KES 1,000 plants 10 trees. KES 5,000 sponsors an eco-champion for a month. Donate securely via M-Pesa, card, or PayPal.",
 };

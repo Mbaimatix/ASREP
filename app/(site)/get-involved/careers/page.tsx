@@ -3,7 +3,7 @@ import PageHero from "@/components/shared/PageHero";
 import SectionHeader from "@/components/shared/SectionHeader";
 
 export const metadata: Metadata = {
-  title: "Careers & Tenders | ASREP Africa",
+  title: "Careers & Tenders",
   description:
     "Job opportunities, consultancy tenders, and internships at ASREP Africa. Join a team committed to resilience, peace, and ecological restoration in Kenya's ASALs.",
 };

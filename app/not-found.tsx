@@ -8,7 +8,7 @@ export default function NotFound() {
       <header className="bg-forest py-4 px-6">
         <Link href="/" className="flex items-center gap-3">
           <div className="relative w-9 h-9">
-            <Image src="/logos/asrep-logo-white.png" alt="ASREP Africa" fill className="object-contain" />
+            <Image src="/logos/asrep-logo-white.png" alt="ASREP Africa" fill className="object-contain" sizes="36px" />
           </div>
           <span className="text-white font-display font-bold text-lg">
             ASREP <span className="text-gold">AFRICA</span>

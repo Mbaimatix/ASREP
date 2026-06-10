@@ -2,7 +2,7 @@
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Unsubscribe | ASREP Africa",
+  title: "Unsubscribe",
   robots: { index: false },
 };
 

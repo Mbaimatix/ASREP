@@ -1,10 +1,10 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import PageHero from "@/components/shared/PageHero";
 
 export const metadata: Metadata = {
-  title: "Get Involved | ASREP Africa",
+  title: "Get Involved",
   description:
     "Support ASREP Africa's work across Kenya's ASALs — donate, volunteer, partner, or explore career opportunities with our team in Isiolo County.",
   openGraph: {
