@@ -20,9 +20,13 @@
  */
 
 import { PrismaClient } from "@prisma/client";
+import { PrismaPg } from "@prisma/adapter-pg";
+import pg from "pg";
 import bcrypt from "bcryptjs";
 
-const prisma = new PrismaClient();
+// Prisma v7 requires a driver adapter — same construction as lib/prisma.ts.
+const pool = new pg.Pool({ connectionString: process.env.DATABASE_URL });
+const prisma = new PrismaClient({ adapter: new PrismaPg(pool) });
 
 async function main() {
   const email    = process.env.SEED_EMAIL    ?? "client@asrepafrica.org";
@@ -45,7 +49,7 @@ async function main() {
   console.log(`✅  Editor account ready: ${user.email} (role: ${user.role})`);
   console.log(`    URL:      http://localhost:3000/admin/login`);
   console.log(`    Email:    ${user.email}`);
-  console.log(`    Password: ${password}`);
+  console.log(`    Password: (the SEED_PASSWORD you provided — not echoed)`);
   console.log(`    ⚠️  Tell the client to change their password after first login.`);
 }
 
