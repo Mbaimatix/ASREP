@@ -134,7 +134,7 @@ export default function ImpactPage() {
             tag="Thematic Impact"
             title="Five Areas of"
             titleHighlight="Measurable Change"
-            subtitle="Impact across all six thematic programmes, documented in our annual Impact Report."
+            subtitle="Impact across our five thematic areas, documented in our annual Impact Report."
             id="impact-areas-heading"
           />
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
