@@ -1,0 +1,59 @@
+backend:
+  name: github
+  repo: Mbaimatrix/ASREP
+  branch: main
+  base_url: https://asrepafrica.org
+  auth_endpoint: api/auth
+
+media_folder: public/uploads
+public_folder: /uploads
+publish_mode: simple
+logo_url: /logos/asrep-logo.png
+
+collections:
+  - name: news
+    label: "News & Stories"
+    folder: content/news
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    extension: md
+    format: frontmatter
+    sortable_fields: ["publishedAt", "title", "category"]
+    fields:
+      - { label: Title,          name: title,       widget: string }
+      - label: "Publish Date"
+        name: publishedAt
+        widget: datetime
+        format: YYYY-MM-DD
+        date_format: YYYY-MM-DD
+        time_format: false
+      - label: Category
+        name: category
+        widget: select
+        options:
+          - { label: "Announcements",         value: announcements }
+          - { label: "Climate & Environment", value: climate-environment }
+          - { label: "Peacebuilding",         value: peacebuilding }
+          - { label: "Research",              value: research }
+          - { label: "Partnerships",          value: partnerships }
+          - { label: "Media Coverage",        value: media-coverage }
+      - { label: Excerpt,           name: excerpt,    widget: text }
+      - { label: "Hero Image",      name: heroImage,  widget: image, required: false }
+      - { label: "Hero Alt Text",   name: heroAlt,    widget: string, required: false, default: "" }
+      - { label: "Author Name",     name: author,     widget: string, default: "ASREP Africa Communications" }
+      - { label: "Author Role/Org", name: authorRole, widget: string, default: "ASREP Africa" }
+      - { label: Body,              name: body,       widget: markdown }
+
+  - name: settings
+    label: Settings
+    files:
+      - name: stats
+        label: "Site Statistics (Homepage & Impact page)"
+        file: content/stats.json
+        fields:
+          - { label: "Wards Covered",             name: wards_covered,      widget: number, value_type: int, min: 1 }
+          - { label: "People Reached",            name: people_reached,     widget: number, value_type: int, min: 1 }
+          - { label: "Peace Actors Engaged",      name: peace_actors,       widget: number, value_type: int, min: 1 }
+          - { label: "Policies Developed",        name: policies_developed, widget: number, value_type: int, min: 1 }
+          - { label: "Women & Youth Part. (%)",   name: women_youth_pct,    widget: number, value_type: int, min: 1, max: 100 }

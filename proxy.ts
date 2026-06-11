@@ -14,6 +14,11 @@ export default auth((req: NextRequest & { auth: { user?: { role?: string } } | n
   const session = req.auth;
   const role = session?.user?.role;
 
+  // Pass Decap CMS static files through — GitHub OAuth handles CMS access
+  if (pathname === "/admin/index.html" || pathname === "/admin/config.yml") {
+    return NextResponse.next();
+  }
+
   // ─── Unauthenticated — redirect to login ────────────────────────────────
   if (!session) {
     const loginUrl = new URL("/admin/login", req.url);

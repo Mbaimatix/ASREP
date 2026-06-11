@@ -39,6 +39,26 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       {
+        // Relaxed CSP for Decap CMS admin — must be declared before the global rule
+        source: "/admin/:path*",
+        headers: [
+          {
+            key: "Content-Security-Policy",
+            value: [
+              "default-src 'self'",
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com https://cdn.jsdelivr.net",
+              "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+              "font-src 'self' data: https://fonts.gstatic.com",
+              "img-src 'self' data: blob: https://raw.githubusercontent.com",
+              "connect-src 'self' https://api.github.com https://raw.githubusercontent.com",
+              "frame-src blob: 'self'",
+              "object-src 'none'",
+              "base-uri 'self'",
+            ].join("; "),
+          },
+        ],
+      },
+      {
         source: "/(.*)",
         headers: [
           { key: "X-Content-Type-Options", value: "nosniff" },
@@ -87,6 +107,16 @@ const nextConfig: NextConfig = {
       {
         // Cache public images for 7 days
         source: "/images/(.*)",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=604800, stale-while-revalidate=86400",
+          },
+        ],
+      },
+      {
+        // Cache CMS-uploaded media for 7 days
+        source: "/uploads/(.*)",
         headers: [
           {
             key: "Cache-Control",
