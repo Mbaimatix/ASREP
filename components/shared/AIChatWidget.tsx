@@ -22,31 +22,37 @@ const SUGGESTIONS = [
   "How can I volunteer?",
 ];
 
-/* ─── Markdown-lite renderer (bold + bullet lists) ───────────────────────── */
+/* ─── Markdown-lite renderer (bold, italic, bullet lists) ───────────────── */
+
+function renderInline(text: string): React.ReactNode[] {
+  // **bold** first, then *italic* within plain segments — order matters
+  return text.split(/\*\*(.*?)\*\*/g).flatMap((part, j) => {
+    if (j % 2 === 1) return [<strong key={`b${j}`}>{part}</strong>];
+    return part.split(/\*(.*?)\*/g).map((s, k) =>
+      k % 2 === 1 ? <em key={`i${j}-${k}`}>{s}</em> : s
+    );
+  });
+}
 
 function renderMarkdown(text: string): React.ReactNode[] {
   return text.split("\n").map((line, i) => {
-    // Render **bold** text
-    const parts = line.split(/\*\*(.*?)\*\*/g).map((part, j) =>
-      j % 2 === 1 ? <strong key={j}>{part}</strong> : part
-    );
-
     // Bullet list items
     if (line.startsWith("•") || line.startsWith("-")) {
       return (
         <li key={i} className="ml-3 list-none flex gap-1.5">
           <span className="text-forest mt-0.5">•</span>
-          <span>{parts}</span>
+          <span>{renderInline(line.replace(/^[•\-]\s*/, ""))}</span>
         </li>
       );
     }
 
     // Numbered items (e.g. "1. Climate…")
     if (/^\d+\./.test(line)) {
+      const numPrefix = line.match(/^\d+\.\s*/)?.[0] ?? "";
       return (
         <li key={i} className="ml-1 list-none flex gap-1.5">
-          <span className="text-forest font-semibold shrink-0">{line.match(/^\d+\./)?.[0]}</span>
-          <span>{parts.slice(1)}</span>
+          <span className="text-forest font-semibold shrink-0">{numPrefix.trimEnd()}</span>
+          <span>{renderInline(line.slice(numPrefix.length))}</span>
         </li>
       );
     }
@@ -54,7 +60,7 @@ function renderMarkdown(text: string): React.ReactNode[] {
     // Empty lines → spacer
     if (!line.trim()) return <div key={i} className="h-1.5" />;
 
-    return <p key={i}>{parts}</p>;
+    return <p key={i}>{renderInline(line)}</p>;
   });
 }
 
@@ -134,6 +140,7 @@ export default function AIChatWidget() {
           signal: abortRef.current.signal,
         });
 
+        if (res.status === 429) throw new Error("rate-limited");
         if (!res.ok || !res.body) throw new Error("Chat unavailable");
 
         const reader = res.body.getReader();
@@ -162,13 +169,15 @@ export default function AIChatWidget() {
         );
       } catch (err) {
         if ((err as Error).name === "AbortError") return;
+        const isRateLimited = (err as Error).message === "rate-limited";
         setMessages((prev) =>
           prev.map((m) =>
             m.id === assistantMsgId
               ? {
                   ...m,
-                  content:
-                    "I'm sorry, I couldn't process that. Please try again or email us at asrepafrica@gmail.com.",
+                  content: isRateLimited
+                    ? "I'm getting a lot of messages right now — please try again in a moment!"
+                    : "I'm sorry, I couldn't process that. Please try again or email us at asrepafrica@gmail.com.",
                   streaming: false,
                 }
               : m

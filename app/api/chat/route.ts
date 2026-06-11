@@ -206,7 +206,9 @@ function scoreEntry(input: string, entry: KnowledgeEntry): number {
     }
   }
 
-  return score + (entry.weight ?? 0);
+  // Only apply weight when at least one keyword matched; otherwise weight
+  // would inflate unmatched entries and defeat the bestScore <= 0 fallback.
+  return score > 0 ? score + (entry.weight ?? 0) : 0;
 }
 
 function findBestResponse(userMessage: string): string {
@@ -242,9 +244,9 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Request too large." }, { status: 413 });
   }
 
-  // Rate limit: 5 requests per IP per 10 minutes
+  // Rate limit: 30 requests per IP per 10 minutes (chat-specific bucket)
   const ip = getClientIp(req);
-  const { allowed, retryAfterSeconds } = await checkRateLimit(ip);
+  const { allowed, retryAfterSeconds } = await checkRateLimit(`chat:${ip}`, 30, 10 * 60 * 1000);
   if (!allowed) {
     return NextResponse.json(
       { error: "Too many requests. Please try again shortly." },
