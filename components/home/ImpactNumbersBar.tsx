@@ -36,6 +36,7 @@ function AnimatedNumber({
       if (progress < 1) raf = requestAnimationFrame(tick);
     };
 
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setDisplay(0);
     const timer = window.setTimeout(() => {
       raf = requestAnimationFrame(tick);
@@ -56,6 +57,7 @@ export default function ImpactNumbersBar() {
 
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setReducedMotion(mq.matches);
     const handler = (e: MediaQueryListEvent) => setReducedMotion(e.matches);
     mq.addEventListener("change", handler);

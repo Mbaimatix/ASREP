@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const subjects = [
   "General Enquiry",
@@ -17,7 +17,10 @@ export default function ContactForm() {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
   // Record when the form first rendered; sent to the API to detect instant-submit bots.
-  const renderTs = useRef(Date.now());
+  const renderTs = useRef<number>(0);
+  useEffect(() => {
+    renderTs.current = Date.now();
+  }, []);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
