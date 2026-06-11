@@ -2,6 +2,7 @@
 import PageHero from "@/components/shared/PageHero";
 import SectionHeader from "@/components/shared/SectionHeader";
 import LightboxGallery from "@/components/shared/LightboxGallery";
+import { IMPACT_STATS } from "@/lib/impact-stats";
 
 export const metadata: Metadata = {
   alternates: { canonical: "https://asrepafrica.org/impact" },
@@ -94,16 +95,10 @@ export default function ImpactPage() {
       <section className="bg-forest py-14" aria-label="Top-level impact statistics">
         <div className="container-asrep">
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 text-center">
-            {[
-              { value: "10", suffix: "", label: "Wards Covered" },
-              { value: "2,000", suffix: "+", label: "People Reached" },
-              { value: "500", suffix: "+", label: "Peace Actors" },
-              { value: "23", suffix: "", label: "Policies Developed" },
-              { value: "60", suffix: "%", label: "Women & Youth" },
-            ].map((s) => (
+            {IMPACT_STATS.map((s) => (
               <div key={s.label}>
                 <p className="font-display text-white text-4xl font-bold">
-                  {s.value}<span className="text-gold">{s.suffix}</span>
+                  {s.value.toLocaleString("en")}<span className="text-gold">{s.suffix}</span>
                 </p>
                 <p className="text-white/55 text-xs uppercase tracking-widest mt-1">{s.label}</p>
               </div>

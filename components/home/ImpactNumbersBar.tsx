@@ -1,27 +1,62 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
-import CountUp from "react-countup";
+import { IMPACT_STATS } from "@/lib/impact-stats";
 
-const stats = [
-  { value: 10, suffix: "", label: "Wards Covered", sublabel: "across Isiolo County" },
-  { value: 2000, suffix: "+", label: "People Reached", sublabel: "eco-champions & community members" },
-  { value: 500, suffix: "+", label: "Peacebuilding", sublabel: "actors engaged" },
-  { value: 23, suffix: "", label: "Policies Developed", sublabel: "governance & safeguarding" },
-  { value: 60, suffix: "%", label: "Women & Youth", sublabel: "in all programmes" },
-];
+/**
+ * Eased requestAnimationFrame count-up.
+ * Renders the final value for SSR / no-JS / reduced-motion; once `active`
+ * flips true it restarts from 0 and always lands exactly on the target,
+ * surviving fast scrolls, re-renders, and strict-mode remounts.
+ */
+function AnimatedNumber({
+  target,
+  active,
+  delayMs,
+}: {
+  target: number;
+  active: boolean;
+  delayMs: number;
+}) {
+  const [display, setDisplay] = useState(target);
+
+  useEffect(() => {
+    if (!active) return;
+
+    const duration = 1800;
+    let raf = 0;
+    let startTime: number | null = null;
+
+    const tick = (now: number) => {
+      if (startTime === null) startTime = now;
+      const progress = Math.min((now - startTime) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setDisplay(Math.round(eased * target));
+      if (progress < 1) raf = requestAnimationFrame(tick);
+    };
+
+    setDisplay(0);
+    const timer = window.setTimeout(() => {
+      raf = requestAnimationFrame(tick);
+    }, delayMs);
+
+    return () => {
+      window.clearTimeout(timer);
+      cancelAnimationFrame(raf);
+    };
+  }, [active, target, delayMs]);
+
+  return <>{display.toLocaleString("en")}</>;
+}
 
 export default function ImpactNumbersBar() {
-  const [reducedMotion, setReducedMotion] = useState<boolean>(() =>
-    typeof window !== "undefined"
-      ? window.matchMedia("(prefers-reduced-motion: reduce)").matches
-      : false
-  );
+  const [reducedMotion, setReducedMotion] = useState(false);
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.25 });
 
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setReducedMotion(mq.matches);
     const handler = (e: MediaQueryListEvent) => setReducedMotion(e.matches);
     mq.addEventListener("change", handler);
     return () => mq.removeEventListener("change", handler);
@@ -40,9 +75,9 @@ export default function ImpactNumbersBar() {
         </p>
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 lg:gap-4">
-          {stats.map((stat, i) => (
+          {IMPACT_STATS.map((stat, i) => (
             <div
-              key={i}
+              key={stat.label}
               className="text-center group"
             >
               {/* Number */}
@@ -51,17 +86,11 @@ export default function ImpactNumbersBar() {
                   className="font-display text-white text-4xl md:text-5xl font-bold leading-none"
                   aria-label={`${stat.value.toLocaleString("en")}${stat.suffix}`}
                 >
-                  {inView && !reducedMotion ? (
-                    <CountUp
-                      end={stat.value}
-                      duration={1.8}
-                      delay={i * 0.15}
-                      separator=","
-                      useEasing
-                    />
-                  ) : (
-                    stat.value.toLocaleString("en")
-                  )}
+                  <AnimatedNumber
+                    target={stat.value}
+                    active={inView && !reducedMotion}
+                    delayMs={i * 150}
+                  />
                 </span>
                 {stat.suffix && (
                   <span className="font-display text-gold text-3xl md:text-4xl font-bold leading-none">
@@ -77,7 +106,7 @@ export default function ImpactNumbersBar() {
               <p className="text-white/45 text-xs leading-relaxed">{stat.sublabel}</p>
 
               {/* Divider — hide on last item on large screens */}
-              {i < stats.length - 1 && (
+              {i < IMPACT_STATS.length - 1 && (
                 <div
                   className="hidden lg:block absolute right-0 top-1/4 h-1/2 w-px bg-white/10"
                   aria-hidden="true"
