@@ -51,7 +51,15 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    const { fullName, email, organisation, subject, message } = await req.json();
+    const { fullName, email, organisation, subject, message, honeypot, renderTs } = await req.json();
+
+    // Honeypot + minimum-fill-time: silently accept so bots learn nothing
+    if (honeypot) {
+      return NextResponse.json({ success: true }, { status: 200 });
+    }
+    if (typeof renderTs === "number" && Date.now() - renderTs < 3000) {
+      return NextResponse.json({ success: true }, { status: 200 });
+    }
 
     // Presence validation
     if (!fullName?.trim() || !email?.trim() || !subject?.trim() || !message?.trim()) {

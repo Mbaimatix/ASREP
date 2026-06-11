@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 const subjects = [
   "General Enquiry",
@@ -16,6 +16,8 @@ const subjects = [
 export default function ContactForm() {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
+  // Record when the form first rendered; sent to the API to detect instant-submit bots.
+  const renderTs = useRef(Date.now());
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -35,6 +37,8 @@ export default function ContactForm() {
           organisation: data.get("organisation"),
           subject: data.get("subject"),
           message: data.get("message"),
+          honeypot: data.get("website") ?? "",
+          renderTs: renderTs.current,
         }),
       });
 
@@ -118,6 +122,12 @@ export default function ContactForm() {
           className="w-full px-4 py-3 rounded-xl border border-charcoal/15 text-sm
             focus:outline-none focus:ring-2 focus:ring-forest focus:border-transparent
             resize-none transition" />
+      </div>
+
+      {/* Honeypot — hidden from humans; bots fill it and get silently rejected */}
+      <div aria-hidden="true" style={{ position: "absolute", left: "-9999px", width: 0, height: 0, overflow: "hidden" }}>
+        <label htmlFor="contact-website">Website (leave blank)</label>
+        <input id="contact-website" name="website" type="text" tabIndex={-1} autoComplete="off" />
       </div>
 
       {status === "error" && (
