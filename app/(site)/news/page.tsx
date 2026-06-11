@@ -1,8 +1,9 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 
 import PageHero from "@/components/shared/PageHero";
 import SectionHeader from "@/components/shared/SectionHeader";
 import NewsCard from "@/components/shared/NewsCard";
+import { getArticleList } from "@/lib/get-news";
 
 export const metadata: Metadata = {
   alternates: { canonical: "https://asrepafrica.org/news" },
@@ -21,26 +22,8 @@ const categories = [
   { value: "media-coverage", label: "Media Coverage" },
 ];
 
-type NewsPost = {
-  _id: string;
-  title: string;
-  slug: { current: string };
-  category: string;
-  excerpt: string;
-  publishedAt: string;
-  image: string;
-};
-
-const posts: NewsPost[] = [
-  { _id: "n1", title: "Waso Eco-Champions Plant 10,000 Indigenous Trees Across Isiolo County", slug: { current: "waso-eco-champions-10000-trees" }, category: "climate-environment", excerpt: "ASREP Africa's flagship Waso Eco-Champions programme reaches a landmark milestone, with 10,000 indigenous trees planted across 10 wards of Isiolo County.", publishedAt: "2026-04-01", image: "/images/gallery/waso-eco-champs-line.jpg" },
-  { _id: "n2", title: "ASREP Featured in The Guardian: Conservation Without US Aid", slug: { current: "guardian-conservation-usaid" }, category: "media-coverage", excerpt: "The Guardian's global environment desk highlights ASREP's community-led conservation model as a template for the post-USAID funding landscape.", publishedAt: "2026-03-16", image: "/images/gallery/asrep-forest-partnership.jpg" },
-  { _id: "n3", title: "KSG 'Under the Tree' Civic Education Series Goes National", slug: { current: "ksg-under-tree-national" }, category: "partnerships", excerpt: "A landmark partnership with the Kenya School of Government scales the Isiolo-piloted civic education model to all 47 Kenyan counties.", publishedAt: "2026-02-20", image: "/images/gallery/dida-fayo-remarks-under-tree-series-launch-oldonyiro.jpg" },
-  { _id: "n4", title: "Biographic Magazine: The Future of Conservation Without US Aid", slug: { current: "biographic-future-conservation" }, category: "media-coverage", excerpt: "International conservation magazine Biographic profiles ASREP Africa's eco-champion model as a blueprint for community-funded ecological restoration.", publishedAt: "2026-01-15", image: "/images/gallery/kenya-forest-service-tree-planting.jpg" },
-  { _id: "n5", title: "ASAL IK Vault Series Debut: 'Cows, Women & Land' Documents Borana Oromo Knowledge", slug: { current: "ik-vault-debut-cows-women-land" }, category: "research", excerpt: "ASREP releases its debut ASAL Indigenous Knowledge publication, documenting Borana Oromo ecological and cultural knowledge from Isiolo County.", publishedAt: "2025-09-30", image: "/images/gallery/asrep-elders-strategic-meeting.jpg" },
-  { _id: "n6", title: "Isiolo Peace Actors Forum Engages 500+ Community Members", slug: { current: "isiolo-peace-forum-500" }, category: "peacebuilding", excerpt: "The Isiolo Peace Actors Forum convenes its largest session, bringing together pastoral communities, women leaders, and youth from across 10 wards.", publishedAt: "2025-08-10", image: "/images/gallery/community-women-peace-prayer.jpg" },
-];
-
 export default function NewsPage() {
+  const posts = getArticleList();
   return (
     <>
       <PageHero
@@ -84,14 +67,14 @@ export default function NewsPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
             {posts.map((post) => (
               <NewsCard
-                key={post._id}
-                slug={post.slug.current}
+                key={post.slug}
+                slug={post.slug}
                 title={post.title}
                 excerpt={post.excerpt}
                 category={post.category}
                 publishedAt={post.publishedAt}
-                imageUrl={post.image}
-                imageAlt={post.title}
+                imageUrl={post.heroImage}
+                imageAlt={post.heroAlt}
               />
             ))}
           </div>
@@ -134,4 +117,3 @@ export default function NewsPage() {
     </>
   );
 }
-

@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { getArticle, getArticleSlugs } from "@/lib/get-news";
 
 const BASE = "https://asrepafrica.org";
 
@@ -34,23 +35,16 @@ const staticRoutes: MetadataRoute.Sitemap = [
   { url: `${BASE}/terms-of-use`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.3 },
 ];
 
-// News slugs — kept in sync with app/(site)/news/[slug]/page.tsx
-const newsSlugs = [
-  { slug: "waso-eco-champions-10000-trees", publishedAt: "2026-04-01" },
-  { slug: "guardian-conservation-usaid", publishedAt: "2026-03-16" },
-  { slug: "ksg-under-tree-national", publishedAt: "2026-02-20" },
-  { slug: "biographic-future-conservation", publishedAt: "2026-01-15" },
-  { slug: "ik-vault-debut-cows-women-land", publishedAt: "2025-09-30" },
-  { slug: "isiolo-peace-forum-500", publishedAt: "2025-08-10" },
-];
-
 export default function sitemap(): MetadataRoute.Sitemap {
-  const newsRoutes: MetadataRoute.Sitemap = newsSlugs.map((item) => ({
-    url: `${BASE}/news/${item.slug}`,
-    lastModified: new Date(item.publishedAt),
-    changeFrequency: "monthly" as const,
-    priority: 0.7,
-  }));
+  const newsRoutes: MetadataRoute.Sitemap = getArticleSlugs().map((slug) => {
+    const article = getArticle(slug);
+    return {
+      url: `${BASE}/news/${slug}`,
+      lastModified: new Date(article?.publishedAt ?? new Date()),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    };
+  });
 
   return [...staticRoutes, ...newsRoutes];
 }

@@ -1,4 +1,5 @@
 ﻿import type { Metadata } from "next";
+import { getStats } from "@/lib/get-stats";
 import HeroSection from "@/components/home/HeroSection";
 import NewsTicker from "@/components/home/NewsTicker";
 import ImpactNumbersBar from "@/components/home/ImpactNumbersBar";
@@ -27,7 +28,8 @@ export const metadata: Metadata = {
   },
 };
 
-export default function HomePage() {
+export default async function HomePage() {
+  const stats = getStats();
   return (
     <>
       {/* 1 — Hero slider with Ken Burns effect */}
@@ -40,7 +42,7 @@ export default function HomePage() {
       <NewsTicker />
 
       {/* 3 — Impact numbers: count-up on scroll */}
-      <ImpactNumbersBar />
+      <ImpactNumbersBar stats={stats} />
 
       {/* 4 — Who We Are: 2-col photo + YouTube + text */}
       <WhoWeAreStrip />

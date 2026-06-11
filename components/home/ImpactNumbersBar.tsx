@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
-import { IMPACT_STATS } from "@/lib/impact-stats";
+import type { ImpactStat } from "@/lib/impact-stats";
 
 /**
  * Eased requestAnimationFrame count-up.
@@ -51,7 +51,7 @@ function AnimatedNumber({
   return <>{display.toLocaleString("en")}</>;
 }
 
-export default function ImpactNumbersBar() {
+export default function ImpactNumbersBar({ stats }: { stats: ImpactStat[] }) {
   const [reducedMotion, setReducedMotion] = useState(false);
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.25 });
 
@@ -77,7 +77,7 @@ export default function ImpactNumbersBar() {
         </p>
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 lg:gap-4">
-          {IMPACT_STATS.map((stat, i) => (
+          {stats.map((stat, i) => (
             <div
               key={stat.label}
               className="text-center group"
@@ -108,7 +108,7 @@ export default function ImpactNumbersBar() {
               <p className="text-white/45 text-xs leading-relaxed">{stat.sublabel}</p>
 
               {/* Divider — hide on last item on large screens */}
-              {i < IMPACT_STATS.length - 1 && (
+              {i < stats.length - 1 && (
                 <div
                   className="hidden lg:block absolute right-0 top-1/4 h-1/2 w-px bg-white/10"
                   aria-hidden="true"
