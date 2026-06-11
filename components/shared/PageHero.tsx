@@ -62,7 +62,7 @@ export default function PageHero({
           </span>
         )}
 
-        <h1 className="font-display text-gold text-3xl sm:text-4xl md:text-5xl font-bold leading-tight
+        <h1 className="font-display !text-gold text-3xl sm:text-4xl md:text-5xl font-bold leading-tight
           max-w-3xl mb-3">
           {title}
         </h1>
