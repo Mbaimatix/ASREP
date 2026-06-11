@@ -26,6 +26,18 @@ const slides = [
     src: "/images/hero/hero-5.jpg",
     alt: "Panoramic view of the Waso Nyiro river valley at dawn, Isiolo",
   },
+  {
+    src: "/images/hero/hero-6.jpg",
+    alt: "Aerial view of the Ewaso Ny'iro River winding through Kenya's ASAL rangelands",
+  },
+  {
+    src: "/images/hero/hero-7.jpg",
+    alt: "The Ewaso Ny'iro River flowing past acacia woodland and volcanic hills in Northern Kenya",
+  },
+  {
+    src: "/images/hero/hero-8.jpg",
+    alt: "Seasonal river cutting across the semi-arid landscape of Isiolo County, Kenya",
+  },
 ];
 
 const SLIDE_INTERVAL = 6000;
