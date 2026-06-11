@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 
-export const metadata = { title: "Admin Dashboard | ASREP Africa" };
+export const metadata = { title: "Admin Dashboard" };
 
 export default async function AdminDashboardPage({
   searchParams,

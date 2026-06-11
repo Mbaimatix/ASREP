@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Admin — ASREP Africa",
+  // `absolute` opts out of the root "%s | ASREP Africa" template,
+  // which would otherwise double the suffix on admin pages.
+  title: { absolute: "Admin — ASREP Africa" },
   robots: { index: false, follow: false },
 };
 
