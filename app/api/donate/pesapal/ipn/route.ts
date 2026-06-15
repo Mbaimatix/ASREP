@@ -23,6 +23,10 @@ const PESAPAL_API =
     ? "https://pay.pesapal.com/v3"
     : "https://cybqa.pesapal.com/pesapalv3";
 
+if (process.env.NODE_ENV === "production" && !process.env.PESAPAL_IPN_SECRET) {
+  console.warn("[pesapal/ipn] PESAPAL_IPN_SECRET is not set — IPN endpoint is unauthenticated");
+}
+
 async function getPesapalToken(): Promise<string> {
   const res = await fetch(`${PESAPAL_API}/api/Auth/RequestToken`, {
     method: "POST",
