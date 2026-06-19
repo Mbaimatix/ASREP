@@ -22,6 +22,10 @@ const PESAPAL_API = process.env.PESAPAL_ENV === "production"
   ? "https://pay.pesapal.com/v3"
   : "https://cybqa.pesapal.com/pesapalv3";
 
+if (process.env.NODE_ENV === "production" && !process.env.PESAPAL_IPN_SECRET) {
+  console.warn("[pesapal] PESAPAL_IPN_SECRET is not set — IPN endpoint is unauthenticated");
+}
+
 // Allowed Pesapal redirect URL prefixes
 const ALLOWED_REDIRECT_PREFIXES = [
   "https://pay.pesapal.com",
