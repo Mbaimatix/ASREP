@@ -19,7 +19,7 @@ At the heart of the Biographic feature was the Waso Eco-Champions programme: ASR
 
 > "We are not importing conservation into these communities. Conservation has always been here — in the way people managed their herds, in the knowledge of which trees to protect, in the customary rules about water use. Our job is to support and amplify what communities already know."
 
-Dida E. Fayo, ASREP Africa's Executive Director, articulated for Biographic what makes the organisation's approach distinctive. Having served previously as Director of Programs at the Northern Rangelands Trust and holding a PhD candidacy, Fayo brings both institutional experience and academic rigour to ASREP's model-building. The Biographic interview explored her perspective on the failures of conventional conservation philanthropy and the structural conditions that enable community-led alternatives to succeed.
+Dida E. Fayo, ASREP Africa's Executive Director, articulated for Biographic what makes the organisation's approach distinctive. Having served previously as Director of Programs at the Northern Rangelands Trust and holding a PhD candidacy, Fayo brings both institutional experience and academic rigour to ASREP's model-building. The Biographic interview explored his perspective on the failures of conventional conservation philanthropy and the structural conditions that enable community-led alternatives to succeed.
 
 ## SDZWA-Kenya Partnership and Biodiversity Strategy
 

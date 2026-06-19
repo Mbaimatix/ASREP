@@ -61,9 +61,9 @@ const boardMembers = [
     credentials: "PhD Theology 2025 · St Paul's University · Met Pope Francis 2024",
     photo: "/images/leadership/scholar-kiilu.jpg",
     shortBio:
-      "A canon and theologian at St Paul's University with a PhD in Theology (2025), Dr. Kiilu brings interfaith peacebuilding expertise and gender mainstreaming leadership to ASREP's governance. He was received by Pope Francis in 2024.",
+      "A canon and theologian at St Paul's University with a PhD in Theology (2025), Dr. Kiilu brings interfaith peacebuilding expertise and gender mainstreaming leadership to ASREP's governance. She was received by Pope Francis in 2024.",
     fullBio:
-      "Ven. Canon Dr. Scholar Kiilu is one of Kenya's most distinguished voices on interfaith dialogue and gender justice. His theological scholarship is grounded in decades of community peacebuilding across ethnically and religiously diverse communities in Kenya. His 2025 PhD focused on theology of reconciliation, and his 2024 papal audience reflects his standing in global faith-based development circles. At ASREP, he chairs the board's peacebuilding and gender equity oversight, ensuring that ASREP's social cohesion programmes are theologically informed, community-grounded, and transformatively inclusive.",
+      "Ven. Canon Dr. Scholar Kiilu is one of Kenya's most distinguished voices on interfaith dialogue and gender justice. Her theological scholarship is grounded in decades of community peacebuilding across ethnically and religiously diverse communities in Kenya. Her 2025 PhD focused on theology of reconciliation, and her 2024 papal audience reflects her standing in global faith-based development circles. At ASREP, she chairs the board's peacebuilding and gender equity oversight, ensuring that ASREP's social cohesion programmes are theologically informed, community-grounded, and transformatively inclusive.",
   },
   {
     name: "FCPA Abudo Dambala",
@@ -83,9 +83,9 @@ const boardMembers = [
     credentials: "PhD Candidate · Former NRT Director of Programs · 15+ Years ASAL Experience",
     photo: "/images/leadership/dida-fayo.jpg",
     shortBio:
-      "Founder and Executive Director of ASREP Africa, Dida Fayo brings 15+ years of frontline ASAL programme leadership, including as Director of Programs at the Northern Rangelands Trust. She has built partnerships with USAID, the EU, Agence Française de Développement, and Mercy Corps.",
+      "Founder and Executive Director of ASREP Africa, Dida Fayo brings 15+ years of frontline ASAL programme leadership, including as Director of Programs at the Northern Rangelands Trust. He has built partnerships with USAID, the EU, Agence Française de Développement, and Mercy Corps.",
     fullBio:
-      "Dida E. Fayo is the visionary and operational lead of ASREP Africa. Her career in Kenya's ASAL development sector is defined by deep community trust, exceptional programme delivery, and a distinctive capacity to translate grassroots insights into institutional-quality programmes. As NRT Director of Programs, she oversaw multi-million dollar portfolios spanning livelihoods, conservation, and governance across dozens of community conservancies in Northern Kenya. She is currently pursuing a PhD, and her research feeds directly into ASREP's knowledge generation mandate. Under her leadership in just two years, ASREP has planted 10,000 trees, developed 23 policies, and achieved global media recognition.",
+      "Dida E. Fayo is the visionary and operational lead of ASREP Africa. His career in Kenya's ASAL development sector is defined by deep community trust, exceptional programme delivery, and a distinctive capacity to translate grassroots insights into institutional-quality programmes. As NRT Director of Programs, he oversaw multi-million dollar portfolios spanning livelihoods, conservation, and governance across dozens of community conservancies in Northern Kenya. He is currently pursuing a PhD, and his research feeds directly into ASREP's knowledge generation mandate. Under his leadership in just two years, ASREP has planted 10,000 trees, developed 23 policies, and achieved global media recognition.",
   },
 ];
 
