@@ -18,6 +18,31 @@ export const metadata: Metadata = {
 // Field & programme photos
 const fieldPhotos = [
   {
+    src: "/images/gallery/asrep-agar-mou-signing-impact-report-group.jpg",
+    alt: "Representatives from ASREP Africa and African Agency for Arid Resources Limited (AGAR) holding the ASREP Impact Report after signing a strategic MOU Framework Agreement",
+    caption: "ASREP Africa & AGAR MOU signing — Isiolo, June 2026",
+  },
+  {
+    src: "/images/gallery/asrep-agar-mou-seated-discussion.jpg",
+    alt: "AGAR representative and ASREP Africa team member in discussion at the MOU signing table",
+    caption: "ASREP Africa & AGAR MOU seated discussion — Isiolo, June 2026",
+  },
+  {
+    src: "/images/gallery/asrep-agar-mou-team-roundtable.jpg",
+    alt: "Four representatives from ASREP Africa and AGAR in roundtable discussion at the MOU Framework Agreement signing",
+    caption: "ASREP Africa & AGAR MOU team roundtable — Isiolo, June 2026",
+  },
+  {
+    src: "/images/gallery/asrep-agar-mou-signing-document.jpg",
+    alt: "Delegation from ASREP Africa and AGAR signing the MOU Framework Agreement document at the official ceremony",
+    caption: "ASREP Africa & AGAR MOU Framework document signing — Isiolo, June 2026",
+  },
+  {
+    src: "/images/gallery/dida-fayo-presenting-mou-signing.jpg",
+    alt: "ASREP Africa Executive Director Dida Fayo presenting near the ASREP thematic-focus poster at the MOU signing ceremony",
+    caption: "Dida Fayo presenting at ASREP–AGAR MOU signing — June 2026",
+  },
+  {
     src: "/images/gallery/waso-eco-champs-line.jpg",
     alt: "Waso Eco-Champions lined up at a community tree planting event in Isiolo County",
     caption: "Waso Eco-Champions mobilise for community tree planting — Isiolo County 2024",

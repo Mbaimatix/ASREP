@@ -22,6 +22,16 @@ const categories = [
   { value: "media-coverage", label: "Media Coverage" },
 ];
 
+type MediaItem = { pub: string; title: string; date: string; href: string; contributors?: string };
+
+const mediaCoverage: MediaItem[] = [
+  { pub: "Standard Media (Opinion)", title: "Ewaso Nyiro River Is Dying — and Kenya Cannot Afford to Look Away", date: "June 24, 2026", href: "https://www.standardmedia.co.ke/opinion/article/2001551078/ewaso-nyiro-river-is-dying-and-kenya-cannot-afford-to-look-away", contributors: "With acknowledgement to: Prof. Nura Mohamed, Jennifer Maurer, Boaz Ogada, Wyss Academy for Nature, Antony Wandera, Jameel Observatory for Food Security Early Action, Jason Sircely, Tahira Mohamed Shariff, Dr. Diba Dida Wako." },
+  { pub: "Biographic Magazine", title: "The Future of Conservation Without US Aid", date: "2026", href: "https://www.biographic.com/the-future-of-conservation-without-us-aid/" },
+  { pub: "The Guardian", title: "Conservation in the Age of Trump Aid Cuts", date: "March 2026", href: "https://www.theguardian.com/environment/2026/mar/16/conservation-trump-cuts-natural-world-usaid-funding-biodiversity-aoe" },
+  { pub: "Standard Digital", title: "Isiolo Banks on Eco-Champions for Conservation", date: "2025", href: "https://www.standardmedia.co.ke/environment-climate/article/2001536345/isiolo-banks-on-eco-champions-to-empower-communities-on-conservation" },
+  { pub: "People Daily Kenya", title: "ASREP's Community Conservation Gains Traction", date: "2025", href: "https://epaper.peopledaily.digital" },
+];
+
 export default function NewsPage() {
   const posts = getArticleList();
   return (
@@ -92,12 +102,7 @@ export default function NewsPage() {
             id="media-coverage-heading"
           />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            {[
-              { pub: "Biographic Magazine", title: "The Future of Conservation Without US Aid", date: "2026", href: "https://www.biographic.com/the-future-of-conservation-without-us-aid/" },
-              { pub: "The Guardian", title: "Conservation in the Age of Trump Aid Cuts", date: "March 2026", href: "https://www.theguardian.com/environment/2026/mar/16/conservation-trump-cuts-natural-world-usaid-funding-biodiversity-aoe" },
-              { pub: "Standard Digital", title: "Isiolo Banks on Eco-Champions for Conservation", date: "2025", href: "https://www.standardmedia.co.ke/environment-climate/article/2001536345/isiolo-banks-on-eco-champions-to-empower-communities-on-conservation" },
-              { pub: "People Daily Kenya", title: "ASREP's Community Conservation Gains Traction", date: "2025", href: "https://epaper.peopledaily.digital" },
-            ].map((item) => (
+            {mediaCoverage.map((item) => (
               <a key={item.href} href={item.href} target="_blank" rel="noopener noreferrer"
                 className="group flex items-start gap-5 p-6 bg-cream rounded-2xl border border-charcoal/8 hover:shadow-md transition-shadow">
                 <div className="flex-1">
@@ -105,6 +110,9 @@ export default function NewsPage() {
                   <p className="font-display font-bold text-earth group-hover:text-forest transition-colors text-lg leading-snug">
                     &ldquo;{item.title}&rdquo;
                   </p>
+                  {item.contributors && (
+                    <p className="text-muted text-xs mt-2">{item.contributors}</p>
+                  )}
                 </div>
                 <svg className="w-4 h-4 text-muted shrink-0 mt-1 group-hover:text-forest transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
