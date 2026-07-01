@@ -5,6 +5,7 @@ category: "partnerships"
 excerpt: "ASREP Africa and African Agency for Arid Resources Limited (AGAR) have signed a strategic MOU Framework Agreement to jointly advance community-led ecosystem restoration and inclusive green economic transformation across Kenya's drylands, targeting 10,000 plants and 500+ trained eco-champions over the next six months."
 heroImage: "/images/gallery/asrep-agar-mou-signing-impact-report-group.jpg"
 heroAlt: "Representatives from ASREP Africa and African Agency for Arid Resources Limited (AGAR) holding the ASREP Impact Report after signing a strategic MOU Framework Agreement"
+heroImagePosition: "object-top"
 author: "ASREP Africa Communications"
 authorRole: "ASREP Africa"
 ---

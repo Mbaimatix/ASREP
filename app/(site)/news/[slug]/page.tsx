@@ -207,7 +207,7 @@ export default async function NewsPostPage({ params }: { params: Promise<{ slug:
           alt={heroAlt}
           fill
           priority
-          className="object-cover opacity-80"
+          className={`object-cover opacity-80 ${post.heroImagePosition ?? "object-center"}`}
           sizes="100vw"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-forest/80 via-forest/30 to-transparent" />

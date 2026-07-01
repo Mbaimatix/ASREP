@@ -12,6 +12,7 @@ export type Article = {
   excerpt: string;
   heroImage: string;
   heroAlt: string;
+  heroImagePosition?: string;
   author: string;
   authorRole: string;
   body: string;
@@ -36,6 +37,7 @@ export function getArticle(slug: string): Article | null {
     excerpt: data.excerpt ?? "",
     heroImage: data.heroImage ?? "",
     heroAlt: data.heroAlt ?? "",
+    heroImagePosition: data.heroImagePosition,
     author: data.author ?? "ASREP Africa",
     authorRole: data.authorRole ?? "",
     body: content.trim(),
