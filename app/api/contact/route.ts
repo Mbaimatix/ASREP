@@ -13,6 +13,16 @@ const LIMITS = {
   message: 5000,
 };
 
+/** Escape user input before interpolating it into an HTML email template. */
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
 const transporter = nodemailer.createTransport({
   host: process.env.EMAIL_SERVER_HOST,
   port: Number(process.env.EMAIL_SERVER_PORT ?? 587),
@@ -107,6 +117,16 @@ export async function POST(req: NextRequest) {
       // Non-fatal — continue to send email
     }
 
+    // Escape every user-provided value before interpolating into HTML templates.
+    const safe = {
+      fullName: escapeHtml(fullName.trim()),
+      firstName: escapeHtml(fullName.trim().split(" ")[0]),
+      email: escapeHtml(email.trim()),
+      organisation: organisation ? escapeHtml(organisation.trim()) : "",
+      subject: escapeHtml(subject.trim()),
+      message: escapeHtml(message.trim()),
+    };
+
     // Send email notification to ASREP team
     await transporter.sendMail({
       from: `"ASREP Africa Website" <${process.env.EMAIL_FROM}>`,
@@ -120,14 +140,14 @@ export async function POST(req: NextRequest) {
           </div>
           <div style="background: #FAF6F0; padding: 24px; border-radius: 0 0 8px 8px; border: 1px solid #e8d5b7;">
             <table style="width: 100%; border-collapse: collapse;">
-              <tr><td style="padding: 8px 0; color: #6B7280; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">Name</td><td style="padding: 8px 0; color: #1C1C1C;">${fullName}</td></tr>
-              <tr><td style="padding: 8px 0; color: #6B7280; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">Email</td><td style="padding: 8px 0; color: #1C1C1C;"><a href="mailto:${email}" style="color: #1A3A2A;">${email}</a></td></tr>
-              ${organisation ? `<tr><td style="padding: 8px 0; color: #6B7280; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">Organisation</td><td style="padding: 8px 0; color: #1C1C1C;">${organisation}</td></tr>` : ""}
-              <tr><td style="padding: 8px 0; color: #6B7280; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">Subject</td><td style="padding: 8px 0; color: #1C1C1C;">${subject}</td></tr>
+              <tr><td style="padding: 8px 0; color: #6B7280; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">Name</td><td style="padding: 8px 0; color: #1C1C1C;">${safe.fullName}</td></tr>
+              <tr><td style="padding: 8px 0; color: #6B7280; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">Email</td><td style="padding: 8px 0; color: #1C1C1C;"><a href="mailto:${safe.email}" style="color: #1A3A2A;">${safe.email}</a></td></tr>
+              ${organisation ? `<tr><td style="padding: 8px 0; color: #6B7280; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">Organisation</td><td style="padding: 8px 0; color: #1C1C1C;">${safe.organisation}</td></tr>` : ""}
+              <tr><td style="padding: 8px 0; color: #6B7280; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">Subject</td><td style="padding: 8px 0; color: #1C1C1C;">${safe.subject}</td></tr>
             </table>
             <hr style="border: none; border-top: 1px solid #e8d5b7; margin: 16px 0;" />
             <p style="color: #6B7280; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin: 0 0 8px;">Message</p>
-            <p style="color: #1C1C1C; line-height: 1.6; white-space: pre-wrap;">${message}</p>
+            <p style="color: #1C1C1C; line-height: 1.6; white-space: pre-wrap;">${safe.message}</p>
           </div>
           <p style="color: #6B7280; font-size: 11px; margin-top: 12px; text-align: center;">
             Sent from the ASREP Africa website contact form — asrepafrica.org
@@ -144,10 +164,10 @@ export async function POST(req: NextRequest) {
       html: `
         <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto;">
           <div style="background: #1A3A2A; padding: 24px; border-radius: 8px 8px 0 0;">
-            <h2 style="color: #C9A84C; margin: 0;">Thank you, ${fullName.split(" ")[0]}</h2>
+            <h2 style="color: #C9A84C; margin: 0;">Thank you, ${safe.firstName}</h2>
           </div>
           <div style="background: #FAF6F0; padding: 24px; border-radius: 0 0 8px 8px; border: 1px solid #e8d5b7;">
-            <p>We've received your message regarding <strong>${subject}</strong> and will respond within <strong>3–5 working days</strong>.</p>
+            <p>We've received your message regarding <strong>${safe.subject}</strong> and will respond within <strong>3–5 working days</strong>.</p>
             <p style="color: #6B7280; font-size: 14px;">If your matter is urgent, please call us at +254 733 687 149.</p>
           </div>
           <p style="color: #6B7280; font-size: 11px; margin-top: 12px; text-align: center;">

@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { prisma } from "@/lib/prisma";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 import { isAllowedOrigin } from "@/lib/csrf";
 
@@ -103,10 +104,30 @@ export async function POST(req: NextRequest) {
   try {
     const { amount, currency, programme, donorName, donorEmail, donorPhone } = await req.json();
 
-    // Validation
-    if (!amount || amount < 100) {
-      return NextResponse.json({ message: "Minimum donation is KES 100." }, { status: 400 });
+    // Amount validation — must be a finite, whole number within sane bounds.
+    const MIN_AMOUNT = 100;
+    const MAX_AMOUNT = 10_000_000;
+    const numAmount = Number(amount);
+    if (
+      !Number.isFinite(numAmount) ||
+      !Number.isInteger(numAmount) ||
+      numAmount < MIN_AMOUNT ||
+      numAmount > MAX_AMOUNT
+    ) {
+      return NextResponse.json(
+        { message: `Donation must be a whole number between ${MIN_AMOUNT} and ${MAX_AMOUNT}.` },
+        { status: 400 }
+      );
     }
+
+    // Currency allowlist (what Pesapal supports for this account); default KES.
+    const ALLOWED_CURRENCIES = ["KES", "USD"] as const;
+    const resolvedCurrency =
+      currency == null || currency === "" ? "KES" : String(currency).toUpperCase();
+    if (!ALLOWED_CURRENCIES.includes(resolvedCurrency as (typeof ALLOWED_CURRENCIES)[number])) {
+      return NextResponse.json({ message: "Unsupported currency." }, { status: 400 });
+    }
+
     if (!donorName?.trim() || !donorEmail?.trim()) {
       return NextResponse.json({ message: "Donor name and email are required." }, { status: 400 });
     }
@@ -120,6 +141,28 @@ export async function POST(req: NextRequest) {
     // Generate unique order reference
     const orderRef = `ASREP-${Date.now()}-${Math.random().toString(36).slice(2, 7).toUpperCase()}`;
 
+    // Persist a PENDING donation row up front so the donor details captured at
+    // initiation are never lost. The IPN later links to this row by
+    // orderMerchantReference. orderTrackingId is required + unique in the schema,
+    // so we seed it with orderRef as a placeholder until Pesapal returns the real
+    // tracking id via the IPN callback. Non-fatal: payment proceeds regardless.
+    try {
+      await prisma.donation.create({
+        data: {
+          orderTrackingId: orderRef,
+          orderMerchantReference: orderRef,
+          status: "PENDING",
+          amount: numAmount,
+          currency: resolvedCurrency,
+          donorName: donorName.trim(),
+          donorEmail: donorEmail.trim(),
+          programme: programme?.trim() || "General",
+        },
+      });
+    } catch (dbErr) {
+      console.error("Pesapal: failed to persist pending donation:", dbErr);
+    }
+
     // Prepare callback URL
     const callbackUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/get-involved/donate/thank-you`;
 
@@ -132,8 +175,8 @@ export async function POST(req: NextRequest) {
       },
       body: JSON.stringify({
         id: orderRef,
-        currency: currency ?? "KES",
-        amount: Number(amount),
+        currency: resolvedCurrency,
+        amount: numAmount,
         description: `ASREP Africa Donation — ${programme ?? "General"}`,
         callback_url: callbackUrl,
         notification_id: ipnId,

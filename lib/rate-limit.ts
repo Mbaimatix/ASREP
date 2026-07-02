@@ -5,12 +5,39 @@ import type { NextRequest } from "next/server";
 // UPSTASH_REDIS_REST_TOKEN to enable persistent cross-instance rate limiting.
 const store = new Map<string, { count: number; firstRequest: number }>();
 
+// Hard cap on distinct keys held in memory to prevent unbounded growth under
+// key churn or a spoofed-IP flood.
+const MAX_STORE_ENTRIES = 10_000;
+
+/**
+ * Evict entries whose window has elapsed, then — if still over the cap — drop the
+ * oldest entries (Map preserves insertion order) until back under the limit.
+ */
+function evictStale(windowMs: number): void {
+  const now = Date.now();
+  for (const [k, v] of store) {
+    if (now - v.firstRequest > windowMs) store.delete(k);
+  }
+  if (store.size > MAX_STORE_ENTRIES) {
+    let excess = store.size - MAX_STORE_ENTRIES;
+    for (const k of store.keys()) {
+      store.delete(k);
+      if (--excess <= 0) break;
+    }
+  }
+}
+
 export function getClientIp(req: NextRequest): string {
-  return (
-    req.headers.get("x-forwarded-for")?.split(",")[0].trim() ??
-    req.headers.get("x-real-ip") ??
-    "unknown"
-  );
+  // On Vercel (and similar platforms) the real client IP is appended as the
+  // RIGHTMOST entry of x-forwarded-for by the trusted proxy hop; any values to
+  // the left are client-supplied and therefore spoofable. Never trust the
+  // leftmost value — use the rightmost (trusted) entry, then x-real-ip.
+  const xff = req.headers.get("x-forwarded-for");
+  if (xff) {
+    const parts = xff.split(",").map((p) => p.trim()).filter(Boolean);
+    if (parts.length > 0) return parts[parts.length - 1];
+  }
+  return req.headers.get("x-real-ip") ?? "unknown";
 }
 
 /**
@@ -62,6 +89,12 @@ export async function checkRateLimit(
 
   // ── In-memory fallback ─────────────────────────────────────────────────────
   const now = Date.now();
+
+  // Bound memory before admitting a potentially-new key.
+  if (store.size >= MAX_STORE_ENTRIES) {
+    evictStale(windowMs);
+  }
+
   const entry = store.get(key);
 
   if (!entry || now - entry.firstRequest > windowMs) {

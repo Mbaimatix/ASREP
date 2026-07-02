@@ -9,7 +9,7 @@ import type { NextRequest } from "next/server";
  * Redirects unauthenticated users to the login page.
  * Enforces role-based access within the admin area.
  */
-export default auth((req: NextRequest & { auth: { user?: { role?: string } } | null }) => {
+const handler = auth((req: NextRequest & { auth: { user?: { role?: string } } | null }) => {
   const { pathname } = req.nextUrl;
   const session = req.auth;
   const role = session?.user?.role;
@@ -45,6 +45,12 @@ export default auth((req: NextRequest & { auth: { user?: { role?: string } } | n
 
   return NextResponse.next();
 });
+
+// Next.js 16 renamed Middleware to Proxy. Both a default export and a named
+// `proxy` export are supported conventions; we export both so the RBAC guard
+// registers regardless of how the runtime resolves the entry point.
+export default handler;
+export const proxy = handler;
 
 export const config = {
   matcher: ["/admin/:path*"],

@@ -8,8 +8,9 @@ export const metadata = { title: "Admin Dashboard" };
 export default async function AdminDashboardPage({
   searchParams,
 }: {
-  searchParams: { error?: string };
+  searchParams: Promise<{ error?: string }>;
 }) {
+  const params = await searchParams;
   const session = await auth();
   if (!session) redirect("/admin/login");
 
@@ -57,7 +58,7 @@ export default async function AdminDashboardPage({
 
       <div className="max-w-5xl mx-auto px-6 py-10">
         {/* Error banner */}
-        {searchParams.error === "unauthorized" && (
+        {params.error === "unauthorized" && (
           <div role="alert" className="mb-6 p-4 bg-red-50 border border-red-200 rounded-xl text-red-700 text-sm">
             ⚠️ You don&apos;t have permission to access that page.
           </div>

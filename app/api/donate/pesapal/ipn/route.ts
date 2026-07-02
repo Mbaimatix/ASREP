@@ -115,23 +115,41 @@ export async function GET(req: NextRequest) {
       amount: statusData.amount,
     });
 
-    // Step 3 — Upsert donation record
+    // Step 3 — Link and update the donation record.
+    // The pending row was created at initiation keyed by orderMerchantReference
+    // (orderTrackingId is not known until this IPN fires). Match on that field so
+    // donor details (donorName/donorEmail/programme) captured at initiation are
+    // preserved rather than overwritten with blanks. Fall back to creating a row
+    // if no pending record exists (e.g. the initiation write failed).
     try {
-      await prisma.donation.upsert({
-        where: { orderTrackingId },
-        update: {
-          status: paymentStatus,
-          updatedAt: new Date(),
-        },
-        create: {
-          orderTrackingId,
-          orderMerchantReference,
-          status: paymentStatus,
-          amount: statusData.amount ?? 0,
-          currency: statusData.currency ?? "KES",
-          paymentMethod: statusData.payment_method ?? "",
-        },
+      const existing = await prisma.donation.findFirst({
+        where: { orderMerchantReference },
       });
+
+      if (existing) {
+        await prisma.donation.update({
+          where: { id: existing.id },
+          data: {
+            orderTrackingId,
+            status: paymentStatus,
+            amount: statusData.amount ?? existing.amount,
+            currency: statusData.currency ?? existing.currency,
+            paymentMethod: statusData.payment_method ?? existing.paymentMethod,
+            updatedAt: new Date(),
+          },
+        });
+      } else {
+        await prisma.donation.create({
+          data: {
+            orderTrackingId,
+            orderMerchantReference,
+            status: paymentStatus,
+            amount: statusData.amount ?? 0,
+            currency: statusData.currency ?? "KES",
+            paymentMethod: statusData.payment_method ?? "",
+          },
+        });
+      }
     } catch (dbErr) {
       // Non-fatal: log but still return 200 so Pesapal doesn't retry indefinitely
       console.error("IPN: DB upsert failed:", dbErr);

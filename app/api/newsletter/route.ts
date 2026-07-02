@@ -5,15 +5,24 @@ import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 import { isAllowedOrigin } from "@/lib/csrf";
 import { createHmac } from "crypto";
 
+// Fail closed: the unsubscribe HMAC is only meaningful with a real secret.
+// This value MUST match app/api/newsletter/unsubscribe/route.ts so signatures verify.
+// Note: NextAuth v5 (lib/auth.ts) reads AUTH_SECRET — that is the canonical name in
+// v5, with NEXTAUTH_SECRET as its legacy alias. Keep both env vars set to the same
+// value so auth and these newsletter routes agree on the signing key.
+const NEWSLETTER_SECRET: string = process.env.NEXTAUTH_SECRET ?? "";
+if (!NEWSLETTER_SECRET) {
+  throw new Error("NEXTAUTH_SECRET is not set — refusing to sign unsubscribe links with a default secret.");
+}
+
 /**
  * Builds a tamper-proof unsubscribe URL.
  * The email is base64url-encoded; the signature prevents arbitrary unsubscription
  * of third-party email addresses without the NEXTAUTH_SECRET.
  */
 function buildUnsubscribeUrl(email: string): string {
-  const secret = process.env.NEXTAUTH_SECRET ?? "fallback-secret";
   const encoded = Buffer.from(email).toString("base64url");
-  const sig = createHmac("sha256", secret).update(encoded).digest("hex");
+  const sig = createHmac("sha256", NEWSLETTER_SECRET).update(encoded).digest("hex");
   return `https://asrepafrica.org/unsubscribe?e=${encoded}&s=${sig}`;
 }
 

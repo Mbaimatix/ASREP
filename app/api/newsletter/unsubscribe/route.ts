@@ -2,6 +2,15 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { createHmac, timingSafeEqual } from "crypto";
 
+// Fail closed: verifying an unsubscribe signature against a default secret would
+// let anyone forge links. This MUST match app/api/newsletter/route.ts's signer.
+// Note: NextAuth v5 (lib/auth.ts) reads AUTH_SECRET — the canonical name in v5,
+// with NEXTAUTH_SECRET as its legacy alias. Keep both set to the same value.
+const NEWSLETTER_SECRET: string = process.env.NEXTAUTH_SECRET ?? "";
+if (!NEWSLETTER_SECRET) {
+  throw new Error("NEXTAUTH_SECRET is not set — refusing to verify unsubscribe links with a default secret.");
+}
+
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const encoded = searchParams.get("e");
@@ -14,8 +23,7 @@ export async function GET(req: NextRequest) {
   }
 
   // Verify HMAC signature — prevents unsubscribing arbitrary third-party emails
-  const secret = process.env.NEXTAUTH_SECRET ?? "fallback-secret";
-  const expectedSig = createHmac("sha256", secret).update(encoded).digest("hex");
+  const expectedSig = createHmac("sha256", NEWSLETTER_SECRET).update(encoded).digest("hex");
 
   const sigBuffer = Buffer.from(sig, "hex");
   const expectedBuffer = Buffer.from(expectedSig, "hex");
