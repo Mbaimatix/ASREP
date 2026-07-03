@@ -12,7 +12,7 @@ const slides = [
   },
   {
     src: "/images/hero/hero-2.jpg",
-    alt: "Community peace dialogue under an acacia tree in Northern Kenya",
+    alt: "ASREP Africa and AGAR partners at the MoU Framework Agreement signing in the ASREP office — one partner signing the document while colleagues look on, in front of the green ASREP backdrop, Isiolo",
   },
   {
     src: "/images/hero/hero-3.jpg",
