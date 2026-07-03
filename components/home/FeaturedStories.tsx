@@ -1,5 +1,6 @@
 ﻿import Link from "next/link";
 import Image from "next/image";
+import { getArticleList } from "@/lib/get-news";
 
 const categoryColour: Record<string, string> = {
   "announcements": "bg-forest/10 text-forest",
@@ -27,51 +28,21 @@ function formatDate(dateString: string) {
   });
 }
 
-// Slugs are kept consistent with the news listing page and news/[slug] route
-const stories = [
-  {
-    _id: "f1",
-    title: "Waso Eco-Champions Plant 10,000 Indigenous Trees Across Isiolo County",
-    slug: { current: "waso-eco-champions-10000-trees" },
-    category: "climate-environment",
-    excerpt:
-      "Over 2,000 community eco-champions have mobilised across 10 wards of Isiolo County, planting indigenous trees to reverse decades of landscape degradation.",
-    publishedAt: "2026-04-01",
-    imageUrl: "/images/gallery/waso-eco-champs-line.jpg",
-  },
-  {
-    _id: "f2",
-    title: "Big News: ASREP Africa Featured in The Guardian & Biographic Magazine",
-    slug: { current: "guardian-conservation-usaid" },
-    category: "media-coverage",
-    excerpt:
-      "The Guardian highlights ASREP's approach to building locally-funded, community-led conservation in an era of declining international aid.",
-    publishedAt: "2026-03-16",
-    imageUrl: "/images/gallery/asrep-forest-partnership.jpg",
-  },
-  {
-    _id: "f3",
-    title: "KSG 'Under the Tree' Civic Education Series Goes National",
-    slug: { current: "ksg-under-tree-national" },
-    category: "partnerships",
-    excerpt:
-      "A landmark partnership with the Kenya School of Government takes participatory civic education from its Isiolo pilot to a national rollout across all 47 Kenyan counties.",
-    publishedAt: "2026-02-20",
-    imageUrl: "/images/gallery/dida-fayo-remarks-under-tree-series-launch-oldonyiro.jpg",
-  },
-  {
-    _id: "f4",
-    title: "ASAL IK Vault Series Debut: 'Cows, Women & Land' Documents Borana Oromo Knowledge",
-    slug: { current: "ik-vault-debut-cows-women-land" },
-    category: "research",
-    excerpt:
-      "ASREP releases its debut ASAL Indigenous Knowledge publication, documenting Borana Oromo ecological and cultural knowledge from Isiolo County.",
-    publishedAt: "2025-09-30",
-    imageUrl: "/images/gallery/asrep-elders-strategic-meeting.jpg",
-  },
-];
-
 export default function FeaturedStories() {
+  // Latest 4 stories, newest-first, from the same CMS the /news page uses.
+  const stories = getArticleList()
+    .slice(0, 4)
+    .map((article) => ({
+      _id: article.slug,
+      title: article.title,
+      slug: { current: article.slug },
+      category: article.category,
+      excerpt: article.excerpt,
+      publishedAt: article.publishedAt,
+      imageUrl: article.heroImage,
+      imageAlt: article.heroAlt || article.title,
+    }));
+
   return (
     <section className="section-pad bg-sand/30" aria-labelledby="stories-heading">
       <div className="container-asrep">
@@ -113,7 +84,7 @@ export default function FeaturedStories() {
               <div className="relative h-52 bg-sand/50 overflow-hidden">
                 <Image
                   src={story.imageUrl}
-                  alt={story.title}
+                  alt={story.imageAlt}
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-700"
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"

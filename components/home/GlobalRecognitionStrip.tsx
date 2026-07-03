@@ -5,6 +5,8 @@ const coverage = [
   {
     publication: "Biographic Magazine",
     logo: "/logos/biographic-logo.png",
+    image: "/images/gallery/waso-eco-champs-line.jpg",
+    imageAlt: "Waso Eco-Champions lined up at a community tree planting event in Isiolo County",
     headline: "The Future of Conservation Without US Aid",
     excerpt:
       "Biographic Magazine profiles ASREP's Waso Eco-Champs as a model for locally-funded, community-led conservation in an era of declining international aid.",
@@ -15,6 +17,8 @@ const coverage = [
   {
     publication: "The Guardian",
     logo: "/logos/guardian-logo.jpg",
+    image: "/images/gallery/asrep-forest-partnership.jpg",
+    imageAlt: "ASREP Africa leaders meeting with Kenya Forest Service officials to formalise a conservation partnership",
     headline: "Big News: ASREP Africa Global Feature Stories",
     excerpt:
       "The Guardian's global environment desk highlights ASREP alongside leading conservation voices navigating the challenge of USAID funding reductions — affirming ASREP's place in the global conservation conversation.",
@@ -25,6 +29,8 @@ const coverage = [
   {
     publication: "Standard Digital",
     logo: "/logos/standard-logo.png",
+    image: "/images/gallery/community-planting-greens.jpg",
+    imageAlt: "Community members planting green seedlings as part of ASREP's nature-based solutions programme in Isiolo County",
     headline: "Isiolo Banks on Eco-Champions to Empower Communities",
     excerpt:
       "Kenya's Standard Media reports on how eco-champions are reshaping conservation governance and community livelihoods in Isiolo County.",
@@ -64,9 +70,21 @@ export default function GlobalRecognitionStrip() {
           {coverage.map((item) => (
             <article
               key={item.href}
-              className="bg-white rounded-2xl p-7 shadow-sm hover:shadow-lg hover:-translate-y-1
-                transition-all duration-300 flex flex-col"
+              className="bg-white rounded-2xl shadow-sm hover:shadow-lg hover:-translate-y-1
+                transition-all duration-300 flex flex-col overflow-hidden"
             >
+              {/* Related ASREP photo */}
+              <div className="relative h-40 bg-sand/50">
+                <Image
+                  src={item.image}
+                  alt={item.imageAlt}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                />
+              </div>
+
+              <div className="p-7 flex flex-col flex-1">
               {/* Publication wordmark */}
               <div className="h-10 mb-5 flex items-center">
                 {item.publication === "The Guardian" ? (
@@ -117,6 +135,7 @@ export default function GlobalRecognitionStrip() {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                 </svg>
               </a>
+              </div>
             </article>
           ))}
         </div>

@@ -11,12 +11,47 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Photo Gallery | ASREP Africa",
     description: "Field photography from ASREP Africa's programmes across Isiolo County, Kenya.",
-    images: [{ url: "/images/gallery/waso-eco-champs-line.jpg", width: 1200, height: 630, alt: "ASREP Africa field photography" }],
+    images: [{ url: "/images/gallery/aerial-ewaso-nyiro-doum-palms.jpg", width: 1200, height: 630, alt: "Aerial view of the Ewaso Ny'iro River lined with doum palms in Isiolo County" }],
   },
 };
 
 // Field & programme photos
 const fieldPhotos = [
+  {
+    src: "/images/gallery/aerial-ewaso-nyiro-doum-palms.jpg",
+    alt: "Aerial view of the silt-laden Ewaso Ny'iro River lined with doum palms, hills behind",
+    caption: "Ewaso Ny'iro River lined with doum palms — Isiolo County",
+  },
+  {
+    src: "/images/gallery/aerial-asal-seasonal-river-isiolo.jpg",
+    alt: "Aerial view of a seasonal river cutting through semi-arid bushland with mountains in the distance, Isiolo County",
+    caption: "Seasonal river across the ASAL landscape — Isiolo County",
+  },
+  {
+    src: "/images/gallery/aerial-asal-plains-river-crossing.jpg",
+    alt: "High aerial view of the Ewaso Ny'iro River crossing vast ASAL plains dotted with scattered green bush",
+    caption: "Ewaso Ny'iro crossing the ASAL plains — Isiolo County",
+  },
+  {
+    src: "/images/gallery/aerial-asal-rangelands-vista.jpg",
+    alt: "Wide aerial vista of arid and semi-arid rangelands with the Ewaso Ny'iro River as a distant ribbon",
+    caption: "ASAL rangelands vista along the Ewaso Ny'iro — Isiolo County",
+  },
+  {
+    src: "/images/gallery/aerial-ewaso-nyiro-braided-channel.jpg",
+    alt: "Aerial view of the Ewaso Ny'iro River's braided muddy channel winding through dryland vegetation",
+    caption: "Braided channel of the Ewaso Ny'iro River — Isiolo County",
+  },
+  {
+    src: "/images/gallery/aerial-ewaso-nyiro-flood-plain.jpg",
+    alt: "Aerial view of the wide muddy flood plain of the Ewaso Ny'iro River with rocky hills beyond",
+    caption: "Ewaso Ny'iro flood plain — Isiolo County",
+  },
+  {
+    src: "/images/gallery/ewaso-nyiro-rocky-gorge.jpg",
+    alt: "The muddy Ewaso Ny'iro River passing through a rocky gorge with acacia scrub under a big cloud-filled sky",
+    caption: "Ewaso Ny'iro River through a rocky gorge — Isiolo County",
+  },
   {
     src: "/images/gallery/asrep-agar-mou-signing-impact-report-group.jpg",
     alt: "Representatives from ASREP Africa and African Agency for Arid Resources Limited (AGAR) holding the ASREP Impact Report after signing a strategic MOU Framework Agreement",
@@ -237,41 +272,6 @@ const fieldPhotos = [
     alt: "Samburu drummers and dancers performing at an ASREP Africa community cultural event in Isiolo County",
     caption: "Samburu cultural performance — community event, Isiolo County",
   },
-  {
-    src: "/images/gallery/aerial-asal-seasonal-river-isiolo.jpg",
-    alt: "Aerial view of a seasonal river cutting through semi-arid bushland with mountains in the distance, Isiolo County",
-    caption: "Seasonal river across the ASAL landscape — Isiolo County",
-  },
-  {
-    src: "/images/gallery/aerial-ewaso-nyiro-doum-palms.jpg",
-    alt: "Aerial view of the silt-laden Ewaso Ny'iro River lined with doum palms, hills behind",
-    caption: "Ewaso Ny'iro River lined with doum palms — Isiolo County",
-  },
-  {
-    src: "/images/gallery/aerial-asal-plains-river-crossing.jpg",
-    alt: "High aerial view of the Ewaso Ny'iro River crossing vast ASAL plains dotted with scattered green bush",
-    caption: "Ewaso Ny'iro crossing the ASAL plains — Isiolo County",
-  },
-  {
-    src: "/images/gallery/aerial-asal-rangelands-vista.jpg",
-    alt: "Wide aerial vista of arid and semi-arid rangelands with the Ewaso Ny'iro River as a distant ribbon",
-    caption: "ASAL rangelands vista along the Ewaso Ny'iro — Isiolo County",
-  },
-  {
-    src: "/images/gallery/aerial-ewaso-nyiro-braided-channel.jpg",
-    alt: "Aerial view of the Ewaso Ny'iro River's braided muddy channel winding through dryland vegetation",
-    caption: "Braided channel of the Ewaso Ny'iro River — Isiolo County",
-  },
-  {
-    src: "/images/gallery/aerial-ewaso-nyiro-flood-plain.jpg",
-    alt: "Aerial view of the wide muddy flood plain of the Ewaso Ny'iro River with rocky hills beyond",
-    caption: "Ewaso Ny'iro flood plain — Isiolo County",
-  },
-  {
-    src: "/images/gallery/ewaso-nyiro-rocky-gorge.jpg",
-    alt: "The muddy Ewaso Ny'iro River passing through a rocky gorge with acacia scrub under a big cloud-filled sky",
-    caption: "Ewaso Ny'iro River through a rocky gorge — Isiolo County",
-  },
 ];
 
 // Board member portraits in gallery
@@ -329,8 +329,8 @@ export default function GalleryPage() {
       <PageHero
         title="Photo Gallery"
         subtitle="Images from the field — documenting ASREP Africa's programmes and people across Isiolo County and Kenya's ASALs."
-        imageSrc="/images/gallery/waso-eco-champs-line.jpg"
-        imageAlt="Waso Eco-Champions lined up at a community tree planting event in Isiolo County"
+        imageSrc="/images/gallery/aerial-ewaso-nyiro-doum-palms.jpg"
+        imageAlt="Aerial view of the Ewaso Ny'iro River lined with doum palms, Isiolo County"
         breadcrumbs={[{ label: "Gallery" }]}
         tag="From the Field"
       />

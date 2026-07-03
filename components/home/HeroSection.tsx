@@ -35,8 +35,8 @@ const slides = [
     alt: "The Ewaso Ny'iro River flowing past acacia woodland and volcanic hills in Northern Kenya",
   },
   {
-    src: "/images/hero/hero-8.jpg",
-    alt: "Seasonal river cutting across the semi-arid landscape of Isiolo County, Kenya",
+    src: "/images/gallery/dida-fayo-signing-agar-mou.jpg",
+    alt: "ASREP Africa Executive Director Dida Fayo signing the MoU Framework Agreement with AGAR partners at the ASREP office, Isiolo",
   },
 ];
 
