@@ -7,8 +7,8 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const slides = [
   {
-    src: "/images/hero/hero-1.jpg",
-    alt: "Eco-champions planting indigenous trees in the ASAL landscape, Isiolo County",
+    src: "/images/hero/ewaso-nyiro-aerial-hero.jpg",
+    alt: "Aerial view of the Ewaso Ny'iro River flowing between green riverbank woodland and semi-arid rangelands in Isiolo County",
   },
   {
     src: "/images/hero/hero-2.jpg",
@@ -19,8 +19,8 @@ const slides = [
     alt: "Women and youth leaders participating in civic governance training",
   },
   {
-    src: "/images/hero/hero-4.jpg",
-    alt: "Researchers documenting indigenous knowledge with community elders",
+    src: "/images/hero/asrep-agar-mou-group-hero.jpg",
+    alt: "ASREP Africa and AGAR representatives holding the signed MoU and the ASREP 2025–2026 Impact Report",
   },
   {
     src: "/images/hero/hero-5.jpg",

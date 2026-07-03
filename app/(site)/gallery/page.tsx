@@ -43,6 +43,51 @@ const fieldPhotos = [
     caption: "Dida Fayo presenting at ASREP–AGAR MOU signing — June 2026",
   },
   {
+    src: "/images/gallery/asrep-agar-mou-partners-desk-review.jpg",
+    alt: "AGAR representative seated in the foreground while ASREP Africa Executive Director Dida Fayo reviews the MOU documents at the desk, AGAR banner behind",
+    caption: "ASREP & AGAR partners reviewing the MOU — Isiolo, June 2026",
+  },
+  {
+    src: "/images/gallery/dida-fayo-remarks-agar-mou-signing.jpg",
+    alt: "ASREP Africa Executive Director Dida Fayo giving remarks at the desk during the AGAR MOU signing, green ASREP backdrop with logo",
+    caption: "Dida Fayo giving remarks at the ASREP–AGAR MOU signing — Isiolo, June 2026",
+  },
+  {
+    src: "/images/gallery/dida-fayo-thematic-focus-poster.jpg",
+    alt: "Dida Fayo pointing at Kenya on the ASREP Our Thematic Focus and Theory of Change poster, AGAR banner beside him",
+    caption: "Dida Fayo presenting ASREP's thematic focus to AGAR — Isiolo, June 2026",
+  },
+  {
+    src: "/images/gallery/dida-fayo-presenting-agar-delegation.jpg",
+    alt: "Dida Fayo standing and presenting to the seated AGAR delegation at the ASREP office, KAVADI Hub banner at left",
+    caption: "Dida Fayo presenting to the AGAR delegation — Isiolo, June 2026",
+  },
+  {
+    src: "/images/gallery/dida-fayo-explaining-theory-of-change.jpg",
+    alt: "Dida Fayo speaking beside the ASREP thematic-focus and theory-of-change poster and the AGAR banner",
+    caption: "Dida Fayo explaining ASREP's theory of change — Isiolo, June 2026",
+  },
+  {
+    src: "/images/gallery/asrep-agar-mou-document-review.jpg",
+    alt: "Dida Fayo reading the MOU at the desk while the AGAR representative listens, KAVADI Hub banner at left",
+    caption: "ASREP–AGAR MOU document review — Isiolo, June 2026",
+  },
+  {
+    src: "/images/gallery/dida-fayo-signing-agar-mou.jpg",
+    alt: "Dida Fayo signing the MOU Framework Agreement at the desk with the AGAR representative and a colleague standing by",
+    caption: "Dida Fayo signing the ASREP–AGAR MOU — Isiolo, June 2026",
+  },
+  {
+    src: "/images/gallery/asrep-agar-mou-signing-witnesses.jpg",
+    alt: "Partners looking on as Dida Fayo reviews the MOU pages before signing at the ASREP–AGAR ceremony",
+    caption: "Partners witnessing the ASREP–AGAR MOU signing — Isiolo, June 2026",
+  },
+  {
+    src: "/images/gallery/asrep-agar-partners-impact-report-mou.jpg",
+    alt: "Four ASREP Africa and AGAR partners posing with the signed MOU and copies of the ASREP 2025–2026 Impact Report",
+    caption: "ASREP & AGAR partners with the signed MOU and Impact Report — Isiolo, June 2026",
+  },
+  {
     src: "/images/gallery/waso-eco-champs-line.jpg",
     alt: "Waso Eco-Champions lined up at a community tree planting event in Isiolo County",
     caption: "Waso Eco-Champions mobilise for community tree planting — Isiolo County 2024",
@@ -191,6 +236,41 @@ const fieldPhotos = [
     src: "/images/gallery/samburu-drummers-dancing.jpg",
     alt: "Samburu drummers and dancers performing at an ASREP Africa community cultural event in Isiolo County",
     caption: "Samburu cultural performance — community event, Isiolo County",
+  },
+  {
+    src: "/images/gallery/aerial-asal-seasonal-river-isiolo.jpg",
+    alt: "Aerial view of a seasonal river cutting through semi-arid bushland with mountains in the distance, Isiolo County",
+    caption: "Seasonal river across the ASAL landscape — Isiolo County",
+  },
+  {
+    src: "/images/gallery/aerial-ewaso-nyiro-doum-palms.jpg",
+    alt: "Aerial view of the silt-laden Ewaso Ny'iro River lined with doum palms, hills behind",
+    caption: "Ewaso Ny'iro River lined with doum palms — Isiolo County",
+  },
+  {
+    src: "/images/gallery/aerial-asal-plains-river-crossing.jpg",
+    alt: "High aerial view of the Ewaso Ny'iro River crossing vast ASAL plains dotted with scattered green bush",
+    caption: "Ewaso Ny'iro crossing the ASAL plains — Isiolo County",
+  },
+  {
+    src: "/images/gallery/aerial-asal-rangelands-vista.jpg",
+    alt: "Wide aerial vista of arid and semi-arid rangelands with the Ewaso Ny'iro River as a distant ribbon",
+    caption: "ASAL rangelands vista along the Ewaso Ny'iro — Isiolo County",
+  },
+  {
+    src: "/images/gallery/aerial-ewaso-nyiro-braided-channel.jpg",
+    alt: "Aerial view of the Ewaso Ny'iro River's braided muddy channel winding through dryland vegetation",
+    caption: "Braided channel of the Ewaso Ny'iro River — Isiolo County",
+  },
+  {
+    src: "/images/gallery/aerial-ewaso-nyiro-flood-plain.jpg",
+    alt: "Aerial view of the wide muddy flood plain of the Ewaso Ny'iro River with rocky hills beyond",
+    caption: "Ewaso Ny'iro flood plain — Isiolo County",
+  },
+  {
+    src: "/images/gallery/ewaso-nyiro-rocky-gorge.jpg",
+    alt: "The muddy Ewaso Ny'iro River passing through a rocky gorge with acacia scrub under a big cloud-filled sky",
+    caption: "Ewaso Ny'iro River through a rocky gorge — Isiolo County",
   },
 ];
 
