@@ -6,10 +6,17 @@ import { createHmac, timingSafeEqual } from "crypto";
 // let anyone forge links. This MUST match app/api/newsletter/route.ts's signer.
 // Note: NextAuth v5 (lib/auth.ts) reads AUTH_SECRET — the canonical name in v5,
 // with NEXTAUTH_SECRET as its legacy alias. Keep both set to the same value.
-const NEWSLETTER_SECRET: string = process.env.NEXTAUTH_SECRET ?? "";
-if (!NEWSLETTER_SECRET) {
-  throw new Error("NEXTAUTH_SECRET is not set — refusing to verify unsubscribe links with a default secret.");
+// Resolved at call time (not module scope) so importing this route during
+// `next build` can never throw.
+function getNewsletterSecret(): string {
+  const secret = process.env.NEXTAUTH_SECRET ?? process.env.AUTH_SECRET ?? "";
+  if (!secret) {
+    throw new Error("NEXTAUTH_SECRET/AUTH_SECRET is not set");
+  }
+  return secret;
 }
+
+export const dynamic = "force-dynamic";
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
@@ -22,8 +29,17 @@ export async function GET(req: NextRequest) {
     );
   }
 
+  // Resolve the verifying secret per-request (fail closed). A misconfigured
+  // deployment redirects to the generic error page rather than throwing.
+  let secret: string;
+  try {
+    secret = getNewsletterSecret();
+  } catch {
+    return NextResponse.redirect(new URL("/unsubscribe?error=failed", req.url));
+  }
+
   // Verify HMAC signature — prevents unsubscribing arbitrary third-party emails
-  const expectedSig = createHmac("sha256", NEWSLETTER_SECRET).update(encoded).digest("hex");
+  const expectedSig = createHmac("sha256", secret).update(encoded).digest("hex");
 
   const sigBuffer = Buffer.from(sig, "hex");
   const expectedBuffer = Buffer.from(expectedSig, "hex");

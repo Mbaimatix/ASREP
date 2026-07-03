@@ -6,13 +6,18 @@ import { isAllowedOrigin } from "@/lib/csrf";
 import { createHmac } from "crypto";
 
 // Fail closed: the unsubscribe HMAC is only meaningful with a real secret.
-// This value MUST match app/api/newsletter/unsubscribe/route.ts so signatures verify.
+// This helper MUST match app/api/newsletter/unsubscribe/route.ts so signatures verify.
 // Note: NextAuth v5 (lib/auth.ts) reads AUTH_SECRET — that is the canonical name in
 // v5, with NEXTAUTH_SECRET as its legacy alias. Keep both env vars set to the same
 // value so auth and these newsletter routes agree on the signing key.
-const NEWSLETTER_SECRET: string = process.env.NEXTAUTH_SECRET ?? "";
-if (!NEWSLETTER_SECRET) {
-  throw new Error("NEXTAUTH_SECRET is not set — refusing to sign unsubscribe links with a default secret.");
+// Resolved at call time (not module scope) so importing this route during
+// `next build` can never throw.
+function getNewsletterSecret(): string {
+  const secret = process.env.NEXTAUTH_SECRET ?? process.env.AUTH_SECRET ?? "";
+  if (!secret) {
+    throw new Error("NEXTAUTH_SECRET/AUTH_SECRET is not set");
+  }
+  return secret;
 }
 
 /**
@@ -20,9 +25,9 @@ if (!NEWSLETTER_SECRET) {
  * The email is base64url-encoded; the signature prevents arbitrary unsubscription
  * of third-party email addresses without the NEXTAUTH_SECRET.
  */
-function buildUnsubscribeUrl(email: string): string {
+function buildUnsubscribeUrl(email: string, secret: string): string {
   const encoded = Buffer.from(email).toString("base64url");
-  const sig = createHmac("sha256", NEWSLETTER_SECRET).update(encoded).digest("hex");
+  const sig = createHmac("sha256", secret).update(encoded).digest("hex");
   return `https://asrepafrica.org/unsubscribe?e=${encoded}&s=${sig}`;
 }
 
@@ -59,6 +64,20 @@ export async function POST(req: NextRequest) {
         status: 429,
         headers: { "Retry-After": String(retryAfterSeconds) },
       }
+    );
+  }
+
+  // Resolve the signing secret per-request (fail closed). Done before any DB
+  // work so a misconfigured deployment never persists a subscriber it can't
+  // send a valid, signed unsubscribe link for.
+  let secret: string;
+  try {
+    secret = getNewsletterSecret();
+  } catch (err) {
+    console.error("Newsletter subscription error:", err);
+    return NextResponse.json(
+      { message: "Subscription failed. Please try again." },
+      { status: 500 }
     );
   }
 
@@ -106,7 +125,7 @@ export async function POST(req: NextRequest) {
             </div>
             <p style="color: #6B7280; font-size: 11px; margin-top: 12px; text-align: center;">
               ASREP Africa · Isiolo County, Kenya · asrepafrica@gmail.com<br />
-              <a href="${buildUnsubscribeUrl(normalised)}" style="color: #6B7280;">Unsubscribe</a>
+              <a href="${buildUnsubscribeUrl(normalised, secret)}" style="color: #6B7280;">Unsubscribe</a>
             </p>
           </div>
         `,
