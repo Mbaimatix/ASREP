@@ -128,11 +128,6 @@ const fieldPhotos = [
     caption: "Waso Eco-Champions mobilise for community tree planting — Isiolo County 2024",
   },
   {
-    src: "/images/gallery/community-baraza-isiolo.jpg",
-    alt: "Community baraza (public meeting) convened by ASREP Africa in Isiolo, with elders and community members seated in a circle",
-    caption: "Community baraza — civic engagement, Isiolo 2024",
-  },
-  {
     src: "/images/gallery/women-youth-climate-meeting.jpg",
     alt: "Women and youth participating in a climate resilience meeting organised by ASREP Africa",
     caption: "Women & youth climate meeting — Isiolo County 2025",
