@@ -15,8 +15,9 @@ export default function VolunteerPage() {
       <PageHero
         title="Volunteer with ASREP Africa"
         subtitle="Bring your skills and passion to the frontlines of community resilience in Kenya's ASALs."
-        imageSrc="/images/get-involved/volunteer-hero.jpg"
-        imageAlt="Volunteers working alongside ASREP staff in Isiolo County community engagement"
+        imageSrc="/images/gallery/rangers-youth-tree-planting.jpg"
+        imageAlt="Wildlife rangers and youth volunteers planting indigenous trees — ASREP eco-champions programme"
+        imagePosition="object-center"
         breadcrumbs={[
           { label: "Get Involved", href: "/get-involved/donate" },
           { label: "Volunteer" },

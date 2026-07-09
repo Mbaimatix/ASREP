@@ -19,6 +19,7 @@ export default function ClimateResiliencePage() {
         subtitle="Restoring degraded ASAL landscapes through community-led ecological action."
         imageSrc="/images/programmes/climate-resilience-hero.jpg"
         imageAlt="Waso Eco-Champion planting an indigenous seedling on a degraded hillside in Isiolo County"
+        imagePosition="object-top"
         breadcrumbs={[
           { label: "What We Do", href: "/what-we-do" },
           { label: "Climate Resilience & NbS" },

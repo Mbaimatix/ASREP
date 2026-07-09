@@ -18,6 +18,7 @@ export default function LivelihoodsPage() {
         subtitle="Sustainable income that grows with — not against — the ASAL environment."
         imageSrc="/images/programmes/livelihoods-hero.jpg"
         imageAlt="ASAL women entrepreneurs in ASREP's eco-entrepreneurship programme, Isiolo County"
+        imagePosition="object-top"
         breadcrumbs={[
           { label: "What We Do", href: "/what-we-do" },
           { label: "Livelihoods & Economic Empowerment" },

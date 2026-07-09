@@ -22,8 +22,9 @@ export default function VideosPage() {
       <PageHero
         title="Watch ASREP Africa"
         subtitle="Field documentaries and programme highlights from our work across Kenya's ASALs."
-        imageSrc="/images/impact/impact-hero.jpg"
-        imageAlt="ASREP Africa field documentation"
+        imageSrc="/images/gallery/nagaa-local-radio-dida-public-sensitization.jpg"
+        imageAlt="ASREP Africa Executive Director Dida Fayo on Nagaa FM local radio — public sensitization"
+        imagePosition="object-center"
         breadcrumbs={[{ label: "Videos" }]}
         tag="ASREP on YouTube"
       />

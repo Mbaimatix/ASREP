@@ -88,6 +88,7 @@ export default function ImpactPage() {
         subtitle="Real, measurable change across climate resilience, peace, research, and governance in Kenya's ASALs."
         imageSrc="/images/impact/impact-hero.jpg"
         imageAlt="ASREP Africa impact  -  eco-champions, peace dialogues, and community empowerment in Isiolo County"
+        imagePosition="object-top"
         breadcrumbs={[{ label: "Our Impact" }]}
         tag="2023 - 2026"
       />

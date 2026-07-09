@@ -144,8 +144,9 @@ export default function ResourcesPage() {
       <PageHero
         title="Resources & Publications"
         subtitle="Research, indigenous knowledge documentation, policy briefs, and impact reports from ASREP Africa's work."
-        imageSrc="/images/resources/resources-hero.jpg"
-        imageAlt="ASREP research publications and field documentation materials"
+        imageSrc="/images/gallery/borana-elder-portrait-hero.jpg"
+        imageAlt="Borana elder — ASAL Indigenous Knowledge Vault Series, Isiolo County"
+        imagePosition="object-top"
         breadcrumbs={[{ label: "Resources" }]}
         tag="Publications & Research"
       />

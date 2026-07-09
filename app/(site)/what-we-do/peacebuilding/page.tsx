@@ -18,6 +18,7 @@ export default function PeacebuildingPage() {
         subtitle="Turning resource conflict into shared futures through dialogue, mediation, and inter-community trust."
         imageSrc="/images/programmes/peacebuilding-hero.jpg"
         imageAlt="Inter-community peace dialogue convened under trees in Northern Kenya — ASREP Africa"
+        imagePosition="object-top"
         breadcrumbs={[
           { label: "What We Do", href: "/what-we-do" },
           { label: "Peacebuilding & Social Cohesion" },

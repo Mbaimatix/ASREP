@@ -97,6 +97,7 @@ export default function LeadershipPage() {
         subtitle="A board and executive team united by deep ASAL expertise, institutional credibility, and an unwavering commitment to community-led change."
         imageSrc="/images/about/leadership-hero.jpg"
         imageAlt="ASREP Africa leadership team in session at Isiolo headquarters"
+        imagePosition="object-top"
         breadcrumbs={[
           { label: "About", href: "/about" },
           { label: "Leadership & Governance" },

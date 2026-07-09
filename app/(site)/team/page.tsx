@@ -91,8 +91,9 @@ export default function TeamPage() {
       <PageHero
         title="Our Team"
         subtitle="Dedicated professionals and community leaders driving ASREP Africa's mission across Kenya's ASALs."
-        imageSrc="/images/about/leadership-hero.jpg"
-        imageAlt="ASREP Africa leadership team and board members"
+        imageSrc="/images/gallery/asrep-community-team-group.jpg"
+        imageAlt="ASREP Africa community team and programme staff, Isiolo County"
+        imagePosition="object-top"
         breadcrumbs={[{ label: "Our Team" }]}
         tag="People & Governance"
       />

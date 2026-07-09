@@ -6,6 +6,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import MobileMenu from "./MobileMenu";
+import AnnouncementBar from "./AnnouncementBar";
 
 type NavChild = { label: string; href: string };
 type NavItem  = { label: string; href: string; children?: NavChild[] };
@@ -105,6 +106,13 @@ export default function Navbar() {
     <>
       <header className={`fixed top-0 left-0 right-0 z-50 w-full ${isHome ? "" : "shadow-lg"}`}>
 
+        {/* ── Mobile announcement strip — above the logo row (utility bar is desktop-only) ── */}
+        <div className={`${isHome ? "bg-transparent" : "bg-forest"} md:hidden`}>
+          <div className="max-w-7xl mx-auto px-6 py-1.5">
+            <AnnouncementBar />
+          </div>
+        </div>
+
         {/* ── Strip 1: Utility bar — desktop only ────────────────────────── */}
         <div className={`${isHome ? "bg-transparent" : "bg-forest"} hidden md:block`}>
           <div className="max-w-7xl mx-auto px-6 py-2 flex items-center justify-between">
@@ -150,6 +158,9 @@ export default function Navbar() {
                 asrepafrica@gmail.com
               </a>
             </div>
+
+            {/* Center: rotating announcement — joins the utility bar inline */}
+            <AnnouncementBar className="hidden md:flex flex-1 justify-center px-4 lg:px-8 max-w-2xl" />
 
             {/* Right: social + donate */}
             <div className="flex items-center gap-3">

@@ -26,6 +26,7 @@ export default function DonatePage() {
         subtitle="Every contribution plants trees, builds peace, and empowers communities across Kenya's ASALs."
         imageSrc="/images/get-involved/donate-hero.jpg"
         imageAlt="Waso Eco-Champions holding tree seedlings — your donation makes this possible"
+        imagePosition="object-top"
         breadcrumbs={[
           { label: "Get Involved", href: "/get-involved/donate" },
           { label: "Donate" },

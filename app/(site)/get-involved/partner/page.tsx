@@ -42,8 +42,9 @@ export default function PartnerPage() {
       <PageHero
         title="Partner with ASREP Africa"
         subtitle="Align your organisation with proven, locally-led impact across Kenya's arid and semi-arid lands."
-        imageSrc="/images/get-involved/partner-hero.jpg"
-        imageAlt="ASREP Africa partnership meeting with institutional partners in Isiolo"
+        imageSrc="/images/gallery/asrep-agar-mou-signing-impact-report-group.jpg"
+        imageAlt="ASREP Africa and AGAR representatives holding the signed MOU and Impact Report — partnership, Isiolo"
+        imagePosition="object-top"
         breadcrumbs={[
           { label: "Get Involved", href: "/get-involved/donate" },
           { label: "Partner with Us" },
